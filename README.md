@@ -32,6 +32,10 @@ class ColorPickerExample extends React.Component {
 }
 ```
 
+## 其它链接
+
+[react-color-picker](http://4bin.cn/projects/react-color-picker/)
+
 ## 参考
 
 - [casesandberg/react-color](https://github.com/casesandberg/react-color)
