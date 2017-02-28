@@ -1,3 +1,9 @@
+/* 色度组件 */
+
+// todo: 添加propTypes和defaultProps
+// todo: 客制化slider组件
+// todo: 修改组件，使可用于除了色度以外的属性
+
 import React, { Component, PureComponent } from 'react'
 import reactCSS from 'reactcss'
 import * as hue from '../helpers/hue'
@@ -71,7 +77,10 @@ export class Hue extends (PureComponent || Component) {
       'custom': {
         ...this.props.style
       }
-    }, { vertical: this.props.direction === 'vertical', 'custom': !!this.props.style})
+    }, { 
+        vertical: this.props.direction === 'vertical', 
+        custom: !!this.props.style
+    })
 
     return (
       <div style={ styles.root }>

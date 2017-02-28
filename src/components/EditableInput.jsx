@@ -1,3 +1,10 @@
+/* 颜色属性输入 */
+
+// todo: 添加propTypes和defaultProps
+// todo: debug拖动改数功能
+// todo: 客制化标签
+// todo: 配置小数点位数
+
 import React, { Component, PureComponent } from 'react'
 import reactCSS from 'reactcss'
 

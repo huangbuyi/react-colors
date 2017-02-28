@@ -1,6 +1,14 @@
+/* 选择色度和明度 */
+
+// todo: 添加propTypes和defaultProps
+// todo: 将div叠加修改为梯度背景色的叠加
+// todo: 使用梯度和filter，添加其他二维选择功能
+// todo: 客制化选框
+
 import React, { Component, PureComponent } from 'react'
 import reactCSS from 'reactcss'
 import * as saturation from '../helpers/saturation'
+import throttle from 'lodash/throttle'
 
 export class Saturation extends (PureComponent || Component) {
   static propTypes = {
@@ -8,16 +16,15 @@ export class Saturation extends (PureComponent || Component) {
   }
 
   static defaultProps = {
-    shadow: null,
-    radius: 4,
   }
 
   constructor(props) {
     super(props)
 
-/*    this.throttle = throttle((fn, data, e) => {
+    // 50ms内不重复触发
+    this.throttle = throttle((fn, data, e) => {
       fn(data, e)
-    }, 50)*/
+    }, 50)
   }
 
   componentWillUnmount() {
@@ -25,7 +32,6 @@ export class Saturation extends (PureComponent || Component) {
   }
 
   handleChange = (e, skip) => {
-      //this.props.onChange(saturation.calculateChange(e, skip, this.props, this.refs.container), e)
     this.props.onChange(saturation.calculateChange(e, skip, this.props, this.refs.container), e)
   }
 

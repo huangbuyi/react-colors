@@ -6,6 +6,8 @@ import Saturation from '../src/components/Saturation.jsx'
 import Fields from '../src/components/Fields.jsx'
 import EditableInput from '../src/components/EditableInput.jsx'
 
+/* 组合化拾色器组件，让组件自由组合 */
+
 const style = {
 	divider: {
 		height: 1,
@@ -41,16 +43,16 @@ const style = {
 	}
 }
 
-class Test extends React.Component {
+class ColorPickerExample extends React.Component {
 
-	handleChange (a) {
-		console.log(a)
+	handleChange (colorObj) {
+		console.log(colorObj)
 	}
 
 	render () {
 
 		return (
-			<ColorPicker onChange={ (a) => this.handleChange(a) }>				
+			<ColorPicker color='blue' onChange={ (a) => this.handleChange(a) }>				
 				<Saturation/>
 				<Hue style={ style.hueStyle } direction='vertical'/>
 				<Fields style={ style.fields }>
@@ -68,10 +70,11 @@ class Test extends React.Component {
 }
 
 render (
-	<Test />,
+	<ColorPickerExample />,
 	document.querySelector('.content')
 )
 
+// todo: 将一些样式设为默认值
 // todo 组件默认样式
 // todo 可配置选框样式
 // todo 可配置输入框按钮、标签位置

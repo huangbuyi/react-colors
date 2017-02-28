@@ -1,3 +1,16 @@
+/* 
+	容器组件，将颜色属性和onChange事件传递给每个子组件，并作为设定颜色和获取颜色的接口 
+	颜色输入格式：任何合法的颜色格式
+	颜色输出格式 {
+	  hsl: { a: 1, h: 0, l: 0.5, s: 1 },
+	  hex: '#ff0000',
+	  rgb: { r: 255, g: 0, b: 0, a: 1 },
+	  hsv: { h: 0, s: 1, v: 1, a: 1 },
+	  oldHue: 0
+	}
+	参考https://github.com/bgrins/TinyColor
+*/
+
 import React, {PropTypes} from 'react'
 import reactCSS from 'reactcss'
 import color from '../helpers/color'
@@ -13,9 +26,13 @@ function colorType (props, propName, componentName) {
 
 class ColorPicker extends React.Component {
 	static propTypes = {
+		// 监听颜色变化
 		onChange: PropTypes.func,
+		// 容器样式
 		style: PropTypes.object,
+		// 默认颜色
 		defaultColor: colorType,
+		// 设置颜色
 		color: colorType
 	}
 
@@ -61,6 +78,8 @@ class ColorPicker extends React.Component {
 		})
 
 		let { children } = this.props
+
+		// 为子组件传入新属性
 		let newChildren = React.Children.map(children, child => {
 			return React.cloneElement(child, {
 				onChange: (v, e) => {

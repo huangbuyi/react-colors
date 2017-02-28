@@ -1,3 +1,9 @@
+/* 
+  Fields组件用于包裹EditableInput组件 
+*/
+
+// todo: 改为es6组件
+// todo: 添加propTypes和defaultProps
 import React from 'react'
 import reactCSS from 'reactcss'
 import color from '../helpers/color'
@@ -21,7 +27,8 @@ export const Fields = (props) => {
   })
 
   const handleChange = (data, e) => {
-    console.log(data)
+    
+    // 将返回值整合为合法的颜色值
     if (data['#']) {
       color.isValidHex(data['#']) && onChange({
         hex: data['#'],
@@ -50,6 +57,8 @@ export const Fields = (props) => {
       }, e)
     }
   }
+
+  // 根据EditableInput组件的label值传入属性
   const values = {
     r: rgb.r,
     g: rgb.g,
@@ -62,6 +71,7 @@ export const Fields = (props) => {
     a: rgb.a,
     '#': hex
   }
+
   let newChildren = React.Children.map(children, child => {
 
     let newProps = {

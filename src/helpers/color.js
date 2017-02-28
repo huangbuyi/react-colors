@@ -1,3 +1,4 @@
+/* 包装tinycolor对象 */
 import each from 'lodash/each'
 import tinycolor from 'tinycolor2'
 
