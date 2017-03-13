@@ -2,9 +2,9 @@ import React from 'react'
 import {render} from 'react-dom'
 import ColorPicker from '../src/components/ColorPicker.jsx'
 import Hue from '../src/components/Hue.jsx'
-import Saturation from '../src/components/Saturation.jsx'
 import Fields from '../src/components/Fields.jsx'
 import EditableInput from '../src/components/EditableInput.jsx'
+import ColorPanel from '../src/components/ColorPanel.jsx'
 
 /* 组合化拾色器组件，让组件自由组合 */
 
@@ -52,8 +52,8 @@ class ColorPickerExample extends React.Component {
 	render () {
 
 		return (
-			<ColorPicker color='blue' onChange={ (a) => this.handleChange(a) }>				
-				<Saturation/>
+			<ColorPicker color='blue' onChange={ (a) => this.handleChange(a) }>	
+				<ColorPanel colorModel='r'/>			
 				<Hue style={ style.hueStyle } direction='vertical'/>
 				<Fields style={ style.fields }>
 					<EditableInput style={ style.inputStyle } label='r'/>

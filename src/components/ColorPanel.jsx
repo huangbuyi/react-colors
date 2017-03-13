@@ -7,7 +7,7 @@
 
 import React, { Component, PureComponent, PropTypes } from 'react'
 import reactCSS from 'reactcss'
-import * as saturation from '../helpers/saturation'
+import calcEventPosition from '../helpers/calcEventPosition'
 import throttle from 'lodash/throttle'
 
 export class ColorPanel extends (PureComponent || Component) {
@@ -23,10 +23,8 @@ export class ColorPanel extends (PureComponent || Component) {
   constructor(props) {
     super(props)
 
-    // 50ms内不重复触发
-    this.throttle = throttle((fn, data, e) => {
-      fn(data, e)
-    }, 50)
+    // 50ms内不重复触发,todo 使用
+    this.handleChange = throttle(this.handleChange, 50)
   }
 
   getBackground( model ) {
@@ -55,8 +53,10 @@ export class ColorPanel extends (PureComponent || Component) {
     this.unbindEventListeners()
   }
 
-  handleChange = (e, skip) => {
-    this.props.onChange(saturation.calculateChange(e, skip, this.props, this.refs.container), e)
+  handleChange = (e) => {
+    let p = calcEventPosition(e, this.refs.container)
+    console.log(p)
+    //this.props.onChange(calcEventPositiom(e, this.refs.container), e)
   }
 
   handleMouseDown = (e) => {

@@ -62,17 +62,17 @@
 
 	var _Hue2 = _interopRequireDefault(_Hue);
 
-	var _Saturation = __webpack_require__(362);
-
-	var _Saturation2 = _interopRequireDefault(_Saturation);
-
-	var _Fields = __webpack_require__(367);
+	var _Fields = __webpack_require__(362);
 
 	var _Fields2 = _interopRequireDefault(_Fields);
 
-	var _EditableInput = __webpack_require__(368);
+	var _EditableInput = __webpack_require__(363);
 
 	var _EditableInput2 = _interopRequireDefault(_EditableInput);
+
+	var _ColorPanel = __webpack_require__(364);
+
+	var _ColorPanel2 = _interopRequireDefault(_ColorPanel);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -119,16 +119,16 @@
 		}
 	};
 
-	var Test = function (_React$Component) {
-		_inherits(Test, _React$Component);
+	var ColorPickerExample = function (_React$Component) {
+		_inherits(ColorPickerExample, _React$Component);
 
-		function Test() {
-			_classCallCheck(this, Test);
+		function ColorPickerExample() {
+			_classCallCheck(this, ColorPickerExample);
 
-			return _possibleConstructorReturn(this, (Test.__proto__ || Object.getPrototypeOf(Test)).apply(this, arguments));
+			return _possibleConstructorReturn(this, (ColorPickerExample.__proto__ || Object.getPrototypeOf(ColorPickerExample)).apply(this, arguments));
 		}
 
-		_createClass(Test, [{
+		_createClass(ColorPickerExample, [{
 			key: 'handleChange',
 			value: function handleChange(colorObj) {
 				console.log(colorObj);
@@ -143,7 +143,7 @@
 					{ color: 'blue', onChange: function onChange(a) {
 							return _this2.handleChange(a);
 						} },
-					_react2.default.createElement(_Saturation2.default, null),
+					_react2.default.createElement(_ColorPanel2.default, { colorModel: 'r' }),
 					_react2.default.createElement(_Hue2.default, { style: style.hueStyle, direction: 'vertical' }),
 					_react2.default.createElement(
 						_Fields2.default,
@@ -160,10 +160,10 @@
 			}
 		}]);
 
-		return Test;
+		return ColorPickerExample;
 	}(_react2.default.Component);
 
-	(0, _reactDom.render)(_react2.default.createElement(Test, null), document.querySelector('.content'));
+	(0, _reactDom.render)(_react2.default.createElement(ColorPickerExample, null), document.querySelector('.content'));
 
 	// todo: 将一些样式设为默认值
 	// todo 组件默认样式
@@ -28931,499 +28931,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.Saturation = undefined;
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactcss = __webpack_require__(179);
-
-	var _reactcss2 = _interopRequireDefault(_reactcss);
-
-	var _saturation = __webpack_require__(363);
-
-	var saturation = _interopRequireWildcard(_saturation);
-
-	var _throttle = __webpack_require__(364);
-
-	var _throttle2 = _interopRequireDefault(_throttle);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* 选择色度和明度 */
-
-	// todo: 添加propTypes和defaultProps
-	// todo: 将div叠加修改为梯度背景色的叠加
-	// todo: 使用梯度和filter，添加其他二维选择功能
-	// todo: 客制化选框
-
-	var Saturation = exports.Saturation = function (_ref) {
-	  _inherits(Saturation, _ref);
-
-	  function Saturation(props) {
-	    _classCallCheck(this, Saturation);
-
-	    // 50ms内不重复触发
-	    var _this = _possibleConstructorReturn(this, (Saturation.__proto__ || Object.getPrototypeOf(Saturation)).call(this, props));
-
-	    _this.handleChange = function (e, skip) {
-	      _this.props.onChange(saturation.calculateChange(e, skip, _this.props, _this.refs.container), e);
-	    };
-
-	    _this.handleMouseDown = function (e) {
-	      _this.handleChange(e, true);
-	      window.addEventListener('mousemove', _this.handleChange);
-	      window.addEventListener('mouseup', _this.handleMouseUp);
-	    };
-
-	    _this.handleMouseUp = function () {
-	      _this.unbindEventListeners();
-	    };
-
-	    _this.throttle = (0, _throttle2.default)(function (fn, data, e) {
-	      fn(data, e);
-	    }, 50);
-	    return _this;
-	  }
-
-	  _createClass(Saturation, [{
-	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {
-	      this.unbindEventListeners();
-	    }
-	  }, {
-	    key: 'unbindEventListeners',
-	    value: function unbindEventListeners() {
-	      window.removeEventListener('mousemove', this.handleChange);
-	      window.removeEventListener('mouseup', this.handleMouseUp);
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var styles = (0, _reactcss2.default)({
-	        'default': {
-	          root: {
-	            position: 'relative',
-	            display: 'inline-block',
-	            width: '256px',
-	            height: '256px',
-	            background: 'hsl(' + this.props.hsv.h + ',100%, 50%)'
-	          },
-	          white: {
-	            absolute: '0px 0px 0px 0px',
-	            background: 'linear-gradient(to right, #fff, rgba(255,255,255,0))'
-	          },
-	          black: {
-	            absolute: '0px 0px 0px 0px',
-	            background: 'linear-gradient(to top, #000, rgba(0,0,0,0))'
-	          },
-	          pointer: {
-	            position: 'absolute',
-	            top: -(this.props.hsv.v * 100) + 100 + '%',
-	            left: this.props.hsv.s * 100 + '%',
-	            cursor: 'default'
-	          },
-	          circle: {
-	            width: '4px',
-	            height: '4px',
-	            boxShadow: '0 0 0 1.5px #fff, inset 0 0 1px 1px rgba(0,0,0,.3),\n            0 0 1px 2px rgba(0,0,0,.4)',
-	            borderRadius: '50%',
-	            cursor: 'hand',
-	            transform: 'translate(-2px, -2px)'
-	          }
-	        },
-	        'custom': _extends({}, this.props.style)
-	      }, { 'custom': !!this.props.style });
-
-	      return _react2.default.createElement(
-	        'div',
-	        {
-	          style: styles.root,
-	          ref: 'container',
-	          onMouseDown: this.handleMouseDown,
-	          onTouchMove: this.handleChange,
-	          onTouchStart: this.handleChange
-	        },
-	        _react2.default.createElement(
-	          'div',
-	          { style: styles.white },
-	          _react2.default.createElement('div', { style: styles.black }),
-	          _react2.default.createElement(
-	            'div',
-	            { style: styles.pointer },
-	            this.props.pointer ? _react2.default.createElement(this.props.pointer, this.props) : _react2.default.createElement('div', { style: styles.circle })
-	          )
-	        )
-	      );
-	    }
-	  }]);
-
-	  return Saturation;
-	}(_react.PureComponent || _react.Component);
-
-	Saturation.propTypes = {};
-	Saturation.defaultProps = {};
-	exports.default = Saturation;
-
-/***/ },
-/* 363 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.calculateChange = calculateChange;
-	function calculateChange(e, skip, props, container) {
-	  !skip && e.preventDefault();
-	  var containerWidth = container.clientWidth;
-	  var containerHeight = container.clientHeight;
-	  var x = typeof e.pageX === 'number' ? e.pageX : e.touches[0].pageX;
-	  var y = typeof e.pageY === 'number' ? e.pageY : e.touches[0].pageY;
-	  var left = x - (container.getBoundingClientRect().left + window.pageXOffset);
-	  var top = y - (container.getBoundingClientRect().top + window.pageYOffset);
-
-	  if (left < 0) {
-	    left = 0;
-	  } else if (left > containerWidth) {
-	    left = containerWidth;
-	  } else if (top < 0) {
-	    top = 0;
-	  } else if (top > containerHeight) {
-	    top = containerHeight;
-	  }
-
-	  var saturation = left * 100 / containerWidth;
-	  var bright = -(top * 100 / containerHeight) + 100;
-
-	  return {
-	    h: props.hsl.h,
-	    s: saturation,
-	    v: bright,
-	    a: props.hsl.a,
-	    source: 'rgb'
-	  };
-	}
-
-/***/ },
-/* 364 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var debounce = __webpack_require__(365),
-	    isObject = __webpack_require__(210);
-
-	/** Error message constants. */
-	var FUNC_ERROR_TEXT = 'Expected a function';
-
-	/**
-	 * Creates a throttled function that only invokes `func` at most once per
-	 * every `wait` milliseconds. The throttled function comes with a `cancel`
-	 * method to cancel delayed `func` invocations and a `flush` method to
-	 * immediately invoke them. Provide `options` to indicate whether `func`
-	 * should be invoked on the leading and/or trailing edge of the `wait`
-	 * timeout. The `func` is invoked with the last arguments provided to the
-	 * throttled function. Subsequent calls to the throttled function return the
-	 * result of the last `func` invocation.
-	 *
-	 * **Note:** If `leading` and `trailing` options are `true`, `func` is
-	 * invoked on the trailing edge of the timeout only if the throttled function
-	 * is invoked more than once during the `wait` timeout.
-	 *
-	 * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
-	 * until to the next tick, similar to `setTimeout` with a timeout of `0`.
-	 *
-	 * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
-	 * for details over the differences between `_.throttle` and `_.debounce`.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 0.1.0
-	 * @category Function
-	 * @param {Function} func The function to throttle.
-	 * @param {number} [wait=0] The number of milliseconds to throttle invocations to.
-	 * @param {Object} [options={}] The options object.
-	 * @param {boolean} [options.leading=true]
-	 *  Specify invoking on the leading edge of the timeout.
-	 * @param {boolean} [options.trailing=true]
-	 *  Specify invoking on the trailing edge of the timeout.
-	 * @returns {Function} Returns the new throttled function.
-	 * @example
-	 *
-	 * // Avoid excessively updating the position while scrolling.
-	 * jQuery(window).on('scroll', _.throttle(updatePosition, 100));
-	 *
-	 * // Invoke `renewToken` when the click event is fired, but not more than once every 5 minutes.
-	 * var throttled = _.throttle(renewToken, 300000, { 'trailing': false });
-	 * jQuery(element).on('click', throttled);
-	 *
-	 * // Cancel the trailing throttled invocation.
-	 * jQuery(window).on('popstate', throttled.cancel);
-	 */
-	function throttle(func, wait, options) {
-	  var leading = true,
-	      trailing = true;
-
-	  if (typeof func != 'function') {
-	    throw new TypeError(FUNC_ERROR_TEXT);
-	  }
-	  if (isObject(options)) {
-	    leading = 'leading' in options ? !!options.leading : leading;
-	    trailing = 'trailing' in options ? !!options.trailing : trailing;
-	  }
-	  return debounce(func, wait, {
-	    'leading': leading,
-	    'maxWait': wait,
-	    'trailing': trailing
-	  });
-	}
-
-	module.exports = throttle;
-
-
-/***/ },
-/* 365 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var isObject = __webpack_require__(210),
-	    now = __webpack_require__(366),
-	    toNumber = __webpack_require__(351);
-
-	/** Error message constants. */
-	var FUNC_ERROR_TEXT = 'Expected a function';
-
-	/* Built-in method references for those with the same name as other `lodash` methods. */
-	var nativeMax = Math.max,
-	    nativeMin = Math.min;
-
-	/**
-	 * Creates a debounced function that delays invoking `func` until after `wait`
-	 * milliseconds have elapsed since the last time the debounced function was
-	 * invoked. The debounced function comes with a `cancel` method to cancel
-	 * delayed `func` invocations and a `flush` method to immediately invoke them.
-	 * Provide `options` to indicate whether `func` should be invoked on the
-	 * leading and/or trailing edge of the `wait` timeout. The `func` is invoked
-	 * with the last arguments provided to the debounced function. Subsequent
-	 * calls to the debounced function return the result of the last `func`
-	 * invocation.
-	 *
-	 * **Note:** If `leading` and `trailing` options are `true`, `func` is
-	 * invoked on the trailing edge of the timeout only if the debounced function
-	 * is invoked more than once during the `wait` timeout.
-	 *
-	 * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
-	 * until to the next tick, similar to `setTimeout` with a timeout of `0`.
-	 *
-	 * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
-	 * for details over the differences between `_.debounce` and `_.throttle`.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 0.1.0
-	 * @category Function
-	 * @param {Function} func The function to debounce.
-	 * @param {number} [wait=0] The number of milliseconds to delay.
-	 * @param {Object} [options={}] The options object.
-	 * @param {boolean} [options.leading=false]
-	 *  Specify invoking on the leading edge of the timeout.
-	 * @param {number} [options.maxWait]
-	 *  The maximum time `func` is allowed to be delayed before it's invoked.
-	 * @param {boolean} [options.trailing=true]
-	 *  Specify invoking on the trailing edge of the timeout.
-	 * @returns {Function} Returns the new debounced function.
-	 * @example
-	 *
-	 * // Avoid costly calculations while the window size is in flux.
-	 * jQuery(window).on('resize', _.debounce(calculateLayout, 150));
-	 *
-	 * // Invoke `sendMail` when clicked, debouncing subsequent calls.
-	 * jQuery(element).on('click', _.debounce(sendMail, 300, {
-	 *   'leading': true,
-	 *   'trailing': false
-	 * }));
-	 *
-	 * // Ensure `batchLog` is invoked once after 1 second of debounced calls.
-	 * var debounced = _.debounce(batchLog, 250, { 'maxWait': 1000 });
-	 * var source = new EventSource('/stream');
-	 * jQuery(source).on('message', debounced);
-	 *
-	 * // Cancel the trailing debounced invocation.
-	 * jQuery(window).on('popstate', debounced.cancel);
-	 */
-	function debounce(func, wait, options) {
-	  var lastArgs,
-	      lastThis,
-	      maxWait,
-	      result,
-	      timerId,
-	      lastCallTime,
-	      lastInvokeTime = 0,
-	      leading = false,
-	      maxing = false,
-	      trailing = true;
-
-	  if (typeof func != 'function') {
-	    throw new TypeError(FUNC_ERROR_TEXT);
-	  }
-	  wait = toNumber(wait) || 0;
-	  if (isObject(options)) {
-	    leading = !!options.leading;
-	    maxing = 'maxWait' in options;
-	    maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;
-	    trailing = 'trailing' in options ? !!options.trailing : trailing;
-	  }
-
-	  function invokeFunc(time) {
-	    var args = lastArgs,
-	        thisArg = lastThis;
-
-	    lastArgs = lastThis = undefined;
-	    lastInvokeTime = time;
-	    result = func.apply(thisArg, args);
-	    return result;
-	  }
-
-	  function leadingEdge(time) {
-	    // Reset any `maxWait` timer.
-	    lastInvokeTime = time;
-	    // Start the timer for the trailing edge.
-	    timerId = setTimeout(timerExpired, wait);
-	    // Invoke the leading edge.
-	    return leading ? invokeFunc(time) : result;
-	  }
-
-	  function remainingWait(time) {
-	    var timeSinceLastCall = time - lastCallTime,
-	        timeSinceLastInvoke = time - lastInvokeTime,
-	        result = wait - timeSinceLastCall;
-
-	    return maxing ? nativeMin(result, maxWait - timeSinceLastInvoke) : result;
-	  }
-
-	  function shouldInvoke(time) {
-	    var timeSinceLastCall = time - lastCallTime,
-	        timeSinceLastInvoke = time - lastInvokeTime;
-
-	    // Either this is the first call, activity has stopped and we're at the
-	    // trailing edge, the system time has gone backwards and we're treating
-	    // it as the trailing edge, or we've hit the `maxWait` limit.
-	    return (lastCallTime === undefined || (timeSinceLastCall >= wait) ||
-	      (timeSinceLastCall < 0) || (maxing && timeSinceLastInvoke >= maxWait));
-	  }
-
-	  function timerExpired() {
-	    var time = now();
-	    if (shouldInvoke(time)) {
-	      return trailingEdge(time);
-	    }
-	    // Restart the timer.
-	    timerId = setTimeout(timerExpired, remainingWait(time));
-	  }
-
-	  function trailingEdge(time) {
-	    timerId = undefined;
-
-	    // Only invoke if we have `lastArgs` which means `func` has been
-	    // debounced at least once.
-	    if (trailing && lastArgs) {
-	      return invokeFunc(time);
-	    }
-	    lastArgs = lastThis = undefined;
-	    return result;
-	  }
-
-	  function cancel() {
-	    if (timerId !== undefined) {
-	      clearTimeout(timerId);
-	    }
-	    lastInvokeTime = 0;
-	    lastArgs = lastCallTime = lastThis = timerId = undefined;
-	  }
-
-	  function flush() {
-	    return timerId === undefined ? result : trailingEdge(now());
-	  }
-
-	  function debounced() {
-	    var time = now(),
-	        isInvoking = shouldInvoke(time);
-
-	    lastArgs = arguments;
-	    lastThis = this;
-	    lastCallTime = time;
-
-	    if (isInvoking) {
-	      if (timerId === undefined) {
-	        return leadingEdge(lastCallTime);
-	      }
-	      if (maxing) {
-	        // Handle invocations in a tight loop.
-	        timerId = setTimeout(timerExpired, wait);
-	        return invokeFunc(lastCallTime);
-	      }
-	    }
-	    if (timerId === undefined) {
-	      timerId = setTimeout(timerExpired, wait);
-	    }
-	    return result;
-	  }
-	  debounced.cancel = cancel;
-	  debounced.flush = flush;
-	  return debounced;
-	}
-
-	module.exports = debounce;
-
-
-/***/ },
-/* 366 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var root = __webpack_require__(206);
-
-	/**
-	 * Gets the timestamp of the number of milliseconds that have elapsed since
-	 * the Unix epoch (1 January 1970 00:00:00 UTC).
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 2.4.0
-	 * @category Date
-	 * @returns {number} Returns the timestamp.
-	 * @example
-	 *
-	 * _.defer(function(stamp) {
-	 *   console.log(_.now() - stamp);
-	 * }, _.now());
-	 * // => Logs the number of milliseconds it took for the deferred invocation.
-	 */
-	var now = function() {
-	  return root.Date.now();
-	};
-
-	module.exports = now;
-
-
-/***/ },
-/* 367 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
 	exports.Fields = undefined;
 
 	var _react = __webpack_require__(1);
@@ -29537,7 +29044,7 @@
 	exports.default = Fields;
 
 /***/ },
-/* 368 */
+/* 363 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29734,6 +29241,498 @@
 	}(_react.PureComponent || _react.Component);
 
 	exports.default = EditableInput;
+
+/***/ },
+/* 364 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ColorPanel = undefined;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactcss = __webpack_require__(179);
+
+	var _reactcss2 = _interopRequireDefault(_reactcss);
+
+	var _calcEventPosition = __webpack_require__(365);
+
+	var _calcEventPosition2 = _interopRequireDefault(_calcEventPosition);
+
+	var _throttle = __webpack_require__(366);
+
+	var _throttle2 = _interopRequireDefault(_throttle);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* 选择色度和明度 */
+
+	// todo: 添加propTypes和defaultProps
+	// todo: 将div叠加修改为梯度背景色的叠加
+	// todo: 使用梯度和filter，添加其他二维选择功能
+	// todo: 客制化选框
+
+	var ColorPanel = exports.ColorPanel = function (_ref) {
+	  _inherits(ColorPanel, _ref);
+
+	  function ColorPanel(props) {
+	    _classCallCheck(this, ColorPanel);
+
+	    // 50ms内不重复触发,todo 使用
+	    var _this = _possibleConstructorReturn(this, (ColorPanel.__proto__ || Object.getPrototypeOf(ColorPanel)).call(this, props));
+
+	    _this.handleChange = function (e) {
+	      var p = (0, _calcEventPosition2.default)(e, _this.refs.container);
+	      console.log(p);
+	      //this.props.onChange(calcEventPositiom(e, this.refs.container), e)
+	    };
+
+	    _this.handleMouseDown = function (e) {
+	      _this.handleChange(e, true);
+	      window.addEventListener('mousemove', _this.handleChange);
+	      window.addEventListener('mouseup', _this.handleMouseUp);
+	    };
+
+	    _this.handleMouseUp = function () {
+	      _this.unbindEventListeners();
+	    };
+
+	    _this.throttle = (0, _throttle2.default)(function (fn, data, e) {
+	      fn(data, e);
+	    }, 50);
+	    _this.handleChange = (0, _throttle2.default)(_this.handleChange, 50);
+	    return _this;
+	  }
+
+	  _createClass(ColorPanel, [{
+	    key: 'getBackground',
+	    value: function getBackground(model) {
+	      var props = this.props;
+	      var background = {
+	        r: 'linear-gradient(to top right, rgba(' + props.rgb.r + ',0,0,1),transparent, rgba(' + props.rgb.r + ',255,255,1) ), \n          linear-gradient(to bottom right, rgb(' + props.rgb.r + ',255,0), rgb(' + props.rgb.r + ',0,255) )',
+	        g: 'linear-gradient(to top right, rgba(0,' + props.rgb.g + ',0,1),transparent, rgba(255,' + props.rgb.g + ',255,1) ), \n          linear-gradient(to bottom right, rgb(255,' + props.rgb.g + ',0), rgb(0,' + props.rgb.g + ',255) )',
+	        b: 'linear-gradient(to top right, rgba(0,0,' + props.rgb.b + ',1),transparent, rgba(255,255,' + props.rgb.b + ',1) ), \n          linear-gradient(to bottom right, rgb(0,255,' + props.rgb.b + '), rgb(255,0,' + props.rgb.b + ') )',
+	        h: 'linear-gradient(to top, #000, transparent),linear-gradient(to right, #FFF, rgba(255,255,255,0)),\n          linear-gradient(to top, hsl(' + props.hsv.h + ', 100%, 50%), hsl(' + props.hsv.h + ', 100%, 50%))',
+	        s: 'linear-gradient(to top, #000, transparent), linear-gradient(rgba(255,255,255,' + (1 - props.hsv.s) + '), rgba(255,255,255,' + (1 - props.hsv.s) + ')),\n          linear-gradient(to right, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%)',
+	        v: 'linear-gradient(to top, rgba(0,0,0,' + (1 - props.hsv.v) + '), rgba(0,0,0,' + (1 - props.hsv.v) + ')),linear-gradient(to top, #fff, transparent), \n          linear-gradient(to right, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%)'
+	      };
+
+	      return background[model];
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      this.unbindEventListeners();
+	    }
+	  }, {
+	    key: 'unbindEventListeners',
+	    value: function unbindEventListeners() {
+	      window.removeEventListener('mousemove', this.handleChange);
+	      window.removeEventListener('mouseup', this.handleMouseUp);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var props = this.props;
+	      var styles = (0, _reactcss2.default)({
+	        'default': {
+	          root: {
+	            position: 'relative',
+	            display: 'inline-block',
+	            width: '256px',
+	            height: '256px',
+	            background: this.getBackground(props.colorModel)
+	          },
+	          white: {
+	            absolute: '0px 0px 0px 0px',
+	            background: 'linear-gradient(to right, #fff, rgba(255,255,255,0))'
+	          },
+	          black: {
+	            absolute: '0px 0px 0px 0px',
+	            background: 'linear-gradient(to top, #000, rgba(0,0,0,0))'
+	          },
+	          pointer: {
+	            position: 'absolute',
+	            top: -(this.props.hsv.v * 100) + 100 + '%',
+	            left: this.props.hsv.s * 100 + '%',
+	            cursor: 'default'
+	          },
+	          circle: {
+	            width: '4px',
+	            height: '4px',
+	            boxShadow: '0 0 0 1.5px #fff, inset 0 0 1px 1px rgba(0,0,0,.3),\n            0 0 1px 2px rgba(0,0,0,.4)',
+	            borderRadius: '50%',
+	            cursor: 'hand',
+	            transform: 'translate(-2px, -2px)'
+	          }
+	        },
+	        'custom': _extends({}, this.props.style)
+	      }, { 'custom': !!this.props.style });
+
+	      return _react2.default.createElement('div', {
+	        style: styles.root,
+	        ref: 'container',
+	        onMouseDown: this.handleMouseDown,
+	        onTouchMove: this.handleChange,
+	        onTouchStart: this.handleChange
+	      });
+	    }
+	  }]);
+
+	  return ColorPanel;
+	}(_react.PureComponent || _react.Component);
+
+	ColorPanel.propTypes = {
+	  color: _react.PropTypes.string,
+	  colorModel: _react.PropTypes.oneOf(['r', 'g', 'b', 'h', 's', 'v'])
+	};
+	ColorPanel.defaultProps = {
+	  xAxis: 'h'
+	};
+	exports.default = ColorPanel;
+
+/***/ },
+/* 365 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = calcEventPosition;
+	function calcEventPosition(e, container) {
+	  var containerWidth = container.clientWidth;
+	  var containerHeight = container.clientHeight;
+	  var x = typeof e.pageX === 'number' ? e.pageX : e.touches[0].pageX;
+	  var y = typeof e.pageY === 'number' ? e.pageY : e.touches[0].pageY;
+	  var left = x - (container.getBoundingClientRect().left + window.pageXOffset);
+	  var top = y - (container.getBoundingClientRect().top + window.pageYOffset);
+
+	  left = left < 0 ? 0 : left;
+	  left = left > containerWidth ? containerWidth : left;
+	  top = top < 0 ? 0 : top;
+	  top = top > containerHeight ? containerHeight : top;
+
+	  return {
+	    left: left,
+	    top: top,
+	    leftP: left / containerWidth,
+	    topP: top / containerHeight
+	  };
+	}
+
+/***/ },
+/* 366 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var debounce = __webpack_require__(367),
+	    isObject = __webpack_require__(210);
+
+	/** Error message constants. */
+	var FUNC_ERROR_TEXT = 'Expected a function';
+
+	/**
+	 * Creates a throttled function that only invokes `func` at most once per
+	 * every `wait` milliseconds. The throttled function comes with a `cancel`
+	 * method to cancel delayed `func` invocations and a `flush` method to
+	 * immediately invoke them. Provide `options` to indicate whether `func`
+	 * should be invoked on the leading and/or trailing edge of the `wait`
+	 * timeout. The `func` is invoked with the last arguments provided to the
+	 * throttled function. Subsequent calls to the throttled function return the
+	 * result of the last `func` invocation.
+	 *
+	 * **Note:** If `leading` and `trailing` options are `true`, `func` is
+	 * invoked on the trailing edge of the timeout only if the throttled function
+	 * is invoked more than once during the `wait` timeout.
+	 *
+	 * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+	 * until to the next tick, similar to `setTimeout` with a timeout of `0`.
+	 *
+	 * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
+	 * for details over the differences between `_.throttle` and `_.debounce`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 0.1.0
+	 * @category Function
+	 * @param {Function} func The function to throttle.
+	 * @param {number} [wait=0] The number of milliseconds to throttle invocations to.
+	 * @param {Object} [options={}] The options object.
+	 * @param {boolean} [options.leading=true]
+	 *  Specify invoking on the leading edge of the timeout.
+	 * @param {boolean} [options.trailing=true]
+	 *  Specify invoking on the trailing edge of the timeout.
+	 * @returns {Function} Returns the new throttled function.
+	 * @example
+	 *
+	 * // Avoid excessively updating the position while scrolling.
+	 * jQuery(window).on('scroll', _.throttle(updatePosition, 100));
+	 *
+	 * // Invoke `renewToken` when the click event is fired, but not more than once every 5 minutes.
+	 * var throttled = _.throttle(renewToken, 300000, { 'trailing': false });
+	 * jQuery(element).on('click', throttled);
+	 *
+	 * // Cancel the trailing throttled invocation.
+	 * jQuery(window).on('popstate', throttled.cancel);
+	 */
+	function throttle(func, wait, options) {
+	  var leading = true,
+	      trailing = true;
+
+	  if (typeof func != 'function') {
+	    throw new TypeError(FUNC_ERROR_TEXT);
+	  }
+	  if (isObject(options)) {
+	    leading = 'leading' in options ? !!options.leading : leading;
+	    trailing = 'trailing' in options ? !!options.trailing : trailing;
+	  }
+	  return debounce(func, wait, {
+	    'leading': leading,
+	    'maxWait': wait,
+	    'trailing': trailing
+	  });
+	}
+
+	module.exports = throttle;
+
+
+/***/ },
+/* 367 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isObject = __webpack_require__(210),
+	    now = __webpack_require__(368),
+	    toNumber = __webpack_require__(351);
+
+	/** Error message constants. */
+	var FUNC_ERROR_TEXT = 'Expected a function';
+
+	/* Built-in method references for those with the same name as other `lodash` methods. */
+	var nativeMax = Math.max,
+	    nativeMin = Math.min;
+
+	/**
+	 * Creates a debounced function that delays invoking `func` until after `wait`
+	 * milliseconds have elapsed since the last time the debounced function was
+	 * invoked. The debounced function comes with a `cancel` method to cancel
+	 * delayed `func` invocations and a `flush` method to immediately invoke them.
+	 * Provide `options` to indicate whether `func` should be invoked on the
+	 * leading and/or trailing edge of the `wait` timeout. The `func` is invoked
+	 * with the last arguments provided to the debounced function. Subsequent
+	 * calls to the debounced function return the result of the last `func`
+	 * invocation.
+	 *
+	 * **Note:** If `leading` and `trailing` options are `true`, `func` is
+	 * invoked on the trailing edge of the timeout only if the debounced function
+	 * is invoked more than once during the `wait` timeout.
+	 *
+	 * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+	 * until to the next tick, similar to `setTimeout` with a timeout of `0`.
+	 *
+	 * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
+	 * for details over the differences between `_.debounce` and `_.throttle`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 0.1.0
+	 * @category Function
+	 * @param {Function} func The function to debounce.
+	 * @param {number} [wait=0] The number of milliseconds to delay.
+	 * @param {Object} [options={}] The options object.
+	 * @param {boolean} [options.leading=false]
+	 *  Specify invoking on the leading edge of the timeout.
+	 * @param {number} [options.maxWait]
+	 *  The maximum time `func` is allowed to be delayed before it's invoked.
+	 * @param {boolean} [options.trailing=true]
+	 *  Specify invoking on the trailing edge of the timeout.
+	 * @returns {Function} Returns the new debounced function.
+	 * @example
+	 *
+	 * // Avoid costly calculations while the window size is in flux.
+	 * jQuery(window).on('resize', _.debounce(calculateLayout, 150));
+	 *
+	 * // Invoke `sendMail` when clicked, debouncing subsequent calls.
+	 * jQuery(element).on('click', _.debounce(sendMail, 300, {
+	 *   'leading': true,
+	 *   'trailing': false
+	 * }));
+	 *
+	 * // Ensure `batchLog` is invoked once after 1 second of debounced calls.
+	 * var debounced = _.debounce(batchLog, 250, { 'maxWait': 1000 });
+	 * var source = new EventSource('/stream');
+	 * jQuery(source).on('message', debounced);
+	 *
+	 * // Cancel the trailing debounced invocation.
+	 * jQuery(window).on('popstate', debounced.cancel);
+	 */
+	function debounce(func, wait, options) {
+	  var lastArgs,
+	      lastThis,
+	      maxWait,
+	      result,
+	      timerId,
+	      lastCallTime,
+	      lastInvokeTime = 0,
+	      leading = false,
+	      maxing = false,
+	      trailing = true;
+
+	  if (typeof func != 'function') {
+	    throw new TypeError(FUNC_ERROR_TEXT);
+	  }
+	  wait = toNumber(wait) || 0;
+	  if (isObject(options)) {
+	    leading = !!options.leading;
+	    maxing = 'maxWait' in options;
+	    maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;
+	    trailing = 'trailing' in options ? !!options.trailing : trailing;
+	  }
+
+	  function invokeFunc(time) {
+	    var args = lastArgs,
+	        thisArg = lastThis;
+
+	    lastArgs = lastThis = undefined;
+	    lastInvokeTime = time;
+	    result = func.apply(thisArg, args);
+	    return result;
+	  }
+
+	  function leadingEdge(time) {
+	    // Reset any `maxWait` timer.
+	    lastInvokeTime = time;
+	    // Start the timer for the trailing edge.
+	    timerId = setTimeout(timerExpired, wait);
+	    // Invoke the leading edge.
+	    return leading ? invokeFunc(time) : result;
+	  }
+
+	  function remainingWait(time) {
+	    var timeSinceLastCall = time - lastCallTime,
+	        timeSinceLastInvoke = time - lastInvokeTime,
+	        result = wait - timeSinceLastCall;
+
+	    return maxing ? nativeMin(result, maxWait - timeSinceLastInvoke) : result;
+	  }
+
+	  function shouldInvoke(time) {
+	    var timeSinceLastCall = time - lastCallTime,
+	        timeSinceLastInvoke = time - lastInvokeTime;
+
+	    // Either this is the first call, activity has stopped and we're at the
+	    // trailing edge, the system time has gone backwards and we're treating
+	    // it as the trailing edge, or we've hit the `maxWait` limit.
+	    return (lastCallTime === undefined || (timeSinceLastCall >= wait) ||
+	      (timeSinceLastCall < 0) || (maxing && timeSinceLastInvoke >= maxWait));
+	  }
+
+	  function timerExpired() {
+	    var time = now();
+	    if (shouldInvoke(time)) {
+	      return trailingEdge(time);
+	    }
+	    // Restart the timer.
+	    timerId = setTimeout(timerExpired, remainingWait(time));
+	  }
+
+	  function trailingEdge(time) {
+	    timerId = undefined;
+
+	    // Only invoke if we have `lastArgs` which means `func` has been
+	    // debounced at least once.
+	    if (trailing && lastArgs) {
+	      return invokeFunc(time);
+	    }
+	    lastArgs = lastThis = undefined;
+	    return result;
+	  }
+
+	  function cancel() {
+	    if (timerId !== undefined) {
+	      clearTimeout(timerId);
+	    }
+	    lastInvokeTime = 0;
+	    lastArgs = lastCallTime = lastThis = timerId = undefined;
+	  }
+
+	  function flush() {
+	    return timerId === undefined ? result : trailingEdge(now());
+	  }
+
+	  function debounced() {
+	    var time = now(),
+	        isInvoking = shouldInvoke(time);
+
+	    lastArgs = arguments;
+	    lastThis = this;
+	    lastCallTime = time;
+
+	    if (isInvoking) {
+	      if (timerId === undefined) {
+	        return leadingEdge(lastCallTime);
+	      }
+	      if (maxing) {
+	        // Handle invocations in a tight loop.
+	        timerId = setTimeout(timerExpired, wait);
+	        return invokeFunc(lastCallTime);
+	      }
+	    }
+	    if (timerId === undefined) {
+	      timerId = setTimeout(timerExpired, wait);
+	    }
+	    return result;
+	  }
+	  debounced.cancel = cancel;
+	  debounced.flush = flush;
+	  return debounced;
+	}
+
+	module.exports = debounce;
+
+
+/***/ },
+/* 368 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var root = __webpack_require__(206);
+
+	/**
+	 * Gets the timestamp of the number of milliseconds that have elapsed since
+	 * the Unix epoch (1 January 1970 00:00:00 UTC).
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 2.4.0
+	 * @category Date
+	 * @returns {number} Returns the timestamp.
+	 * @example
+	 *
+	 * _.defer(function(stamp) {
+	 *   console.log(_.now() - stamp);
+	 * }, _.now());
+	 * // => Logs the number of milliseconds it took for the deferred invocation.
+	 */
+	var now = function() {
+	  return root.Date.now();
+	};
+
+	module.exports = now;
+
 
 /***/ }
 /******/ ]);
