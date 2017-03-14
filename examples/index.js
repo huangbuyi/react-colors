@@ -4,7 +4,8 @@ import ColorPicker from '../src/components/ColorPicker.jsx'
 import Hue from '../src/components/Hue.jsx'
 import Fields from '../src/components/Fields.jsx'
 import EditableInput from '../src/components/EditableInput.jsx'
-import ColorPanel from '../src/components/ColorPanel.jsx'
+import ColorPanel from '../src/components/ColorPanel'
+import ColorBar from '../src/components/ColorBar'
 
 /* 组合化拾色器组件，让组件自由组合 */
 
@@ -53,7 +54,8 @@ class ColorPickerExample extends React.Component {
 
 		return (
 			<ColorPicker color='blue' onChange={ (a) => this.handleChange(a) }>	
-				<ColorPanel colorModel='r'/>			
+				<ColorPanel model='s'/>			
+				<ColorBar model='s'/>
 				<Hue style={ style.hueStyle } direction='vertical'/>
 				<Fields style={ style.fields }>
 					<EditableInput style={ style.inputStyle } label='r'/>
