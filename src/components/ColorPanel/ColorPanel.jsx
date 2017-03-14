@@ -1,23 +1,26 @@
 /* 选择色度和明度 */
 
-// todo: 添加propTypes和defaultProps
-// todo: 将div叠加修改为梯度背景色的叠加
-// todo: 使用梯度和filter，添加其他二维选择功能
-// todo: 客制化选框
+// todo: 改变样式实现
+// todo: 添加x，y轴配置
 
 import React, { Component, PureComponent, PropTypes } from 'react'
 import reactCSS from 'reactcss'
-import calcEventPosition from '../helpers/calcEventPosition'
+import calcEventPosition from '../../helpers/calcEventPosition'
 import throttle from 'lodash/throttle'
+import CirclePanel from './CirclePointer.jsx'
 
 export class ColorPanel extends (PureComponent || Component) {
   static propTypes = {
-    color: PropTypes.string,
-    colorModel: PropTypes.oneOf(['r','g','b','h','s','v']),
+    model: PropTypes.oneOf(['r','g','b','h','s','v']),
+    pointer: PropTypes.node,
+    rgb: PropTypes.object,
+    hsv: PropTypes.object,
+    onChange: PropTypes.func
   }
 
   static defaultProps = {
-    xAxis: 'h',
+    model: 'r',
+    pointer: <CirclePanel />
   }
 
   constructor(props) {
@@ -27,7 +30,7 @@ export class ColorPanel extends (PureComponent || Component) {
     this.handleChange = throttle(this.handleChange, 50)
   }
 
-  getBackground( model ) {
+  getBackground() {
     let props = this.props
     let background = {
       r: `linear-gradient(to top right, rgba(${ props.rgb.r },0,0,1),transparent, rgba(${ props.rgb.r },255,255,1) ), 
@@ -44,19 +47,85 @@ export class ColorPanel extends (PureComponent || Component) {
           linear-gradient(to right, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%)`
     }
 
-    return background[model]
+    return background[props.model]
   }
 
+  getColor(e) {
+    let props = this.props
+    let p = calcEventPosition(e, this.refs.container)
+    let newColor = {
+      r: {
+        r: props.rgb.r,
+        g: 255 - p.topP * 255,
+        b: p.leftP * 255
+      },
+      g: {
+        r: 255 - p.topP * 255,
+        g: props.rgb.g,
+        b: p.leftP * 255
+      },
+      b: {
+        r: 255 - p.topP * 255,
+        g: p.leftP * 255,
+        b: props.rgb.b
+      },
+      h: {
+        h: props.hsv.h,
+        s: p.leftP,
+        v: 1 - p.topP
+      },
+      s: {
+        h: p.leftP * 360,
+        s: props.hsv.s,
+        v: 1 - p.topP
+      },
+      v: {
+        h: p.leftP * 360,
+        s: 1 - p.topP,
+        v: props.hsv.v
+      }
+    }
+    return newColor[props.model]
+  }
 
+  getPosition () {
+    let props = this.props
+    let position = {
+      r: {
+        leftP: props.rgb.b / 255,
+        topP: 1 - props.rgb.g / 255
+      },
+      g: {
+        leftP: props.rgb.b / 255,
+        topP: 1 - props.rgb.r / 255
+      },
+      b: {
+        leftP: props.rgb.g / 255,
+        topP: 1 - props.rgb.r / 255
+      },
+      h: {
+        leftP: props.hsv.s,
+        topP: 1 - props.hsv.v
+      },
+      s: {
+        leftP: props.hsv.h / 360,
+        topP: 1 - props.hsv.v
+      },
+      v: {
+        leftP: props.hsv.h / 360,
+        topP: 1 - props.hsv.s
+      }
+    }
+    return position[props.model]
+  }
 
   componentWillUnmount() {
     this.unbindEventListeners()
   }
 
   handleChange = (e) => {
-    let p = calcEventPosition(e, this.refs.container)
-    console.log(p)
-    //this.props.onChange(calcEventPositiom(e, this.refs.container), e)
+    let c = this.getColor(e)
+    this.props.onChange(c, e)
   }
 
   handleMouseDown = (e) => {
@@ -76,6 +145,7 @@ export class ColorPanel extends (PureComponent || Component) {
 
   render() {
     let props = this.props
+    let p = this.getPosition()
     const styles = reactCSS({
       'default': {
         root: {
@@ -84,20 +154,16 @@ export class ColorPanel extends (PureComponent || Component) {
           width: '256px',
           height: '256px',
           background: this.getBackground(props.colorModel),
-        },
-        white: {
-          absolute: '0px 0px 0px 0px',
-          background: 'linear-gradient(to right, #fff, rgba(255,255,255,0))',
-        },
-        black: {
-          absolute: '0px 0px 0px 0px',
-          background: 'linear-gradient(to top, #000, rgba(0,0,0,0))',
+          cursor: 'default',
         },
         pointer: {
           position: 'absolute',
-          top: `${ -(this.props.hsv.v * 100) + 100 }%`,
-          left: `${ this.props.hsv.s * 100 }%`,
-          cursor: 'default',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          transform: `translate(${ p.leftP * 100 }%, ${ p.topP * 100 }%)`,
+         
         },
         circle: {
           width: '4px',
@@ -105,7 +171,6 @@ export class ColorPanel extends (PureComponent || Component) {
           boxShadow: `0 0 0 1.5px #fff, inset 0 0 1px 1px rgba(0,0,0,.3),
             0 0 1px 2px rgba(0,0,0,.4)`,
           borderRadius: '50%',
-          cursor: 'hand',
           transform: 'translate(-2px, -2px)',
         },
       },
@@ -122,6 +187,9 @@ export class ColorPanel extends (PureComponent || Component) {
         onTouchMove={ this.handleChange }
         onTouchStart={ this.handleChange }
       >
+        <div style={ styles.pointer }>{ 
+          props.pointer
+        }</div>
       </div>
     )
   }

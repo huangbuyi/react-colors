@@ -2,6 +2,7 @@
 import each from 'lodash/each'
 import tinycolor from 'tinycolor2'
 
+
 export default {
 
   simpleCheckForValidColor(data) {
