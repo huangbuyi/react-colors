@@ -1,6 +1,8 @@
 import React, { Component, PureComponent, PropTypes } from 'react'
 import reactCSS from 'reactcss'
-import * as hue from '../../helpers/hue'
+import calcEventPosition from '../../helpers/calcEventPosition'
+
+// todo 完善v
 
 class ColorBar extends (PureComponent || Component) {
 	static defaultProps = {
@@ -30,20 +32,71 @@ class ColorBar extends (PureComponent || Component) {
           #0ff 50%, #00f 67%, #f0f 83%, #f00 100%)`,
       s: `linear-gradient(to top,rgba(0,0,0,${1-props.hsv.v}),rgba(0,0,0,${1-props.hsv.v})),
           linear-gradient(to top,hsl(${ props.hsl.h },100%,100%),hsl(${ props.hsl.h },100%,50%))`,
-      v: `linear-gradient(to top, hsl(${ props.hsl.h },${ props.hsl.s*100 }%,0%), 
-					hsl(${ props.hsl.h },${ props.hsl.s*100 },100%)`,
+      v: `
+          linear-gradient(to top,hsl(${ props.hsl.h },100%,0%),hsl(${ props.hsl.h },100%,50%))`,
 		}
     console.log(background[props.model])
 		return background[props.model]
 	}
 
+  getColor (e) {
+    let {rgb, hsv, model} = this.props
+    let p = calcEventPosition(e, this.refs.container)
+    let newColor = {
+      r: {
+        r: 255 - p.topP * 255,
+        g: rgb.g,
+        b: rgb.b
+      },
+      g: {
+        r: rgb.r,
+        g: 255 - p.topP * 255,
+        b: rgb.b
+      },
+      b: {
+        r: rgb.r,
+        g: rgb.g,
+        b: 255 - p.topP * 255
+      },
+      h: {
+        h: 360 - 360 * p.topP,
+        s: hsv.s,
+        v: hsv.v
+      },
+      s: {
+        h: hsv.h,
+        s: 1 - p.topP,
+        v: hsv.v
+      },
+      v: {
+        h: hsv.h,
+        s: hsv.s,
+        v: 1 - p.topP
+      }
+    }
+    return newColor[model]
+  }
+
+  getPosition () {
+    let {rgb, hsv, model} = this.props 
+    let position = {
+      r: 1 - rgb.r / 255,
+      g: 1 - rgb.g / 255,
+      b: 1 - rgb.b / 255,
+      h: 1 - hsv.h / 360,
+      s: 1 - hsv.s,
+      v: 1 - hsv.v
+    }
+    return position[model]
+  }
+
   componentWillUnmount() {
     this.unbindEventListeners()
   }
 
-  handleChange = (e, skip) => {
-    const change = hue.calculateChange(e, skip, this.props, this.refs.container)
-    change && this.props.onChange(change, e)
+  handleChange = (e) => {
+    let newColor = this.getColor(e)
+    this.props.onChange(newColor, e)
   }
 
   handleMouseDown = (e) => {
@@ -62,6 +115,7 @@ class ColorBar extends (PureComponent || Component) {
   }
 
   render() {
+    let top = this.getPosition() * 100
     const styles = reactCSS({
       'default': {
         root: {
@@ -81,7 +135,11 @@ class ColorBar extends (PureComponent || Component) {
         },
         pointer: {
           position: 'absolute',
-          left: `${ (this.props.hsl.h * 100) / 360 }%`,
+          left: 0,
+          top: 0,
+          width: '100%',
+          height: '100%',
+          transform: `translateY(${ top }%)`
         },
         slider: {
           width: '4px',
@@ -95,10 +153,6 @@ class ColorBar extends (PureComponent || Component) {
       'vertical': {
         root: {
           background: this.getBackground(),
-        },
-        pointer: {
-          left: '0px',
-          top: `${ -((this.props.hsl.h * 100) / 360) + 100 }%`,
         },
       },
       'custom': {

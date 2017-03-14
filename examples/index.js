@@ -54,8 +54,8 @@ class ColorPickerExample extends React.Component {
 
 		return (
 			<ColorPicker color='blue' onChange={ (a) => this.handleChange(a) }>	
-				<ColorPanel model='s'/>			
-				<ColorBar model='s'/>
+				<ColorPanel model='b'/>			
+				<ColorBar model='b'/>
 				<Hue style={ style.hueStyle } direction='vertical'/>
 				<Fields style={ style.fields }>
 					<EditableInput style={ style.inputStyle } label='r'/>
