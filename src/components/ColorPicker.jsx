@@ -13,16 +13,16 @@
 
 import React, {PropTypes} from 'react'
 import reactCSS from 'reactcss'
-import color from '../helpers/color'
+import chroma from 'chroma-js'
 
-function colorType (props, propName, componentName) {
+/*function colorType (props, propName, componentName) {
     if ( props[propName] && !color.isValid(props[propName])) {
      	return new Error(
        		'Invalid color prop `' + propName + '` supplied to' +
         	' `' + componentName + '`. Validation failed.'
       	);
     }
-}
+}*/
 
 class ColorPicker extends React.Component {
 	static propTypes = {
@@ -31,10 +31,12 @@ class ColorPicker extends React.Component {
 		// 容器样式
 		style: PropTypes.object,
 		// 默认颜色
-		defaultColor: colorType,
+		// defaultColor: colorType,
 		// 设置颜色
-		color: colorType
-	}
+		// color: colorType,
+		colorModel: PropTypes.oneOf(['rgb','hsl','hsv','...'])
+	}	
+
 
 	static defaultProps = {
 		onChange: () => {},
@@ -43,21 +45,38 @@ class ColorPicker extends React.Component {
 
 	constructor(props) {
 		super(props);
+
+		this.chroma = chroma(props.defaultColor, props.colorModel)
 		this.state = {
-			color: color.toState(props.color || props.defaultColor)
+			// data format:[r,g,b] i.e: [0,0,255]
+			rgb: this.chroma.rgb(),
 		}
 	}
 
 	componentWillReceiveProps(nextProps) {
 		nextProps.color && this.setState({
-			color: color.toState(nextProps.color)
+			rgb: chroma(nextProps.color, nextProps.colorModel)
 		})
 	}
 
-	handleChange (v, e) {
-		let newColor = color.toState(v)
-		this.setState({color: newColor})
-		this.props.onChange(newColor, e)
+	shouldComponentUpdate(nextProps, nextState) {
+		return true
+	}
+
+	handleChange (v, m, e) {
+		let tmps = m.split('.')
+		let model = tmps[0]
+		if (tmps[1] && tmps[1].length > 1) {
+			tmps[1].split('').map( (color, i) => {
+				this.chroma.set(tmps[0] + '.' + color, v[i])
+			}) 
+		} else {
+			this.chroma.set(m, v)
+		}
+		
+		let newRgb = this.chroma.rgb()
+		this.setState({rgb: newRgb})
+		this.props.onChange(newRgb, e)
 	}
 
 
@@ -68,6 +87,7 @@ class ColorPicker extends React.Component {
 		      		display: 'inline-block',
 		      		boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)',
 		      		padding: '6px',
+		      		background: 'rgb(83,83,83)'
 		    	},
 		  	},
 		  	'custom': {
@@ -78,15 +98,15 @@ class ColorPicker extends React.Component {
 		})
 
 		let { children } = this.props
-
+		let chroma = this.chroma.set('rgb',this.state.rgb)
 		// 为子组件传入新属性
 		let newChildren = React.Children.map(children, child => {
 			return React.cloneElement(child, {
 				onChange: (v, e) => {
-					this.handleChange(v, e)
+					this.handleChange(v, child.props.outputModel || 'rgb', e)
 					child.props.onChange && child.props.onChange(v, e)
 				},
-				...this.state.color
+				color: chroma.get(child.props.inputModel || 'rgb')
 			})
 		})
 
