@@ -6,8 +6,11 @@ import Fields from '../src/components/Fields.jsx'
 import EditableInput from '../src/components/EditableInput.jsx'
 import ColorPanel from '../src/components/ColorPanel'
 import ColorBar from '../src/components/ColorBar'
+import ColorInput from '../src/components/ColorInput'
 
 /* 组合化拾色器组件，让组件自由组合 */
+
+// todo 考虑hex字符串
 
 const style = {
 	divider: {
@@ -54,7 +57,8 @@ class ColorPickerExample extends React.Component {
 
 		return (
 			<ColorPicker defaultColor={[255,0.5,0.5]} colorModel='rgb' onChange={ (a) => this.handleChange(a) }>	
-				<ColorBar/>			
+				<ColorPanel />	
+				<ColorInput />		
 			</ColorPicker>
 		)
 	}

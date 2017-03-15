@@ -11,7 +11,7 @@ import CirclePanel from './CirclePointer.jsx'
 
 export class ColorPanel extends (PureComponent || Component) {
   static propTypes = {
-    model: PropTypes.oneOf(['r','g','b','h','s','v']),
+    model: PropTypes.oneOf(['rgb.r','rgb.g','rgb.b','hsv.h','hsv.s','hsv.v']),
     pointer: PropTypes.node,
     rgb: PropTypes.object,
     hsv: PropTypes.object,
@@ -19,8 +19,7 @@ export class ColorPanel extends (PureComponent || Component) {
   }
 
   static defaultProps = {
-    inputModel: 'rgb',
-    outputModel: 'rgb.gb',
+    model: 'rgb.r',
     pointer: <CirclePanel />
   }
 
@@ -34,66 +33,66 @@ export class ColorPanel extends (PureComponent || Component) {
   getBackground() {
     let props = this.props
     let background = {
-      'rgb.gb': `linear-gradient(to top right, rgba(${ Math.round(props.color[0]) },0,0,1),transparent, rgba(${ Math.round(props.color[0]) },255,255,1) ), 
+      'rgb.r': `linear-gradient(to top right, rgba(${ Math.round(props.color[0]) },0,0,1),transparent, rgba(${ Math.round(props.color[0]) },255,255,1) ), 
           linear-gradient(to bottom right, rgb(${ Math.round(props.color[0]) },255,0), rgb(${ Math.round(props.color[0]) },0,255) )`,
-      'rgb.rb': `linear-gradient(to top right, rgba(0,${ Math.round(props.color[1]) },0,1),transparent, rgba(255,${ Math.round(props.color[1]) },255,1) ), 
+      'rgb.g': `linear-gradient(to top right, rgba(0,${ Math.round(props.color[1]) },0,1),transparent, rgba(255,${ Math.round(props.color[1]) },255,1) ), 
           linear-gradient(to bottom right, rgb(255,${ Math.round(props.color[1]) },0), rgb(0,${ Math.round(props.color[1]) },255) )`,
-      'rgb.rg': `linear-gradient(to top right, rgba(0,0,${ Math.round(props.color[2]) },1),transparent, rgba(255,255,${ Math.round(props.color[2]) },1) ), 
+      'rgb.b': `linear-gradient(to top right, rgba(0,0,${ Math.round(props.color[2]) },1),transparent, rgba(255,255,${ Math.round(props.color[2]) },1) ), 
           linear-gradient(to bottom right, rgb(0,255,${ Math.round(props.color[2]) }), rgb(255,0,${ Math.round(props.color[2]) }) )`,
-      'hsv.sv': `linear-gradient(to top, #000, transparent),linear-gradient(to right, #FFF, rgba(255,255,255,0)),
+      'hsv.h': `linear-gradient(to top, #000, transparent),linear-gradient(to right, #FFF, rgba(255,255,255,0)),
           linear-gradient(to top, hsl(${ props.color[0] }, 100%, 50%), hsl(${ props.color[0] }, 100%, 50%))`,
-      'hsv.hv': `linear-gradient(to top, #000, transparent), linear-gradient(rgba(255,255,255,${ 1-props.color[1] }), rgba(255,255,255,${ 1-props.color[1] })),
+      'hsv.s': `linear-gradient(to top, #000, transparent), linear-gradient(rgba(255,255,255,${ 1-props.color[1] }), rgba(255,255,255,${ 1-props.color[1] })),
           linear-gradient(to right, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%)`,
-      'hsv.hs': `linear-gradient(to top, rgba(0,0,0,${ 1-props.color[1] }), rgba(0,0,0,${ 1-props.color[1] })),linear-gradient(to top, #fff, transparent), 
+      'hsv.v': `linear-gradient(to top, rgba(0,0,0,${ 1-props.color[1] }), rgba(0,0,0,${ 1-props.color[1] })),linear-gradient(to top, #fff, transparent), 
           linear-gradient(to right, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%)`
     }
 
-    return background[props.outputModel]
+    return background[props.model]
   }
 
   getColor(e) {
-    let props = this.props
+    let {color, model} = this.props
     let p = calcEventPosition(e, this.refs.container)
     let newColor = {
-      'rgb.gb': [255 - p.topP * 255, p.leftP * 255],
-      'rgb.rb': [255 - p.topP * 255, p.leftP * 255],
-      'rgb.rg': [255 - p.topP * 255, p.leftP * 255, props.color[2]],
-      'hsv.sv': [p.leftP, 1 - p.topP],
-      'hsv.hv': [p.leftP * 360, 1 - p.topP],
-      'hsv.hs': [p.leftP * 360, 1 - p.topP],
+      'rgb.r': [color[0], 255 - p.topP * 255, p.leftP * 255],
+      'rgb.g': [255 - p.topP * 255, color[1], p.leftP * 255],
+      'rgb.b': [255 - p.topP * 255, p.leftP * 255, color[2]],
+      'hsv.h': [color[0], p.leftP, 1 - p.topP],
+      'hsv.s': [p.leftP * 360, color[1], 1 - p.topP],
+      'hsv.v': [p.leftP * 360, 1 - p.topP, color[2]],
     }
-    return newColor[props.outputModel]
+    return newColor[model]
   }
 
   getPosition () {
-    let props = this.props
+    let {color, model} = this.props
     let position = {
-      'rgb.gb': {
-        leftP: props.color[2] / 255,
-        topP: 1 - props.color[1] / 255
+      'rgb.r': {
+        leftP: color[2] / 255,
+        topP: 1 - color[1] / 255
       },
-      'rgb.rb': {
-        leftP: props.color[2] / 255,
-        topP: 1 - props.color[0] / 255
+      'rgb.g': {
+        leftP: color[2] / 255,
+        topP: 1 - color[0] / 255
       },
-      'rgb.rg': {
-        leftP: props.color[1] / 255,
-        topP: 1 - props.color[0] / 255
+      'rgb.b': {
+        leftP: color[1] / 255,
+        topP: 1 - color[0] / 255
       },
-      'hsv.sv': {
-        leftP: props.color[1],
-        topP: 1 - props.color[2]
+      'hsv.h': {
+        leftP: color[1],
+        topP: 1 - color[2]
       },
-      'hsv.hv': {
-        leftP: props.color[0] / 360,
-        topP: 1 - props.color[2]
+      'hsv.s': {
+        leftP: color[0] / 360,
+        topP: 1 - color[2]
       },
-      'hsv.hs': {
-        leftP: props.color[0] / 360,
-        topP: 1 - props.color[1]
+      'hsv.v': {
+        leftP: color[0] / 360,
+        topP: 1 - color[1]
       }
     }
-    return position[props.outputModel]
+    return position[model]
   }
 
   componentWillUnmount() {
@@ -102,7 +101,6 @@ export class ColorPanel extends (PureComponent || Component) {
 
   handleChange = (e) => {
     let c = this.getColor(e)
-    console.log(c)
     this.props.onChange(c, e)
   }
 
@@ -124,7 +122,6 @@ export class ColorPanel extends (PureComponent || Component) {
   render() {
     let props = this.props
     let p = this.getPosition()
-    console.log(this.getBackground())
     const styles = reactCSS({
       'default': {
         root: {

@@ -6,7 +6,7 @@ import calcEventPosition from '../../helpers/calcEventPosition'
 
 class ColorBar extends (PureComponent || Component) {
 	static defaultProps = {
-		model: PropTypes.oneOf(['r','g','b','h','s','l']),
+		model: PropTypes.oneOf(['rgb.r','rgb.g','rgb.b','hsv.h','hsv.s','hsv.v']),
 		pointer: PropTypes.node,
 		rgb: PropTypes.object,
     hsv: PropTypes.object,
@@ -14,15 +14,13 @@ class ColorBar extends (PureComponent || Component) {
 	}
 
 	static defaultProps = {
-		model: 'r',
 		pointer: '',
 		direction: 'vertical',
-    InputModel: 'rgb',
-    outputModel: 'rgb.r'
+    model: 'rgb.r'
 	}
 
 	getBackground () {
-		let {color, outputModel} = this.props
+		let {color, model} = this.props
 		let background = {
 			'rgb.r': `linear-gradient(to top, rgb(0,${ Math.round(color[1]) },${ Math.round(color[2]) }), 
 					rgb(255, ${ Math.round(color[1]) }, ${ Math.round(color[2]) })`,
@@ -37,25 +35,25 @@ class ColorBar extends (PureComponent || Component) {
       'hsv.v': `linear-gradient(to top,rgba(0,0,0,1),transparent),
           linear-gradient(to top,hsl(${ color[0] },100%,50%),hsl(${ color[0] },100%,50%))`,
 		}
-		return background[outputModel]
+		return background[model]
 	}
 
   getColor (e) {
-    let {color, outputModel} = this.props
+    let {color, model} = this.props
     let p = calcEventPosition(e, this.refs.container)
     let newColor = {
-      'rgb.r': 255 - p.topP * 255,
-      'rgb.g': 255 - p.topP * 255,
-      'rgb.b': 255 - p.topP * 255,
-      'hsv.h': 360 - 360 * p.topP,
-      'hsv.s': 1 - p.topP,
-      'hsv.v': 1 - p.topP,
+      'rgb.r': [255 - p.topP * 255, color[1], color[2]],
+      'rgb.g': [color[0], 255 - p.topP * 255, color[2]],
+      'rgb.b': [color[0], color[1], 255 - p.topP * 255],
+      'hsv.h': [360 - 360 * p.topP, color[1], color[2]],
+      'hsv.s': [color[0], 1 - p.topP, color[2]],
+      'hsv.v': [color[0], color[1], 1 - p.topP],
     }
-    return newColor[outputModel]
+    return newColor[model]
   }
 
   getPosition () {
-    let {color, outputModel} = this.props 
+    let {color, model} = this.props 
     let position = {
       'rgb.r': 1 - color[0] / 255,
       'rgb.g': 1 - color[1] / 255,
@@ -64,7 +62,7 @@ class ColorBar extends (PureComponent || Component) {
       'hsv.s': 1 - color[1],
       'hsv.v': 1 - color[2]
     }
-    return position[outputModel]
+    return position[model]
   }
 
   componentWillUnmount() {

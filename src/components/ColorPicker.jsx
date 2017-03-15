@@ -63,17 +63,9 @@ class ColorPicker extends React.Component {
 		return true
 	}
 
-	handleChange (v, m, e) {
-		let tmps = m.split('.')
-		let model = tmps[0]
-		if (tmps[1] && tmps[1].length > 1) {
-			tmps[1].split('').map( (color, i) => {
-				this.chroma.set(tmps[0] + '.' + color, v[i])
-			}) 
-		} else {
-			this.chroma.set(m, v)
-		}
-		
+	handleChange (color, model, e) {
+
+		this.chroma.set(model, color)
 		let newRgb = this.chroma.rgb()
 		this.setState({rgb: newRgb})
 		this.props.onChange(newRgb, e)
@@ -101,12 +93,13 @@ class ColorPicker extends React.Component {
 		let chroma = this.chroma.set('rgb',this.state.rgb)
 		// 为子组件传入新属性
 		let newChildren = React.Children.map(children, child => {
+			let model = child.props.model.split('.')[0] || 'rgb'
 			return React.cloneElement(child, {
 				onChange: (v, e) => {
-					this.handleChange(v, child.props.outputModel || 'rgb', e)
+					this.handleChange(v, model, e)
 					child.props.onChange && child.props.onChange(v, e)
 				},
-				color: chroma.get(child.props.inputModel || 'rgb')
+				color: chroma.get(model)
 			})
 		})
 
