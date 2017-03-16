@@ -3,6 +3,7 @@
 - pointer component options 
 - ColorBar apacity
 - ColorPallete add click and hover func
+- delete unnecessary package and file
 
 ## large modify
 
@@ -17,4 +18,6 @@
 - ComfirmButton CancelButton
 - ColorDiv: a layout component
 
-## new feature-0
+## new feature
+
+- provide comparabled component, like PS, Sketch and so on
