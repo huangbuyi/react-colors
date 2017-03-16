@@ -7,6 +7,7 @@ import EditableInput from '../src/components/EditableInput.jsx'
 import ColorPanel from '../src/components/ColorPanel'
 import ColorBar from '../src/components/ColorBar'
 import ColorInput from '../src/components/ColorInput'
+import ColorPallete from '../src/components/ColorPallete'
 
 /* 组合化拾色器组件，让组件自由组合 */
 
@@ -58,7 +59,9 @@ class ColorPickerExample extends React.Component {
 		return (
 			<ColorPicker defaultColor={[255,0.5,0.5]} colorModel='rgb' onChange={ (a) => this.handleChange(a) }>	
 				<ColorPanel />	
-				<ColorInput />		
+				<ColorInput />	
+				<ColorBar />	
+				<ColorPallete />
 			</ColorPicker>
 		)
 	}

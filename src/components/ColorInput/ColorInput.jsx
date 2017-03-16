@@ -11,24 +11,41 @@ import reactCSS from 'reactcss'
 export class EditableInput extends (PureComponent || Component) {
   static propTypes = {
     color: PropTypes.array,
-    model: PropTypes.oneOf(['rgb.r','rgb.g','rgb.b','hsv.h','hsv.s','hsv.v'])
+    model: PropTypes.oneOf(['rgb.r','rgb.g','rgb.b','hsv.h','hsv.s','hsv.v']),
+    value: PropTypes.number,
+    fixed: PropTypes.number,
+    step: PropTypes.number,
+    min: PropTypes.number,
+    max: PropTypes.number
   }
 
   static defaultProps = {
-    model: 'rgb.r'
+    model: 'rgb.r',
   }
-
 
   constructor(props) {
     super()
     this.state = {
-      value: props.color[0],
-      blurValue: props.color[0],
+      value: this.getValue(props),
+      blurValue: this.getValue(props),
     }
   }
 
-  getColor (v) {
-    let value = Number(v)
+  getAttr (attr) {
+    let {model} = this.props
+    let map = {min:0,max:1,step:2,fixed:3}
+    let attrs = {
+      'rgb.r': [0, 255, 1, 0],
+      'rgb.g': [0, 255, 1, 0],
+      'rgb.b': [0, 255, 1, 0],
+      'hsv.h': [0, 360, 1, 0],
+      'hsv.s': [0, 1, 0.01, 2],
+      'hsv.v': [0, 1, 0.01, 2],
+    }
+    return this.props[attr] || attrs[model][ map[attr] ]
+  }
+
+  getColor (value) {
     let {color, model} = this.props
     let newColor = {
       'rgb.r': [value, color[1], color[2]],
@@ -41,14 +58,27 @@ export class EditableInput extends (PureComponent || Component) {
     return newColor[model]
   }
 
+  getValue (props) {
+    let {color, model} = props
+    let values = {
+      'rgb.r': color[0],
+      'rgb.g': color[1],
+      'rgb.b': color[2],
+      'hsv.h': color[0],
+      'hsv.s': color[1],
+      'hsv.v': color[2],
+    }
+    return Number(values[model])
+  }
+
   componentWillReceiveProps(nextProps) {
     const input = this.refs.input
-    if (nextProps.value !== this.state.value) {
-
+    let newValue = this.getValue(nextProps)
+    if (newValue !== this.state.value) {
       if (input === document.activeElement) {
-        this.setState({ blurValue: String(nextProps.value).toUpperCase() })
+        this.setState({ blurValue: newValue })
       } else {
-        this.setState({ value: String(nextProps.value).toUpperCase() })
+        this.setState({ value: newValue })
       }
     }
   }
@@ -64,39 +94,43 @@ export class EditableInput extends (PureComponent || Component) {
   }
 
   handleChange = (e) => {
-    let newColor = this.getColor(e.target.value)
-    this.props.onChange(newColor, e)
-
-    this.setState({ value: e.target.value })
+    let newValue = Number(e.target.value)
+    let newColor = this.getColor(newValue)
+    if( !isNaN(newValue) ) {
+      this.props.onChange(newColor, e)
+      this.setState({ value: newValue })
+    }
+   
   }
 
   handleKeyDown = (e) => {
-    const number = Number(e.target.value)
-    if (number) {
-      const amount = this.props.arrowOffset || 1
 
-      // Up
-      if (e.keyCode === 38) {
-        if (this.props.label !== null) {
-          console.log(this.props.onChange)
-          this.props.onChange({ [this.props.label]: number + amount }, e)
-        } else {
-          this.props.onChange(number + amount, e)
-        }
-
-        this.setState({ value: number + amount })
+    // Up
+    if (e.keyCode === 38) {
+      e.preventDefault()
+      let newValue = this.state.value + this.getAttr('step')
+      if(newValue > this.getAttr('max')) {
+        return 
       }
+      this.setState({ value: newValue }, () => {
+        this.refs.input.select()
+      })
+      let newColor = this.getColor(newValue)
+      this.props.onChange(newColor, e)
+    }
 
-      // Down
-      if (e.keyCode === 40) {
-        if (this.props.label !== null) {
-          this.props.onChange({ [this.props.label]: number - amount }, e)
-        } else {
-          this.props.onChange(number - amount, e)
-        }
-
-        this.setState({ value: number - amount })
+    // Down
+    if (e.keyCode === 40) {
+      e.preventDefault()
+      let newValue = this.state.value - this.getAttr('step')
+      if(newValue < this.getAttr('min')) {
+        return 
       }
+      this.setState({ value: newValue }, () => {
+        this.refs.input.select()
+      })
+      let newColor = this.getColor(newValue)
+      this.props.onChange(newColor, e)
     }
   }
 
@@ -154,7 +188,7 @@ export class EditableInput extends (PureComponent || Component) {
     }, this.props)
 
     let label = this.props.label
-    let value = !!label && label !== '#' && label !== 'hex' ? Number(Number(this.state.value).toFixed(2)) : this.state.value
+    let value = this.state.value.toFixed(this.getAttr('fixed'))
     return (
       <div style={ styles.root }>
         { this.props.label ? (

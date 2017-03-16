@@ -1,7 +1,8 @@
 import React, { Component, PureComponent, PropTypes } from 'react'
 import reactCSS from 'reactcss'
 import calcEventPosition from '../../helpers/calcEventPosition'
-
+import PsPointer from './PsPointer.jsx'
+import RectPointer from './RectPointer.jsx'
 // todo 完善v
 
 class ColorBar extends (PureComponent || Component) {
@@ -14,7 +15,7 @@ class ColorBar extends (PureComponent || Component) {
 	}
 
 	static defaultProps = {
-		pointer: '',
+		pointer: <RectPointer />,
 		direction: 'vertical',
     model: 'rgb.r'
 	}
@@ -99,16 +100,10 @@ class ColorBar extends (PureComponent || Component) {
           display: 'inline-block',
           width: 20,
           height: 256,
-          background: `linear-gradient(to right, #f00 0%, #ff0 17%, #0f0 33%,
-            #0ff 50%, #00f 67%, #f0f 83%, #f00 100%)`,
+          background: this.getBackground(),
           borderRadius: this.props.radius,
           boxShadow: this.props.shadow,
           cursor: 'default'
-        },
-        container: {
-          margin: '0 2px',
-          position: 'relative',
-          height: '100%',
         },
         pointer: {
           position: 'absolute',
@@ -118,44 +113,19 @@ class ColorBar extends (PureComponent || Component) {
           height: '100%',
           transform: `translateY(${ top }%)`
         },
-        slider: {
-          width: '4px',
-          borderRadius: '1px',
-          height: '8px',
-          boxShadow: '0 0 2px rgba(0, 0, 0, .6)',
-          background: '#fff',
-          transform: 'translate(-2px, -4px)',
-        },
       },
-      'vertical': {
-        root: {
-          background: this.getBackground(),
-        },
-      },
-      'custom': {
-        ...this.props.style
-      }
-    }, { 
-        vertical: this.props.direction === 'vertical', 
-        custom: !!this.props.style
     })
 
     return (
-      <div style={ styles.root }>
-        <div
-          style={ styles.container }
-          ref="container"
-          onMouseDown={ this.handleMouseDown }
-          onTouchMove={ this.handleChange }
-          onTouchStart={ this.handleChange }
-        >
-          <div style={ styles.pointer }>
-            { this.props.pointer ? (
-              <this.props.pointer { ...this.props } />
-            ) : (
-              <div style={ styles.slider } />
-            ) }
-          </div>
+      <div 
+        style={ styles.root }
+        ref="container"
+        onMouseDown={ this.handleMouseDown }
+        onTouchMove={ this.handleChange }
+        onTouchStart={ this.handleChange }
+      >
+        <div style={ styles.pointer }>
+          { this.props.pointer }
         </div>
       </div>
     )
