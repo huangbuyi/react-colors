@@ -8,6 +8,7 @@ import ColorPanel from '../src/components/ColorPanel'
 import ColorBar from '../src/components/ColorBar'
 import ColorInput from '../src/components/ColorInput'
 import ColorPallete from '../src/components/ColorPallete'
+import ColorRadio from '../src/components/ColorRadio'
 
 /* 组合化拾色器组件，让组件自由组合 */
 
@@ -58,10 +59,22 @@ class ColorPickerExample extends React.Component {
 
 		return (
 			<ColorPicker defaultColor={[255,0.5,0.5]} colorModel='rgb' onChange={ (a) => this.handleChange(a) }>	
-				<ColorPanel />	
-				<ColorInput />	
+				<ColorPanel />		
 				<ColorBar />	
 				<ColorPallete />
+				<ColorInput model='rgb.r'/>
+				<ColorInput model='rgb.g'/>
+				<ColorInput model='rgb.b'/>
+				<ColorInput model='hsv.h'/>
+				<ColorInput model='hsv.s'/>
+				<ColorInput model='hsv.v'/>
+
+				<ColorRadio model='rgb.r'/>
+				<ColorRadio model='rgb.g'/>
+				<ColorRadio model='rgb.b'/>
+				<ColorRadio model='hsv.h'/>
+				<ColorRadio model='hsv.s'/>
+				<ColorRadio model='hsv.v'/>
 			</ColorPicker>
 		)
 	}

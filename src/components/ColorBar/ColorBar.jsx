@@ -17,7 +17,6 @@ class ColorBar extends (PureComponent || Component) {
 	static defaultProps = {
 		pointer: <RectPointer />,
 		direction: 'vertical',
-    model: 'rgb.r'
 	}
 
 	getBackground () {

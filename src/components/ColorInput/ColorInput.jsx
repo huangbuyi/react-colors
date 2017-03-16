@@ -20,7 +20,6 @@ export class EditableInput extends (PureComponent || Component) {
   }
 
   static defaultProps = {
-    model: 'rgb.r',
   }
 
   constructor(props) {

@@ -2,6 +2,7 @@
 
 - pointer component options 
 - ColorBar apacity
+- ColorPallete add click and hover func
 
 ## large modify
 
@@ -10,10 +11,10 @@
 
 ## new component
 
-- ColorStringInput component
-- ColorPalate
+- ColorStringInput component: for hex
+- ColorPallete
 - ColorHistory
 - ComfirmButton CancelButton
-- ColorHover
+- ColorDiv: a layout component
 
 ## new feature-0

@@ -19,7 +19,6 @@ export class ColorPanel extends (PureComponent || Component) {
   }
 
   static defaultProps = {
-    model: 'rgb.r',
     pointer: <CirclePanel />
   }
 
@@ -43,7 +42,7 @@ export class ColorPanel extends (PureComponent || Component) {
           linear-gradient(to top, hsl(${ props.color[0] }, 100%, 50%), hsl(${ props.color[0] }, 100%, 50%))`,
       'hsv.s': `linear-gradient(to top, #000, transparent), linear-gradient(rgba(255,255,255,${ 1-props.color[1] }), rgba(255,255,255,${ 1-props.color[1] })),
           linear-gradient(to right, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%)`,
-      'hsv.v': `linear-gradient(to top, rgba(0,0,0,${ 1-props.color[1] }), rgba(0,0,0,${ 1-props.color[1] })),linear-gradient(to top, #fff, transparent), 
+      'hsv.v': `linear-gradient(to top, rgba(0,0,0,${ 1-props.color[2] }), rgba(0,0,0,${ 1-props.color[2] })),linear-gradient(to top, #fff, transparent), 
           linear-gradient(to right, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%)`
     }
 
