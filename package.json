@@ -1,15 +1,22 @@
 {
-  "name": "blog",
-  "version": "1.0.0",
+  "name": "react-freecolor",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
+  "files": [
+    "dist",
+    "lib"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --inline"
+    "start": "webpack-dev-server --inline",
+    "clean": "rd /s/q lib && mkdir lib",
+    "lib": "npm run clean && babel src -d lib"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Shibin Huang",
+  "license": "MIT",
   "devDependencies": {
+    "babel-cli": "^6.24.0",
     "babel-core": "^6.18.2",
     "babel-jest": "^17.0.2",
     "babel-loader": "^6.2.8",

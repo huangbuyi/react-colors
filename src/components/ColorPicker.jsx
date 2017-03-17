@@ -40,7 +40,8 @@ class ColorPicker extends React.Component {
 
 	static defaultProps = {
 		onChange: () => {},
-		defaultColor: 'red'
+		onModelChange: () => {},
+		defaultColor: 'red',
 	}
 
 	constructor(props) {
@@ -74,6 +75,58 @@ class ColorPicker extends React.Component {
 
 	handleModelChange (nextModel, e) {
 		this.setState({model: nextModel})
+		this.props.onModelChange(nextModel, e)
+	}
+
+	getChildren (children) {
+		// 为子组件传入新属性
+		return React.Children.map(children, child => {
+			let compName = child.type.name
+
+			if(child.props['data-color']) {
+				let divChildren = child.props.children 
+
+				return React.cloneElement(child, {
+					children: this.getChildren(divChildren)
+				})
+			}
+
+			if(compName === 'ColorRadio') {
+				return React.cloneElement(child, {
+					checked: this.state.model === child.props.model,
+					onChange: (m, e) => { 
+						this.handleModelChange(child.props.model, e)
+					}
+				})
+			}
+
+			if(['ColorPanel','ColorBar','ColorInput','ColorPallete','ColorRadio'].indexOf(compName) > -1) {
+				let model = child.props.model || this.state.model
+				let type = model.split('.')[0] || 'rgb'
+				return React.cloneElement(child, {
+					onChange: (v, e) => {
+						this.handleChange(v, type, e)
+						child.props.onChange && child.props.onChange(v, e)
+					},
+					color: this.chroma.get(type),
+					model: model
+				})
+			}
+
+			if(/*自定义组件传入所有属性color,model*/false){
+				let color = {
+					rgb: [],
+					hsv: [],
+					model: [],
+				}
+				return React.cloneElement(child, {
+					color: color,
+					onChange: (value, type) => { 
+						this.handleCustomChange(value, type, e)
+					}
+				})
+			}
+		})
 	}
 
 	render () {
@@ -94,51 +147,11 @@ class ColorPicker extends React.Component {
 		})
 
 		let { children } = this.props
-		let chroma = this.chroma.set('rgb',this.state.rgb)
-		// 为子组件传入新属性
-		let newChildren = React.Children.map(children, child => {
-			let compName = child.type.name
-
-			if(compName === 'ColorRadio') {
-				return React.cloneElement(child, {
-					checked: this.state.model === child.props.model,
-					onChange: (m, e) => { 
-						this.handleModelChange(child.props.model, e)
-						this.props.onModelChange(m, e)
-					}
-				})
-			}
-			
-			let model = child.props.model || this.state.model
-			let type = model.split('.')[0] || 'rgb'
-			return React.cloneElement(child, {
-				onChange: (v, e) => {
-					this.handleChange(v, type, e)
-					child.props.onChange && child.props.onChange(v, e)
-				},
-				color: chroma.get(type),
-				model: model
-			})
-
-			if(/*自定义组件传入所有属性color,model*/false){
-				let color = {
-					rgb: [],
-					hsv: [],
-					model: [],
-				}
-				return React.cloneElement(child, {
-					color: color,
-					onChange: (value, type) => { 
-						this.handleCustomChange(value, type, e)
-					}
-				})
-
-			}
-		})
+		this.chroma.set('rgb',this.state.rgb)
 
 		return (
 			<div style={ styles.root }>
-				{newChildren}
+				{this.getChildren(children)}
 			</div>
 		)
 	}

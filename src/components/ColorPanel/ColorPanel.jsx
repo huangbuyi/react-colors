@@ -114,6 +114,7 @@ export class ColorPanel extends (PureComponent || Component) {
   }
 
   unbindEventListeners() {
+    console.log('remove')
     window.removeEventListener('mousemove', this.handleChange)
     window.removeEventListener('mouseup', this.handleMouseUp)
   }
@@ -133,14 +134,11 @@ export class ColorPanel extends (PureComponent || Component) {
         },
         pointer: {
           position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          transform: `translate(${ p.leftP * 100 }%, ${ p.topP * 100 }%)`,
-         
+          top: p.topP * 100 + '%',
+          left: p.leftP * 100 + '%',
         },
         circle: {
+          position: 'absolute',
           width: '4px',
           height: '4px',
           boxShadow: `0 0 0 1.5px #fff, inset 0 0 1px 1px rgba(0,0,0,.3),

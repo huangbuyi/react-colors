@@ -46,6 +46,12 @@ const style = {
 		root: {
 			marginLeft: 8
 		}
+	},
+	radio: {
+		marginTop: 20
+	},
+	colorBar: {
+		marginLeft: 16
 	}
 }
 
@@ -59,8 +65,10 @@ class ColorPickerExample extends React.Component {
 
 		return (
 			<ColorPicker defaultColor={[255,0.5,0.5]} colorModel='rgb' onChange={ (a) => this.handleChange(a) }>	
-				<ColorPanel />		
-				<ColorBar />	
+				<ColorPanel />	
+				<span data-color='2' style={ style.colorBar }>	
+					<ColorBar />	
+				</span>
 				<ColorPallete />
 				<ColorInput model='rgb.r'/>
 				<ColorInput model='rgb.g'/>
@@ -68,13 +76,14 @@ class ColorPickerExample extends React.Component {
 				<ColorInput model='hsv.h'/>
 				<ColorInput model='hsv.s'/>
 				<ColorInput model='hsv.v'/>
-
-				<ColorRadio model='rgb.r'/>
-				<ColorRadio model='rgb.g'/>
-				<ColorRadio model='rgb.b'/>
-				<ColorRadio model='hsv.h'/>
-				<ColorRadio model='hsv.s'/>
-				<ColorRadio model='hsv.v'/>
+				<div data-color='1' style={ style.radio }>
+					<ColorRadio model='rgb.r'/>
+					<ColorRadio model='rgb.g'/>
+					<ColorRadio model='rgb.b'/>
+					<ColorRadio model='hsv.h'/>
+					<ColorRadio model='hsv.s'/>
+					<ColorRadio model='hsv.v'/>
+				</div>
 			</ColorPicker>
 		)
 	}

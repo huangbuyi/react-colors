@@ -8,7 +8,7 @@
 import React, { Component, PureComponent, PropTypes } from 'react'
 import reactCSS from 'reactcss'
 
-export class EditableInput extends (PureComponent || Component) {
+export class ColorInput extends (PureComponent || Component) {
   static propTypes = {
     color: PropTypes.array,
     model: PropTypes.oneOf(['rgb.r','rgb.g','rgb.b','hsv.h','hsv.s','hsv.v']),
@@ -20,6 +20,7 @@ export class EditableInput extends (PureComponent || Component) {
   }
 
   static defaultProps = {
+    
   }
 
   constructor(props) {
@@ -32,14 +33,14 @@ export class EditableInput extends (PureComponent || Component) {
 
   getAttr (attr) {
     let {model} = this.props
-    let map = {min:0,max:1,step:2,fixed:3}
+    let map = {min:0,max:1,step:2,fixed:3,label:4}
     let attrs = {
-      'rgb.r': [0, 255, 1, 0],
-      'rgb.g': [0, 255, 1, 0],
-      'rgb.b': [0, 255, 1, 0],
-      'hsv.h': [0, 360, 1, 0],
-      'hsv.s': [0, 1, 0.01, 2],
-      'hsv.v': [0, 1, 0.01, 2],
+      'rgb.r': [0, 255, 1, 0, 'R'],
+      'rgb.g': [0, 255, 1, 0, 'G'],
+      'rgb.b': [0, 255, 1, 0, 'B'],
+      'hsv.h': [0, 360, 1, 0, 'H'],
+      'hsv.s': [0, 1, 0.01, 2, 'S'],
+      'hsv.v': [0, 1, 0.01, 2, 'V'],
     }
     return this.props[attr] || attrs[model][ map[attr] ]
   }
@@ -165,11 +166,21 @@ export class EditableInput extends (PureComponent || Component) {
       'default': {
         root: {
           position: 'relative',
+          marginBottom: 4,
+          height: 36,
+          display: 'flex',
+          alignItems: 'center'
         },
         label: {
-          height: 34,
-          width: 20,
-          display: 'inline-block'
+          position: 'relative',
+          fontSize: 16,
+          textAlign: 'center',
+          display: 'inline-block',
+          width: 30
+        },
+        input: {
+          boxSizing: 'border-box',
+          height: '100%'
         }
       },
       'user-override': {
@@ -186,15 +197,12 @@ export class EditableInput extends (PureComponent || Component) {
       'user-override': true,
     }, this.props)
 
-    let label = this.props.label
+    let {label, rightLabel} = this.props
     let value = this.state.value.toFixed(this.getAttr('fixed'))
+    let labelNode = label || <span style={ styles.label }>{ this.getAttr('label') }</span>
     return (
       <div style={ styles.root }>
-        { this.props.label ? (
-          <div style={ styles.label } onMouseDown={ this.handleMouseDown }>
-            { this.props.label.toUpperCase() }
-          </div>
-        ) : null }
+        { labelNode }
         <input
           style={ styles.input }
           ref="input"
@@ -209,4 +217,4 @@ export class EditableInput extends (PureComponent || Component) {
   }
 }
 
-export default EditableInput
+export default ColorInput

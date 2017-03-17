@@ -102,16 +102,13 @@ class ColorBar extends (PureComponent || Component) {
           background: this.getBackground(),
           borderRadius: this.props.radius,
           boxShadow: this.props.shadow,
-          cursor: 'default'
+          cursor: 'default',
         },
         pointer: {
           position: 'absolute',
           left: 0,
-          top: 0,
-          width: '100%',
-          height: '100%',
-          transform: `translateY(${ top }%)`
-        },
+          top: top + '%',
+        }
       },
     })
 

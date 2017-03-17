@@ -15,7 +15,7 @@ function getHue (hsv, num) {
 
 function ColorPallete ({color}) {
 	let hsv = chroma(color).hsv()
-	let colors = getHue(hsv,36)
+	let colors = getHue(hsv,12)
 
 	return <div>
 		{ 
