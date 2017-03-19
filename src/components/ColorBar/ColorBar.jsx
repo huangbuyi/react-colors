@@ -40,7 +40,7 @@ class ColorBar extends (PureComponent || Component) {
 
   getColor (e) {
     let {color, model} = this.props
-    let p = calcEventPosition(e, this.refs.container)
+    let p = calcEventPosition(e, this.container)
     let newColor = {
       'rgb.r': [255 - p.topP * 255, color[1], color[2]],
       'rgb.g': [color[0], 255 - p.topP * 255, color[2]],
@@ -75,7 +75,7 @@ class ColorBar extends (PureComponent || Component) {
   }
 
   handleMouseDown = (e) => {
-    this.handleChange(e, true)
+    this.handleChange(e)
     window.addEventListener('mousemove', this.handleChange)
     window.addEventListener('mouseup', this.handleMouseUp)
   }
@@ -91,7 +91,6 @@ class ColorBar extends (PureComponent || Component) {
 
   render() {
     let top = this.getPosition() * 100
-    console.log(top)
     const styles = reactCSS({
       'default': {
         root: {
@@ -115,7 +114,7 @@ class ColorBar extends (PureComponent || Component) {
     return (
       <div 
         style={ styles.root }
-        ref="container"
+        ref={node => this.container = node}
         onMouseDown={ this.handleMouseDown }
         onTouchMove={ this.handleChange }
         onTouchStart={ this.handleChange }

@@ -65,6 +65,27 @@ class ColorPickerExample extends React.Component {
 
 		return (
 			<ColorPicker defaultColor={[255,0.5,0.5]} colorModel='rgb' onChange={ (a) => this.handleChange(a) }>	
+				<ColorBar />	
+			</ColorPicker>
+		)
+	}
+}
+
+render (
+	<ColorPickerExample />,
+	document.querySelector('.content')
+)
+
+// todo: 将一些样式设为默认值
+// todo 组件默认样式
+// todo 可配置选框样式
+// todo 可配置输入框按钮、标签位置
+// todo 默认值，变量类型
+
+/*
+
+<ColorPicker defaultColor={[255,0.5,0.5]} colorModel='rgb' onChange={ (a) => this.handleChange(a) }>	
+				<ColorBar />	
 				<ColorPanel />	
 				<span data-color='2' style={ style.colorBar }>	
 					<ColorBar />	
@@ -85,31 +106,4 @@ class ColorPickerExample extends React.Component {
 					<ColorRadio model='hsv.v'/>
 				</div>
 			</ColorPicker>
-		)
-	}
-}
-
-render (
-	<ColorPickerExample />,
-	document.querySelector('.content')
-)
-
-// todo: 将一些样式设为默认值
-// todo 组件默认样式
-// todo 可配置选框样式
-// todo 可配置输入框按钮、标签位置
-// todo 默认值，变量类型
-
-/*
-
-<ColorBar/>
-				<Hue style={ style.hueStyle } direction='vertical'/>
-				<Fields style={ style.fields }>
-					<EditableInput style={ style.inputStyle } label='r'/>
-					<EditableInput style={ style.inputStyle } label='g'/>
-					<EditableInput style={ style.inputStyle } label='b'/>
-					<div style={ style.divider }></div>
-					<EditableInput style={ style.inputStyle } label='h'/>
-					<EditableInput style={ style.inputStyle } label='s'/>
-					<EditableInput style={ style.inputStyle } label='v'/>
-				</Fields>*/
+*/

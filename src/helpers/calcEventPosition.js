@@ -12,9 +12,7 @@ export default function calcEventPosition(e, container) {
   top = top > containerHeight ? containerHeight : top
 
   return {
-    left: left,
-    top: top,
     leftP: left / containerWidth,
     topP: top / containerHeight
   }
-}
+}``

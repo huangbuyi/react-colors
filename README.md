@@ -1,4 +1,13 @@
+
 # 可组合拾色器
+
+<p>
+  <a href="https://circleci.com/gh/vuejs/vue/tree/dev"><img src="https://img.shields.io/circleci/project/vuejs/vue/dev.svg" alt="Build Status"></a>
+  <a href="https://codecov.io/github/vuejs/vue?branch=dev"><img src="https://img.shields.io/codecov/c/github/vuejs/vue/dev.svg" alt="Coverage Status"></a>
+  <a href="https://www.npmjs.com/package/react-freecolor"><img src="https://img.shields.io/npm/dt/react-freecolor.svg" alt="Downloads"></a>
+  <a href="https://www.npmjs.com/package/react-freecolor"><img src="https://img.shields.io/npm/v/react-freecolor.svg" alt="Version"></a>
+  <a href="https://www.npmjs.com/package/react-freecolor"><img src="https://img.shields.io/npm/l/react-freecolor.svg" alt="License"></a>
+</p>
 
 组件部分参考自[casesandberg/react-color](https://github.com/casesandberg/react-color)。相比react-color，该组件更加组合化和客制化，可以任意选择需要的组件进行组合，调整布局，设置各组件样式，并允许添加自定义组件。
 
