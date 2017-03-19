@@ -1,7 +1,9 @@
 {
   "name": "react-freecolor",
   "version": "0.0.2",
+  "title": "React free color",
   "description": "",
+  "homepage": "",
   "main": "index.js",
   "files": [
     "dist",
@@ -56,7 +58,7 @@
     "reactcss": "^1.1.1"
   },
   "jest": {
-    "coverageDirectory": "./converage/",
+    "coverageDirectory": "./coverage/",
     "collectCoverage": true
   }
 }

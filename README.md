@@ -2,8 +2,8 @@
 # 可组合拾色器
 
 <p>
-  <a href="https://circleci.com/gh/vuejs/vue/tree/dev"><img src="https://img.shields.io/circleci/project/vuejs/vue/dev.svg" alt="Build Status"></a>
-  <a href="https://codecov.io/github/vuejs/vue?branch=dev"><img src="https://img.shields.io/codecov/c/github/vuejs/vue/dev.svg" alt="Coverage Status"></a>
+  <a href="https://travis-ci.org/huangbuyi/react-freecolor"><img src="https://img.shields.io/travis/huangbuyi/react-freecolor.svg" alt="Build Status"></a>
+  <a href="https://codecov.io/github/huangbuyi/react-freecolor"><img src="https://img.shields.io/codecov/c/github/huangbuyi/react-freecolor.svg" alt="Coverage Status"></a>
   <a href="https://www.npmjs.com/package/react-freecolor"><img src="https://img.shields.io/npm/dt/react-freecolor.svg" alt="Downloads"></a>
   <a href="https://www.npmjs.com/package/react-freecolor"><img src="https://img.shields.io/npm/v/react-freecolor.svg" alt="Version"></a>
   <a href="https://www.npmjs.com/package/react-freecolor"><img src="https://img.shields.io/npm/l/react-freecolor.svg" alt="License"></a>
