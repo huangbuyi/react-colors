@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "test": "jest",
+    "coverage": "jest && codecov",
     "start": "webpack-dev-server --inline",
     "clean": "rd /s/q lib && mkdir lib",
     "lib": "npm run clean && babel src -d lib"
@@ -24,6 +25,7 @@
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-2": "^6.18.0",
+    "codecov": "^2.1.0",
     "css-loader": "^0.26.1",
     "enzyme": "^2.7.1",
     "eslint": "^3.13.1",
@@ -54,6 +56,7 @@
     "reactcss": "^1.1.1"
   },
   "jest": {
-    "rootDir": "src"
+    "coverageDirectory": "./converage/",
+    "collectCoverage": true
   }
 }

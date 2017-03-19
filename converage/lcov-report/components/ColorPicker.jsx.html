@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for components/ColorPicker.jsx</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\prettify.css" />
+    <link rel="stylesheet" href="..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\index.html">All files</a> / <a href="index.html">components</a> ColorPicker.jsx
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/33</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/16</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/13</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/33</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* 
+	容器组件，将颜色属性和onChange事件传递给每个子组件，并作为设定颜色和获取颜色的接口 
+	颜色输入格式：任何合法的颜色格式
+	颜色输出格式 {
+	  hsl: { a: 1, h: 0, l: 0.5, s: 1 },
+	  hex: '#ff0000',
+	  rgb: { r: 255, g: 0, b: 0, a: 1 },
+	  hsv: { h: 0, s: 1, v: 1, a: 1 },
+	  oldHue: 0
+	}
+	参考https://github.com/bgrins/TinyColor
+*/
+&nbsp;
+import React, {PropTypes} from 'react'
+import reactCSS from 'reactcss'
+import chroma from 'chroma-js'
+&nbsp;
+/*function colorType (props, propName, componentName) {
+    if ( props[propName] &amp;&amp; !color.isValid(props[propName])) {
+     	return new Error(
+       		'Invalid color prop `' + propName + '` supplied to' +
+        	' `' + componentName + '`. Validation failed.'
+      	);
+    }
+}*/
+&nbsp;
+class ColorPicker extends React.Component {
+	static propTypes = {
+		// 监听颜色变化
+		onChange: PropTypes.func,
+		// 容器样式
+		style: PropTypes.object,
+		// 默认颜色
+		// defaultColor: colorType,
+		// 设置颜色
+		// color: colorType,
+		colorModel: PropTypes.oneOf(['rgb','hsl','hsv','...'])
+	}	
+&nbsp;
+&nbsp;
+	static defaultProps = {
+		onChange: <span class="fstat-no" title="function not covered" >()</span> =&gt; {},
+		onModelChange: <span class="fstat-no" title="function not covered" >()</span> =&gt; {},
+		defaultColor: 'red',
+	}
+&nbsp;
+<span class="fstat-no" title="function not covered" >	co</span>nstructor(props) {
+<span class="cstat-no" title="statement not covered" >		super(props);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		this.chroma = chroma(props.defaultColor, props.colorModel)</span>
+<span class="cstat-no" title="statement not covered" >		this.state = {</span>
+			// data format:[r,g,b] i.e: [0,0,255]
+			rgb: this.chroma.rgb(),
+			model: 'rgb.r'
+		}
+	}
+&nbsp;
+<span class="fstat-no" title="function not covered" >	co</span>mponentWillReceiveProps(nextProps) {
+<span class="cstat-no" title="statement not covered" >		nextProps.color &amp;&amp; this.setState({</span>
+			rgb: chroma(nextProps.color, nextProps.colorModel)
+		})
+	}
+&nbsp;
+<span class="fstat-no" title="function not covered" >	sh</span>ouldComponentUpdate(nextProps, nextState) {
+<span class="cstat-no" title="statement not covered" >		return true</span>
+	}
+&nbsp;
+<span class="fstat-no" title="function not covered" >	ha</span>ndleChange (color, model, e) {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		this.chroma.set(model, color)</span>
+		let newRgb = <span class="cstat-no" title="statement not covered" >this.chroma.rgb()</span>
+<span class="cstat-no" title="statement not covered" >		this.setState({rgb: newRgb})</span>
+<span class="cstat-no" title="statement not covered" >		this.props.onChange(newRgb, e)</span>
+	}
+&nbsp;
+<span class="fstat-no" title="function not covered" >	ha</span>ndleModelChange (nextModel, e) {
+<span class="cstat-no" title="statement not covered" >		this.setState({model: nextModel})</span>
+<span class="cstat-no" title="statement not covered" >		this.props.onModelChange(nextModel, e)</span>
+	}
+&nbsp;
+<span class="fstat-no" title="function not covered" >	ge</span>tChildren (children) {
+		// 为子组件传入新属性
+<span class="cstat-no" title="statement not covered" >		return React.Children.map(children, <span class="fstat-no" title="function not covered" >ch</span>ild =&gt; {</span>
+			let compName = <span class="cstat-no" title="statement not covered" >child.type.name</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			if(child.props['data-color']) {</span>
+				let divChildren = <span class="cstat-no" title="statement not covered" >child.props.children </span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >				return React.cloneElement(child, {</span>
+					children: this.getChildren(divChildren)
+				})
+			}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			if(compName === 'ColorRadio') {</span>
+<span class="cstat-no" title="statement not covered" >				return React.cloneElement(child, {</span>
+					checked: this.state.model === child.props.model,
+					onChange: <span class="fstat-no" title="function not covered" >(m</span>, e) =&gt; { 
+<span class="cstat-no" title="statement not covered" >						this.handleModelChange(child.props.model, e)</span>
+					}
+				})
+			}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			if(['ColorPanel','ColorBar','ColorInput','ColorPallete','ColorRadio'].indexOf(compName) &gt; -1) {</span>
+				let model = <span class="cstat-no" title="statement not covered" >child.props.model || this.state.model</span>
+				let type = <span class="cstat-no" title="statement not covered" >model.split('.')[0] || 'rgb'</span>
+<span class="cstat-no" title="statement not covered" >				return React.cloneElement(child, {</span>
+					onChange: <span class="fstat-no" title="function not covered" >(v</span>, e) =&gt; {
+<span class="cstat-no" title="statement not covered" >						this.handleChange(v, type, e)</span>
+<span class="cstat-no" title="statement not covered" >						child.props.onChange &amp;&amp; child.props.onChange(v, e)</span>
+					},
+					color: this.chroma.get(type),
+					model: model
+				})
+			}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			if(/*自定义组件传入所有属性color,model*/false){</span>
+				let color = <span class="cstat-no" title="statement not covered" >{</span>
+					rgb: [],
+					hsv: [],
+					model: [],
+				}
+<span class="cstat-no" title="statement not covered" >				return React.cloneElement(child, {</span>
+					color: color,
+					onChange: <span class="fstat-no" title="function not covered" >(v</span>alue, type) =&gt; { 
+<span class="cstat-no" title="statement not covered" >						this.handleCustomChange(value, type, e)</span>
+					}
+				})
+			}
+		})
+	}
+&nbsp;
+<span class="fstat-no" title="function not covered" >	re</span>nder () {
+		const styles = <span class="cstat-no" title="statement not covered" >reactCSS({</span>
+		    'default': {
+		   		root: {
+		      		display: 'inline-block',
+		      		boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)',
+		      		padding: '6px',
+		      		background: '#fff'
+		    	},
+		  	},
+		  	'custom': {
+		    	root: this.props.style
+		    },
+		}, {
+			'custom': this.props.style
+		})
+&nbsp;
+		let { children } = <span class="cstat-no" title="statement not covered" >this.props</span>
+<span class="cstat-no" title="statement not covered" >		this.chroma.set('rgb',this.state.rgb)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		return (</span>
+			&lt;div style={ styles.root }&gt;
+				{this.getChildren(children)}
+			&lt;/div&gt;
+		)
+	}
+}
+&nbsp;
+export default ColorPicker
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sun Mar 19 2017 21:12:20 GMT+0800 (中国标准时间)
+</div>
+</div>
+<script src="..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\sorter.js"></script>
+</body>
+</html>

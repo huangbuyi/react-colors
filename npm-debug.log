@@ -1,0 +1,48 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'run',
+1 verbose cli   'coverage' ]
+2 info using npm@3.8.9
+3 info using node@v6.2.0
+4 verbose run-script [ 'precoverage', 'coverage', 'postcoverage' ]
+5 info lifecycle react-freecolor@0.0.2~precoverage: react-freecolor@0.0.2
+6 silly lifecycle react-freecolor@0.0.2~precoverage: no script for precoverage, continuing
+7 info lifecycle react-freecolor@0.0.2~coverage: react-freecolor@0.0.2
+8 verbose lifecycle react-freecolor@0.0.2~coverage: unsafe-perm in lifecycle true
+9 verbose lifecycle react-freecolor@0.0.2~coverage: PATH: C:\Program Files\nodejs\node_modules\npm\bin\node-gyp-bin;C:\studio\Apache24\htdocs\react-color-picker\react-color-picker\node_modules\.bin;C:\Program Files\nodejs;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files\nodejs\;C:\Program Files (x86)\Git\cmd;C:\studio\mysql\mysql-5.7.14-winx64\bin;C:\studio\php-5.6.25;C:\WINDOWS\system32\config\systemprofile\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\ProgramData\ComposerSetup\bin;C:\Python27;C:\Users\Administrator\AppData\Local\Android\sdk\tools;C:\Users\Administrator\AppData\Local\Android\sdk\platform-tools;C:\Program Files\Java\jdk1.8.0_121\bin;C:\Ruby23-x64\bin;C:\Program Files (x86)\Bandizip\7z;C:\Users\Administrator\AppData\Roaming\npm;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Users\Administrator\AppData\Roaming\Composer\vendor\bin
+10 verbose lifecycle react-freecolor@0.0.2~coverage: CWD: C:\studio\Apache24\htdocs\react-color-picker\react-color-picker
+11 silly lifecycle react-freecolor@0.0.2~coverage: Args: [ '/d /s /c', 'jest && codecov' ]
+12 silly lifecycle react-freecolor@0.0.2~coverage: Returned: code: 1  signal: null
+13 info lifecycle react-freecolor@0.0.2~coverage: Failed to exec coverage script
+14 verbose stack Error: react-freecolor@0.0.2 coverage: `jest && codecov`
+14 verbose stack Exit status 1
+14 verbose stack     at EventEmitter.<anonymous> (C:\Program Files\nodejs\node_modules\npm\lib\utils\lifecycle.js:245:16)
+14 verbose stack     at emitTwo (events.js:106:13)
+14 verbose stack     at EventEmitter.emit (events.js:191:7)
+14 verbose stack     at ChildProcess.<anonymous> (C:\Program Files\nodejs\node_modules\npm\lib\utils\spawn.js:24:14)
+14 verbose stack     at emitTwo (events.js:106:13)
+14 verbose stack     at ChildProcess.emit (events.js:191:7)
+14 verbose stack     at maybeClose (internal/child_process.js:850:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:215:5)
+15 verbose pkgid react-freecolor@0.0.2
+16 verbose cwd C:\studio\Apache24\htdocs\react-color-picker\react-color-picker
+17 error Windows_NT 10.0.14393
+18 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run" "coverage"
+19 error node v6.2.0
+20 error npm  v3.8.9
+21 error code ELIFECYCLE
+22 error react-freecolor@0.0.2 coverage: `jest && codecov`
+22 error Exit status 1
+23 error Failed at the react-freecolor@0.0.2 coverage script 'jest && codecov'.
+23 error Make sure you have the latest version of node.js and npm installed.
+23 error If you do, this is most likely a problem with the react-freecolor package,
+23 error not with npm itself.
+23 error Tell the author that this fails on your system:
+23 error     jest && codecov
+23 error You can get information on how to open an issue for this project with:
+23 error     npm bugs react-freecolor
+23 error Or if that isn't available, you can get their info via:
+23 error     npm owner ls react-freecolor
+23 error There is likely additional logging output above.
+24 verbose exit [ 1, true ]
