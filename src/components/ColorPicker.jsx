@@ -133,27 +133,14 @@ class ColorPicker extends React.Component {
 	}
 
 	render () {
-		const styles = reactCSS({
-		    'default': {
-		   		root: {
-		      		display: 'inline-block',
-		      		boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)',
-		      		padding: '6px',
-		      		background: '#fff'
-		    	},
-		  	},
-		  	'custom': {
-		    	root: this.props.style
-		    },
-		}, {
-			'custom': this.props.style
-		})
-
-		let { children } = this.props
-		this.chroma.set('rgb',this.state.rgb)
+		let { children, style } = this.props
+		this.chroma.set('rgb', this.state.rgb)
+		const root = Object.assign({
+			position: 'relative'
+		}, style)
 
 		return (
-			<div style={ styles.root }>
+			<div style={ root }>
 				{this.getChildren(children)}
 			</div>
 		)

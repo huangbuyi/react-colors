@@ -1,7 +1,6 @@
 import React, { Component, PureComponent, PropTypes } from 'react'
 import reactCSS from 'reactcss'
 import calcEventPosition from '../../helpers/calcEventPosition'
-import PsPointer from './PsPointer.jsx'
 import RectPointer from './RectPointer.jsx'
 // todo 完善v
 
@@ -90,26 +89,21 @@ class ColorBar extends (PureComponent || Component) {
   }
 
   render() {
+    let {pointer, style, pointerStyle} = this.props
     let top = this.getPosition() * 100
-    const styles = reactCSS({
-      'default': {
-        root: {
-          position: 'relative',
-          display: 'inline-block',
-          width: 20,
-          height: 256,
-          background: this.getBackground(),
-          borderRadius: this.props.radius,
-          boxShadow: this.props.shadow,
-          cursor: 'default',
-        },
-        pointer: {
-          position: 'absolute',
-          left: 0,
-          top: top + '%',
-        }
-      },
-    })
+    const styles = {
+      'root': Object.assign({
+        position: 'relative',
+        height: '100%',
+        background: this.getBackground(),
+        curosr: 'default'
+      }, style),
+      'pointer': Object.assign({
+        position: 'absolute',
+        left: 0,
+        top: top + '%',
+      }, pointerStyle)
+    }
 
     return (
       <div 
@@ -120,7 +114,7 @@ class ColorBar extends (PureComponent || Component) {
         onTouchStart={ this.handleChange }
       >
         <div style={ styles.pointer }>
-          { this.props.pointer }
+          { pointer }
         </div>
       </div>
     )

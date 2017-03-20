@@ -120,37 +120,22 @@ export class ColorPanel extends (PureComponent || Component) {
   }
 
   render() {
-    let props = this.props
+    let {pointer, style, labelStyle} = this.props
+
     let p = this.getPosition()
-    const styles = reactCSS({
-      'default': {
-        root: {
-          position: 'relative',
-          display: 'inline-block',
-          width: '256px',
-          height: '256px',
-          background: this.getBackground(),
-          cursor: 'default',
-        },
-        pointer: {
-          position: 'absolute',
-          top: p.topP * 100 + '%',
-          left: p.leftP * 100 + '%',
-        },
-        circle: {
-          position: 'absolute',
-          width: '4px',
-          height: '4px',
-          boxShadow: `0 0 0 1.5px #fff, inset 0 0 1px 1px rgba(0,0,0,.3),
-            0 0 1px 2px rgba(0,0,0,.4)`,
-          borderRadius: '50%',
-          transform: 'translate(-2px, -2px)',
-        },
-      },
-      'custom': {
-        ...this.props.style
-      },
-    }, { 'custom': !!this.props.style })
+    const styles = {
+      root: Object.assign({
+        position: 'relative',
+        height: '100%',
+        background: this.getBackground(),
+        cursor: 'default'
+      }, style),
+      pointer: Object.assign({
+        position: 'absolute',
+        top: p.topP * 100 + '%',
+        left: p.leftP * 100 + '%',
+      }, labelStyle)
+    }
 
     return (
       <div
@@ -161,7 +146,7 @@ export class ColorPanel extends (PureComponent || Component) {
         onTouchStart={ this.handleChange }
       >
         <div style={ styles.pointer }>{ 
-          props.pointer
+          pointer
         }</div>
       </div>
     )

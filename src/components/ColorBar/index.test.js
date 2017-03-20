@@ -2,7 +2,6 @@ import React from 'react'
 import ColorBar from './ColorBar.jsx'
 import { mount, render } from 'enzyme'
 import { renderToJson } from 'enzyme-to-json'
-import PsPointer from './PsPointer'
 
 
 describe('ColorBar correctly', () => {
@@ -33,12 +32,5 @@ describe('ColorBar correctly', () => {
 			pageX: 105,
 			pageY: 200
 		})
-	})
-})
-
-describe('PsPointer renders correctly', () => {
-	it('render correctly', () => {
-		const wrapper = render(<PsPointer />)
-		expect(renderToJson(wrapper)).toMatchSnapshot()
 	})
 })

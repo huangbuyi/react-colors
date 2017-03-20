@@ -3,14 +3,14 @@ import React from 'react'
 function PsSVGPointer (props) {
 	return (
 		<svg width="10px" height="10px" version="1.1" xmlns="http://www.w3.org/2000/svg"  {...props}>
-		  <path d="M0 5 L6 1 L8 1 A2 2 0 0 1 9 2 L9 8 A2 2 0 0 1 8 9 L6 9 L0 5" />
+		  <path d="M0 5 L6 1 L8 1 A2 2 0 0 1 9 2 L9 8 A2 2 0 0 1 8 9 L6 9 L0 5"/>
 		</svg> 
 	)
 }
 
 PsSVGPointer.defaultProps = {
 	fill: "#fff",
-	stroke: "#000"
+	stroke: "#666",
 }
 
 function PsPointer () {
@@ -26,7 +26,6 @@ function PsPointer () {
 		},
 		right: {
 			float: 'right'
-
 		}
 	}
 

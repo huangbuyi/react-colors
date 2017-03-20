@@ -162,42 +162,29 @@ export class ColorInput extends (PureComponent || Component) {
   }
 
   render() {
-    const styles = reactCSS({
-      'default': {
-        root: {
-          display: 'inline-block',
-          position: 'relative',
-          marginBottom: 4,
-          height: 36,
-          alignItems: 'center'
-        },
-        label: {
-          display: 'inline-block',
-          height: '100%',
-          fontSize: 16,
-          verticalAlign: 'top',
-          textAlign: 'center',
-          lineHeight: '36px',
-          width: 30
-        },
-        input: {
-          boxSizing: 'border-box',
-          height: '100%'
-        }
-      },
-      'user-override': {
-        root: this.props.style && this.props.style.root ? this.props.style.root : {},
-        input: this.props.style && this.props.style.input ? this.props.style.input : {},
-        label: this.props.style && this.props.style.label ? this.props.style.label : {},
-      },
-      'dragLabel-true': {
-        label: {
-          cursor: 'ew-resize',
-        },
-      },
-    }, {
-      'user-override': true,
-    }, this.props)
+    // todo 后部标签
+    let {style, labelStyle, inputStyle} = this.props
+    const styles = {
+      root: Object.assign({
+        display: 'inline-block',
+        position: 'relative',
+        marginBottom: 4,
+        height: '100%',
+      }, style),
+      label: Object.assign({
+        display: 'inline-block',
+        height: '100%',
+        fontSize: 13,
+        verticalAlign: 'top',
+        width: 30
+      }, labelStyle),
+      input: Object.assign({
+        verticalAlign: 'top',
+        width: 40,
+        boxSizing: 'border-box',
+        height: '100%'
+      }, inputStyle)
+    }
 
     let {label, rightLabel} = this.props
     let value = this.state.value.toFixed(this.getAttr('fixed'))
