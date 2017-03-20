@@ -9,6 +9,7 @@ import ColorBar from '../src/components/ColorBar'
 import ColorInput from '../src/components/ColorInput'
 import ColorPallete from '../src/components/ColorPallete'
 import ColorRadio from '../src/components/ColorRadio'
+import Photoshop from '../src/pickers'
 
 /* 组合化拾色器组件，让组件自由组合 */
 
@@ -55,24 +56,9 @@ const style = {
 	}
 }
 
-class ColorPickerExample extends React.Component {
-
-	handleChange (colorObj) {
-		console.log(colorObj)
-	}
-
-	render () {
-
-		return (
-			<ColorPicker defaultColor={[255,0.5,0.5]} colorModel='rgb' onChange={ (a) => this.handleChange(a) }>	
-				<ColorInput color={[255,0,0]} model='rgb.r'/>
-			</ColorPicker>
-		)
-	}
-}
 
 render (
-	<ColorPickerExample />,
+	<Photoshop />,
 	document.querySelector('.content')
 )
 

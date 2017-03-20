@@ -165,17 +165,19 @@ export class ColorInput extends (PureComponent || Component) {
     const styles = reactCSS({
       'default': {
         root: {
+          display: 'inline-block',
           position: 'relative',
           marginBottom: 4,
           height: 36,
-          display: 'flex',
           alignItems: 'center'
         },
         label: {
-          position: 'relative',
-          fontSize: 16,
-          textAlign: 'center',
           display: 'inline-block',
+          height: '100%',
+          fontSize: 16,
+          verticalAlign: 'top',
+          textAlign: 'center',
+          lineHeight: '36px',
           width: 30
         },
         input: {
@@ -202,7 +204,9 @@ export class ColorInput extends (PureComponent || Component) {
     let labelNode = label || <span style={ styles.label }>{ this.getAttr('label') }</span>
     return (
       <div style={ styles.root }>
-        { labelNode }
+        <div style={ styles.label }>
+          { labelNode }
+        </div>
         <input
           style={ styles.input }
           ref={ node => this.input = node }

@@ -42,6 +42,7 @@ class ColorPicker extends React.Component {
 		onChange: () => {},
 		onModelChange: () => {},
 		defaultColor: 'red',
+		history: []
 	}
 
 	constructor(props) {
@@ -126,6 +127,8 @@ class ColorPicker extends React.Component {
 					}
 				})
 			}
+
+			return React.cloneElement(child)
 		})
 	}
 
