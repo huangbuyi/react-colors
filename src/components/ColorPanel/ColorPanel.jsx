@@ -51,7 +51,7 @@ export class ColorPanel extends (PureComponent || Component) {
 
   getColor(e) {
     let {color, model} = this.props
-    let p = calcEventPosition(e, this.refs.container)
+    let p = calcEventPosition(e, this.container)
     let newColor = {
       'rgb.r': [color[0], 255 - p.topP * 255, p.leftP * 255],
       'rgb.g': [255 - p.topP * 255, color[1], p.leftP * 255],
@@ -155,7 +155,7 @@ export class ColorPanel extends (PureComponent || Component) {
     return (
       <div
         style={ styles.root }
-        ref="container"
+        ref={ node => this.container = node}
         onMouseDown={ this.handleMouseDown }
         onTouchMove={ this.handleChange }
         onTouchStart={ this.handleChange }

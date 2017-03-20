@@ -65,7 +65,7 @@ class ColorPickerExample extends React.Component {
 
 		return (
 			<ColorPicker defaultColor={[255,0.5,0.5]} colorModel='rgb' onChange={ (a) => this.handleChange(a) }>	
-				<ColorBar />	
+				<ColorInput color={[255,0,0]} model='rgb.r'/>
 			</ColorPicker>
 		)
 	}

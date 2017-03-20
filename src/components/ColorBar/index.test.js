@@ -1,18 +1,23 @@
 import React from 'react'
-import ColorPicker from '../ColorPicker.jsx'
 import ColorBar from './ColorBar.jsx'
-import { mount } from 'enzyme'
+import { mount, render } from 'enzyme'
+import { renderToJson } from 'enzyme-to-json'
+import PsPointer from './PsPointer'
 
 
-describe('ColorBar renders correctly', () => {
+describe('ColorBar correctly', () => {
+	it('render correctly', () => {
+		const wrapper = render(<ColorBar color={[255,0,0]} model='rgb.r'/>)
+		expect(renderToJson(wrapper)).toMatchSnapshot()
+	})
 
-	it('show color', () => {
+	it('show color correctly', () => {
 		const wrapper = mount(<ColorBar color={[127.5,0,0]} model='rgb.r'/>)
 		expect(parseInt(wrapper.childAt(0).getNode().style.top)).toBe(50)
 	})
 
-	it('mousedown set color', () => {
-		const colorBar = mount(<ColorBar color={[255,0,0]} model='rgb.r' onChange={(newColor) => {
+	it('mousedown set color correctly', () => {
+		const colorBar = mount(<ColorBar color={[255,0,0]} model='rgb.r' onChange={newColor => {
 			newColor[0] = parseInt(newColor[0])
 			expect(newColor).toEqual([155,0,0])
 		}}/>).find(ColorBar)
@@ -28,5 +33,12 @@ describe('ColorBar renders correctly', () => {
 			pageX: 105,
 			pageY: 200
 		})
+	})
+})
+
+describe('PsPointer renders correctly', () => {
+	it('render correctly', () => {
+		const wrapper = render(<PsPointer />)
+		expect(renderToJson(wrapper)).toMatchSnapshot()
 	})
 })

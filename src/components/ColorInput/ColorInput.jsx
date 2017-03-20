@@ -72,7 +72,7 @@ export class ColorInput extends (PureComponent || Component) {
   }
 
   componentWillReceiveProps(nextProps) {
-    const input = this.refs.input
+    const input = this.input
     let newValue = this.getValue(nextProps)
     if (newValue !== this.state.value) {
       if (input === document.activeElement) {
@@ -113,7 +113,7 @@ export class ColorInput extends (PureComponent || Component) {
         return 
       }
       this.setState({ value: newValue }, () => {
-        this.refs.input.select()
+        this.input.select()
       })
       let newColor = this.getColor(newValue)
       this.props.onChange(newColor, e)
@@ -127,7 +127,7 @@ export class ColorInput extends (PureComponent || Component) {
         return 
       }
       this.setState({ value: newValue }, () => {
-        this.refs.input.select()
+        this.input.select()
       })
       let newColor = this.getColor(newValue)
       this.props.onChange(newColor, e)
@@ -205,7 +205,7 @@ export class ColorInput extends (PureComponent || Component) {
         { labelNode }
         <input
           style={ styles.input }
-          ref="input"
+          ref={ node => this.input = node }
           value={ value }
           onKeyDown={ this.handleKeyDown }
           onChange={ this.handleChange }

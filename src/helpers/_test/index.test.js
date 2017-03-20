@@ -17,7 +17,6 @@ function mockContainer(left, top, clientWidth, clientHeight) {
 
 describe('test calcEventPosition', () => {
 	it('valid inside container', () => {
-		console.log('inner')
 		const e = mockEventPosition(150,150)
 		const cont = mockContainer(100,100,100,100)
 		expect(calcEventPosition(e, cont)).toEqual({

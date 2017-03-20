@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ColorInput renders correctly render correctly 1`] = `
+<div
+  style="position:relative;margin-bottom:4px;height:36px;display:flex;align-items:center;"
+>
+  <span
+    style="position:relative;font-size:16px;text-align:center;display:inline-block;width:30px;"
+  >
+    R
+  </span>
+  <input
+    style="box-sizing:border-box;height:100%;"
+    value="255"
+  />
+</div>
+`;
