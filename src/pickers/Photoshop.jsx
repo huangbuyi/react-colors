@@ -120,13 +120,23 @@ class Photoshop extends React.Component {
 					<button onClick={ this.handleConfirm }>OK</button>
 				</div>
 				<div style={ styles.inputs } data-color='1'>
-					<div data-color='1' style={ styles.input }><ColorRadio model='hsv.h' /><ColorInput label='H:' model='hsv.h'/></div>
-					<div data-color='1' style={ styles.input }><ColorRadio model='hsv.s' /><ColorInput label='S:' model='hsv.s'/></div>
-					<div data-color='1' style={ styles.input }><ColorRadio model='hsv.v' /><ColorInput label='V:' model='hsv.v'/></div>
+					<div data-color='1' style={ styles.input }><ColorRadio model='hsv.h'/><ColorInput label='H:' model='hsv.h'/></div>
+					<div data-color='1' style={ styles.input }><ColorRadio model='hsv.s'/><ColorInput label='S:' model='hsv.s'/></div>
+					<div data-color='1' style={ styles.input }><ColorRadio model='hsv.v'/><ColorInput label='V:' model='hsv.v'/></div>
 					<div style={{height: 4}}></div>
-					<div data-color='1' style={ styles.input }><ColorRadio model='rgb.r' /><ColorInput label='R:' model='rgb.r'/></div>
-					<div data-color='1' style={ styles.input }><ColorRadio model='rgb.g' /><ColorInput label='G:' model='rgb.g'/></div>
-					<div data-color='1' style={ styles.input }><ColorRadio model='rgb.b' /><ColorInput label='B:' model='rgb.b'/></div>
+					<div data-color='1' style={ styles.input }><ColorRadio model='rgb.r'/><ColorInput label='R:' model='rgb.r'/></div>
+					<div data-color='1' style={ styles.input }><ColorRadio model='rgb.g'/><ColorInput label='G:' model='rgb.g'/></div>
+					<div data-color='1' style={ styles.input }><ColorRadio model='rgb.b'/><ColorInput label='B:' model='rgb.b'/></div>
+				</div>
+				<div data-color='1'>
+					<div data-color='1' style={ styles.input }><ColorRadio model='hsv.h'/><ColorInput label='L:' model='lab.l'/></div>
+					<div data-color='1' style={ styles.input }><ColorRadio model='hsv.s'/><ColorInput label='a:' model='lab.a'/></div>
+					<div data-color='1' style={ styles.input }><ColorRadio model='hsv.v'/><ColorInput label='b:' model='lab.b'/></div>
+					<div style={{height: 4}}></div>
+					<div data-color='1' style={ styles.input }><ColorInput label='C:' model='cmyk.c'/></div>
+					<div data-color='1' style={ styles.input }><ColorInput label='M:' model='cmyk.m'/></div>
+					<div data-color='1' style={ styles.input }><ColorInput label='Y:' model='cmyk.y'/></div>
+					<div data-color='1' style={ styles.input }><ColorInput label='K:' model='cmyk.k'/></div>
 				</div>
 			</ColorPicker>
 		)

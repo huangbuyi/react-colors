@@ -67,7 +67,6 @@ class ColorPicker extends React.Component {
 	}
 
 	handleChange (color, model, e) {
-
 		this.chroma.set(model, color)
 		let newRgb = this.chroma.rgb()
 		this.setState({rgb: newRgb})
@@ -81,6 +80,7 @@ class ColorPicker extends React.Component {
 
 	getChildren (children) {
 		// 为子组件传入新属性
+		this.chroma.set('rgb', this.state.rgb)
 		return React.Children.map(children, child => {
 			let compName = child.type.name
 
@@ -104,6 +104,7 @@ class ColorPicker extends React.Component {
 			if(['ColorPanel','ColorBar','ColorInput','ColorPallete','ColorRadio'].indexOf(compName) > -1) {
 				let model = child.props.model || this.state.model
 				let type = model.split('.')[0] || 'rgb'
+				console.log(this.chroma.get(type))
 				return React.cloneElement(child, {
 					onChange: (v, e) => {
 						this.handleChange(v, type, e)
@@ -134,7 +135,6 @@ class ColorPicker extends React.Component {
 
 	render () {
 		let { children, style } = this.props
-		this.chroma.set('rgb', this.state.rgb)
 		const root = Object.assign({
 			position: 'relative'
 		}, style)

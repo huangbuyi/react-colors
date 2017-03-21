@@ -4,6 +4,7 @@
 // todo: debug拖动改数功能
 // todo: 客制化标签
 // todo: 配置小数点位数
+// todo: Lab值变化bug
 
 import React, { Component, PureComponent, PropTypes } from 'react'
 import reactCSS from 'reactcss'
@@ -11,7 +12,7 @@ import reactCSS from 'reactcss'
 export class ColorInput extends (PureComponent || Component) {
   static propTypes = {
     color: PropTypes.array,
-    model: PropTypes.oneOf(['rgb.r','rgb.g','rgb.b','hsv.h','hsv.s','hsv.v']),
+    model: PropTypes.oneOf(['rgb.r','rgb.g','rgb.b','hsv.h','hsv.s','hsv.v','lab.l','lab.a','lab.b','cmyk.c','cmyk.m','cmyk.y','cmyk.k']),
     value: PropTypes.number,
     fixed: PropTypes.number,
     step: PropTypes.number,
@@ -41,21 +42,35 @@ export class ColorInput extends (PureComponent || Component) {
       'hsv.h': [0, 360, 1, 0, 'H'],
       'hsv.s': [0, 1, 0.01, 2, 'S'],
       'hsv.v': [0, 1, 0.01, 2, 'V'],
+      'lab.l': [0, 100, 1, 0, 'L'],
+      'lab.a': [-128, 127, 1, 0, 'a'],
+      'lab.b': [-128, 127, 1, 0, 'b'],
+      'cmyk.c': [0, 1, 0.01, 2, 'C'],
+      'cmyk.m': [0, 1, 0.01, 2, 'M'],
+      'cmyk.y': [0, 1, 0.01, 2, 'Y'],
+      'cmyk.k': [0, 1, 0.01, 2, 'K'],
     }
     return this.props[attr] || attrs[model][ map[attr] ]
   }
 
   getColor (value) {
     let {color, model} = this.props
-    let newColor = {
+    console.log('getColor' + color)
+    return {
       'rgb.r': [value, color[1], color[2]],
       'rgb.g': [color[0], value, color[2]],
       'rgb.b': [color[0], color[1], value],
       'hsv.h': [value, color[1], color[2]],
       'hsv.s': [color[0], value, color[2]],
       'hsv.v': [color[0], color[1], value],
-    }
-    return newColor[model]
+      'lab.l': [value, color[1], color[2]],
+      'lab.a': [color[0], value, color[2]],
+      'lab.b': [color[0], color[1], value],
+      'cmyk.c': [value, color[1], color[2], color[3]],
+      'cmyk.m': [color[0], value, color[2], color[3]],
+      'cmyk.y': [color[0], color[1], value, color[3]],
+      'cmyk.k': [color[0], color[1], color[3], value],
+    }[model]
   }
 
   getValue (props) {
@@ -67,8 +82,15 @@ export class ColorInput extends (PureComponent || Component) {
       'hsv.h': color[0],
       'hsv.s': color[1],
       'hsv.v': color[2],
+      'lab.l': color[0],
+      'lab.a': color[1],
+      'lab.b': color[2],
+      'cmyk.c': color[0],
+      'cmyk.m': color[1],
+      'cmyk.y': color[2],
+      'cmyk.k': color[3],
     }
-    return Number(values[model])
+    return parseFloat(values[model])
   }
 
   componentWillReceiveProps(nextProps) {
@@ -94,7 +116,7 @@ export class ColorInput extends (PureComponent || Component) {
   }
 
   handleChange = (e) => {
-    let newValue = Number(e.target.value)
+    let newValue = parseFloat(e.target.value)
     let newColor = this.getColor(newValue)
     if( !isNaN(newValue) ) {
       this.props.onChange(newColor, e)
@@ -112,10 +134,11 @@ export class ColorInput extends (PureComponent || Component) {
       if(newValue > this.getAttr('max')) {
         return 
       }
+      let newColor = this.getColor(newValue)
       this.setState({ value: newValue }, () => {
         this.input.select()
       })
-      let newColor = this.getColor(newValue)
+      
       this.props.onChange(newColor, e)
     }
 
@@ -126,10 +149,11 @@ export class ColorInput extends (PureComponent || Component) {
       if(newValue < this.getAttr('min')) {
         return 
       }
+      let newColor = this.getColor(newValue)
       this.setState({ value: newValue }, () => {
         this.input.select()
       })
-      let newColor = this.getColor(newValue)
+     
       this.props.onChange(newColor, e)
     }
   }
@@ -163,7 +187,8 @@ export class ColorInput extends (PureComponent || Component) {
 
   render() {
     // todo 后部标签
-    let {style, labelStyle, inputStyle} = this.props
+    let {style, labelStyle, inputStyle, model} = this.props
+
     const styles = {
       root: Object.assign({
         display: 'inline-block',
