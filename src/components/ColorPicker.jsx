@@ -67,8 +67,10 @@ class ColorPicker extends React.Component {
 	}
 
 	handleChange (color, model, e) {
+		console.log(color)
 		this.chroma.set(model, color)
 		let newRgb = this.chroma.rgb()
+		console.log(newRgb)
 		this.setState({rgb: newRgb})
 		this.props.onChange(newRgb, e)
 	}
@@ -104,7 +106,6 @@ class ColorPicker extends React.Component {
 			if(['ColorPanel','ColorBar','ColorInput','ColorPallete','ColorRadio'].indexOf(compName) > -1) {
 				let model = child.props.model || this.state.model
 				let type = model.split('.')[0] || 'rgb'
-				console.log(this.chroma.get(type))
 				return React.cloneElement(child, {
 					onChange: (v, e) => {
 						this.handleChange(v, type, e)

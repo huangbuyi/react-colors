@@ -55,7 +55,6 @@ export class ColorInput extends (PureComponent || Component) {
 
   getColor (value) {
     let {color, model} = this.props
-    console.log('getColor' + color)
     return {
       'rgb.r': [value, color[1], color[2]],
       'rgb.g': [color[0], value, color[2]],
@@ -134,6 +133,7 @@ export class ColorInput extends (PureComponent || Component) {
       if(newValue > this.getAttr('max')) {
         return 
       }
+      console.log(this.props.color)
       let newColor = this.getColor(newValue)
       this.setState({ value: newValue }, () => {
         this.input.select()
