@@ -42,7 +42,8 @@ class ColorPicker extends React.Component {
 		onChange: () => {},
 		onModelChange: () => {},
 		defaultColor: 'red',
-		history: []
+		history: [],
+		colorModel: 'rgb'
 	}
 
 	constructor(props) {
@@ -51,14 +52,15 @@ class ColorPicker extends React.Component {
 		this.chroma = chroma(props.defaultColor, props.colorModel)
 		this.state = {
 			// data format:[r,g,b] i.e: [0,0,255]
-			rgb: this.chroma.rgb(),
-			model: 'rgb.r'
+			color: props.defaultColor,
+			model: 'rgb.r',
+			activeModel: props.colorModel
 		}
 	}
 
 	componentWillReceiveProps(nextProps) {
 		nextProps.color && this.setState({
-			rgb: chroma(nextProps.color, nextProps.colorModel)
+			color: chroma(nextProps.color, nextProps.colorModel)
 		})
 	}
 
@@ -67,12 +69,8 @@ class ColorPicker extends React.Component {
 	}
 
 	handleChange (color, model, e) {
-		console.log(color)
-		this.chroma.set(model, color)
-		let newRgb = this.chroma.rgb()
-		console.log(newRgb)
-		this.setState({rgb: newRgb})
-		this.props.onChange(newRgb, e)
+		this.setState({color: color, activeModel: model})
+		this.props.onChange(color, e)
 	}
 
 	handleModelChange (nextModel, e) {
@@ -82,7 +80,9 @@ class ColorPicker extends React.Component {
 
 	getChildren (children) {
 		// 为子组件传入新属性
-		this.chroma.set('rgb', this.state.rgb)
+		let {activeModel, color} = this.state
+		this.chroma.set(activeModel, this.state.color)
+		
 		return React.Children.map(children, child => {
 			let compName = child.type.name
 
@@ -111,7 +111,7 @@ class ColorPicker extends React.Component {
 						this.handleChange(v, type, e)
 						child.props.onChange && child.props.onChange(v, e)
 					},
-					color: this.chroma.get(type),
+					color: type === activeModel ? this.state.color : this.chroma.get(type),
 					model: model
 				})
 			}

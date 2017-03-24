@@ -5,6 +5,7 @@
 // todo: 客制化标签
 // todo: 配置小数点位数
 // todo: Lab值变化bug
+// todo: fix cmyk.k
 
 import React, { Component, PureComponent, PropTypes } from 'react'
 import reactCSS from 'reactcss'
@@ -68,7 +69,7 @@ export class ColorInput extends (PureComponent || Component) {
       'cmyk.c': [value, color[1], color[2], color[3]],
       'cmyk.m': [color[0], value, color[2], color[3]],
       'cmyk.y': [color[0], color[1], value, color[3]],
-      'cmyk.k': [color[0], color[1], color[3], value],
+      'cmyk.k': [color[0], color[1], color[2], value],
     }[model]
   }
 
@@ -129,25 +130,33 @@ export class ColorInput extends (PureComponent || Component) {
     // Up
     if (e.keyCode === 38) {
       e.preventDefault()
-      let newValue = this.state.value + this.getAttr('step')
-      if(newValue > this.getAttr('max')) {
-        return 
+      let max = this.getAttr('max')
+      let value = this.state.value
+      if( value >= max ) {
+        return
       }
-      console.log(this.props.color)
+      let newValue = value + this.getAttr('step')
+      if(newValue > this.getAttr('max')) {
+        newValue = this.getAttr('max')
+      }
       let newColor = this.getColor(newValue)
       this.setState({ value: newValue }, () => {
         this.input.select()
       })
-      
       this.props.onChange(newColor, e)
     }
 
     // Down
     if (e.keyCode === 40) {
       e.preventDefault()
-      let newValue = this.state.value - this.getAttr('step')
+      let min = this.getAttr('min')
+      let value = this.state.value
+      if( value <= min) {
+        return
+      }
+      let newValue = value - this.getAttr('step')
       if(newValue < this.getAttr('min')) {
-        return 
+        newValue = this.getAttr('min') 
       }
       let newColor = this.getColor(newValue)
       this.setState({ value: newValue }, () => {
