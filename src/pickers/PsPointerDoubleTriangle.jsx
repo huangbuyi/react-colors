@@ -13,7 +13,7 @@ PsSVGPointer.defaultProps = {
 	stroke: "#666",
 }
 
-function PsPointer () {
+function PsPointerDoubleTriangle () {
 	const style = {
 		root: {
 			position: 'absolute',
@@ -37,4 +37,4 @@ function PsPointer () {
 	)
 }
 
-export default PsPointer
+export default PsPointerDoubleTriangle

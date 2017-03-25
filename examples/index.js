@@ -55,7 +55,7 @@ const style = {
 
 
 render (
-	<Photoshop />,
+	<Photoshop color='blue'/>,
 	document.querySelector('.content')
 )
 

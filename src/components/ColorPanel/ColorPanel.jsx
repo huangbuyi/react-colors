@@ -114,7 +114,6 @@ export class ColorPanel extends (PureComponent || Component) {
   }
 
   unbindEventListeners() {
-    console.log('remove')
     window.removeEventListener('mousemove', this.handleChange)
     window.removeEventListener('mouseup', this.handleMouseUp)
   }

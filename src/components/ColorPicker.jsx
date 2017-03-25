@@ -15,6 +15,15 @@ import React, {PropTypes} from 'react'
 import reactCSS from 'reactcss'
 import chroma from 'chroma-js'
 
+const formatHex = (hexStr) => {
+	const max = 16777215
+  const min = 0
+  let num = parseInt(hexStr, 16) 
+		let newValue = num > max ? 'ffffff' : hexStr
+  newValue = num < min ? '0' : newValue
+  return newValue.padStart(6, '0')
+}
+
 /*function colorType (props, propName, componentName) {
     if ( props[propName] && !color.isValid(props[propName])) {
      	return new Error(
@@ -53,7 +62,7 @@ class ColorPicker extends React.Component {
 		this.state = {
 			// data format:[r,g,b] i.e: [0,0,255]
 			color: props.defaultColor,
-			model: 'rgb.r',
+			model: 'hsv.h',
 			activeModel: props.colorModel
 		}
 	}
@@ -70,7 +79,25 @@ class ColorPicker extends React.Component {
 
 	handleChange (color, model, e) {
 		this.setState({color: color, activeModel: model})
-		this.props.onChange(color, e)
+		let chroma = this.chroma
+
+		let formatColor = model === 'hex' ? formatHex(color) : color
+		chroma.set(model, formatColor)
+
+		this.props.onChange({
+			rgb: chroma.rgb(),
+			hsl: chroma.hsl(),
+			hsv: chroma.hsv(),
+			lab: chroma.lab(),
+			lch: chroma.lch(),
+			hcl: chroma.hcl(),
+			cmyk: chroma.cmyk(),
+			css: chroma.css(),
+			hex: chroma.hex(),
+			temperature: chroma.temperature(),
+			a: chroma.alpha(),
+			alpha: chroma.alpha(),
+		}, e)
 	}
 
 	handleModelChange (nextModel, e) {
@@ -81,7 +108,6 @@ class ColorPicker extends React.Component {
 	getChildren (children) {
 		// 为子组件传入新属性
 		let {activeModel, color} = this.state
-		this.chroma.set(activeModel, this.state.color)
 		
 		return React.Children.map(children, child => {
 			let compName = child.type.name
