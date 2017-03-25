@@ -2,7 +2,7 @@
 
 exports[`ColorPanel renders correctly render correctly 1`] = `
 <div
-  style="position:relative;display:inline-block;width:256px;height:256px;background:linear-gradient(to top right, rgba(255,0,0,1),transparent, rgba(255,255,255,1) ), 
+  style="position:relative;height:100%;background:linear-gradient(to top right, rgba(255,0,0,1),transparent, rgba(255,255,255,1) ), 
           linear-gradient(to bottom right, rgb(255,255,0), rgb(255,0,255) );cursor:default;"
 >
   <div

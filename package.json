@@ -14,7 +14,7 @@
     "coverage": "jest && codecov",
     "start": "webpack-dev-server --inline",
     "clean": "rd /s/q lib && mkdir lib",
-    "lib": "npm run clean && babel src -d lib"
+    "lib": "npm run clean && babel src --out-dir lib --ignore \"**/*.test.js\""
   },
   "author": "Shibin Huang",
   "license": "MIT",
@@ -59,6 +59,7 @@
     "reactcss": "^1.1.1"
   },
   "jest": {
+    "rootDir": "src",
     "coverageDirectory": "./coverage/",
     "collectCoverage": true
   }

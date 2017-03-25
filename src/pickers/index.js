@@ -1,1 +1,1 @@
-export {default} from './Photoshop.jsx'
+export {default as Photoshop} from './Photoshop'

@@ -7,13 +7,13 @@ import ColorPicker, {
 	ColorRadio, 
 	ColorPanel, 
 	ColorBar
-} from '../components'
+} from '../../components'
 
 
 class Photoshop extends React.Component {
 	static propTypes = {
 		color: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-		header: PropTypes.string,
+		title: PropTypes.node,
 		onChange: PropTypes.func,
 		onAccept: PropTypes.func,
 		onCancel: PropTypes.func,
@@ -22,6 +22,7 @@ class Photoshop extends React.Component {
 	}
 
 	static defaultProps = {
+		title: 'Color Picker',
 	  color: [255,0,0],
 	  onChange: () => {},
 	  onAccept: () => {},
@@ -30,7 +31,7 @@ class Photoshop extends React.Component {
 
 	constructor(props) {
 	  super(props)
-		let color = chroma(props.color, props.colorModel).rgb()
+		let color = {hex: chroma(props.color, props.colorModel).hex()}
 	  this.state = {
 	  	color: color,
 	  	currColor: color
@@ -38,7 +39,7 @@ class Photoshop extends React.Component {
 	}
 
 	handleChange = (newColor) => {
-		this.setState({color: newColor.rgb})
+		this.setState({color: newColor})
 		this.props.onChange(newColor)
 	}
 
@@ -113,11 +114,11 @@ class Photoshop extends React.Component {
 			},
 			colorNew: {
 				height: 34,
-				background: `rgb(${Math.round(color[0])},${Math.round(color[1])},${Math.round(color[2])})`
+				background: color.hex
 			},
 			colorCurr: {
 				height: 34,
-				background: `rgb(${Math.round(currColor[0])},${Math.round(currColor[1])},${Math.round(currColor[2])})`
+				background: currColor.hex
 			},
 			inputHsv: {
 				position: 'absolute',
@@ -162,8 +163,8 @@ class Photoshop extends React.Component {
 			} 
 		}
 		return (
-			<ColorPicker style={ styles.root } defaultColor={this.state.color} colorModel='rgb' onChange={ (a) => this.handleChange(a) }>	
-				<div style={ styles.title }>Color Picker</div>
+			<ColorPicker style={ styles.root } defaultColor={color.hex} colorModel='hex' onChange={ (a) => this.handleChange(a) }>	
+				<div style={ styles.title }>{ this.props.title }</div>
 				<ColorPanel pointer={ <PsPointerCircle /> } style={ styles.panel }/>
 				<ColorBar pointer={ <PsPointerDoubleTriangle /> } style={ styles.bar }/>
 				<div style={ styles.color }>
@@ -177,25 +178,25 @@ class Photoshop extends React.Component {
 					<button style={ styles.button } onClick={ this.handleCancel }>Cancel</button>
 				</div>
 				<div style={ styles.inputHsv } data-color='1'>
-					<div data-color='1' style={ styles.inputDiv }><ColorRadio model='hsv.h'/><ColorInput inputStyle={ styles.input } label='H:' model='hsv.h' rightLabel='°'/></div>
-					<div data-color='1' style={ styles.inputDiv }><ColorRadio model='hsv.s'/><ColorInput inputStyle={ styles.input } label='S:' model='hsv.s' rightLabel='%'/></div>
-					<div data-color='1' style={ styles.inputDiv }><ColorRadio model='hsv.v'/><ColorInput inputStyle={ styles.input } label='V:' model='hsv.v' rightLabel='%'/></div>
+					<div data-color='1' style={styles.inputDiv}><ColorRadio model='hsv.h'/><ColorInput inputStyle={styles.input} label='H:' model='hsv.h' rightLabel='°'/></div>
+					<div data-color='1' style={styles.inputDiv}><ColorRadio model='hsv.s'/><ColorInput inputStyle={styles.input} label='S:' model='hsv.s' rightLabel='%' scale={100}/></div>
+					<div data-color='1' style={styles.inputDiv}><ColorRadio model='hsv.v'/><ColorInput inputStyle={styles.input} label='V:' model='hsv.v' rightLabel='%' scale={100}/></div>
 				</div>
 				<div style={ styles.inputRgb } data-color='1'>
-					<div data-color='1' style={ styles.inputDiv }><ColorRadio model='rgb.r'/><ColorInput inputStyle={ styles.input } label='R:' model='rgb.r'/></div>
-					<div data-color='1' style={ styles.inputDiv }><ColorRadio model='rgb.g'/><ColorInput inputStyle={ styles.input } label='G:' model='rgb.g'/></div>
-					<div data-color='1' style={ styles.inputDiv }><ColorRadio model='rgb.b'/><ColorInput inputStyle={ styles.input } label='B:' model='rgb.b'/></div>
+					<div data-color='1' style={styles.inputDiv}><ColorRadio model='rgb.r'/><ColorInput inputStyle={styles.input} label='R:' model='rgb.r'/></div>
+					<div data-color='1' style={styles.inputDiv}><ColorRadio model='rgb.g'/><ColorInput inputStyle={styles.input} label='G:' model='rgb.g'/></div>
+					<div data-color='1' style={styles.inputDiv}><ColorRadio model='rgb.b'/><ColorInput inputStyle={styles.input} label='B:' model='rgb.b'/></div>
 				</div>
 				<div style={ styles.inputLab } data-color='1'>
-					<div data-color='1' style={ styles.inputDiv }><ColorInput inputStyle={ styles.lab } label='L:' model='lab.l'/></div>
-					<div data-color='1' style={ styles.inputDiv }><ColorInput inputStyle={ styles.lab } label='a:' model='lab.a'/></div>
-					<div data-color='1' style={ styles.inputDiv }><ColorInput inputStyle={ styles.lab } label='b:' model='lab.b'/></div>
+					<div data-color='1' style={styles.inputDiv}><ColorInput inputStyle={styles.lab} label='L:' model='lab.l'/></div>
+					<div data-color='1' style={styles.inputDiv}><ColorInput inputStyle={styles.lab} label='a:' model='lab.a'/></div>
+					<div data-color='1' style={styles.inputDiv}><ColorInput inputStyle={styles.lab} label='b:' model='lab.b'/></div>
 				</div>
 				<div style={ styles.inputCmyk } data-color='1'>
-					<div data-color='1' style={ styles.inputDiv }><ColorInput inputStyle={ styles.input } label='C:' model='cmyk.c' rightLabel='%'/></div>
-					<div data-color='1' style={ styles.inputDiv }><ColorInput inputStyle={ styles.input } label='M:' model='cmyk.m' rightLabel='%'/></div>
-					<div data-color='1' style={ styles.inputDiv }><ColorInput inputStyle={ styles.input } label='Y:' model='cmyk.y' rightLabel='%'/></div>
-					<div data-color='1' style={ styles.inputDiv }><ColorInput inputStyle={ styles.input } label='K:' model='cmyk.k' rightLabel='%'/></div>
+					<div data-color='1' style={styles.inputDiv}><ColorInput inputStyle={styles.input} label='C:' model='cmyk.c' rightLabel='%' scale={100}/></div>
+					<div data-color='1' style={styles.inputDiv}><ColorInput inputStyle={styles.input} label='M:' model='cmyk.m' rightLabel='%' scale={100}/></div>
+					<div data-color='1' style={styles.inputDiv}><ColorInput inputStyle={styles.input} label='Y:' model='cmyk.y' rightLabel='%' scale={100}/></div>
+					<div data-color='1' style={styles.inputDiv}><ColorInput inputStyle={styles.input} label='K:' model='cmyk.k' rightLabel='%' scale={100}/></div>
 				</div>
 					<div style={ styles.inputHex } data-color='1'>
 					<ColorInput inputStyle={ styles.hex } model='hex'/>

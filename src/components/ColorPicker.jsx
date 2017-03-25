@@ -43,7 +43,7 @@ class ColorPicker extends React.Component {
 		// defaultColor: colorType,
 		// 设置颜色
 		// color: colorType,
-		colorModel: PropTypes.oneOf(['rgb','hsl','hsv','...'])
+		colorModel: PropTypes.oneOf(['rgb','hsl','hsv','hex'])
 	}	
 
 

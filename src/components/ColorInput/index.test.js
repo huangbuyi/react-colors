@@ -1,10 +1,22 @@
 import React from 'react'
 import ColorInput from './ColorInput.jsx'
+import ColorHexInput from './ColorHexInput.jsx'
 import { mount, render } from 'enzyme'
 import { renderToJson } from 'enzyme-to-json'
 
+describe('ColorHexInput', () => {
+	it('render correctly', () => {
+		const wrapper = render(<ColorHexInput color='#2196F3' model='hex'/>)
+		expect(renderToJson(wrapper)).toMatchSnapshot()
+	})
+})
 
-describe('ColorInput renders correctly', () => {
+describe('ColorInput', () => {
+	it('render correctly', () => {
+		const wrapper = render(<ColorInput color={[255,0,0]} model='rgb.r'/>)
+		expect(renderToJson(wrapper)).toMatchSnapshot()
+	})
+
 	it('render correctly', () => {
 		const wrapper = render(<ColorInput color={[255,0,0]} model='rgb.r'/>)
 		expect(renderToJson(wrapper)).toMatchSnapshot()

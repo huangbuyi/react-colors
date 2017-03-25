@@ -3,7 +3,6 @@ import ColorBar from './ColorBar.jsx'
 import { mount, render } from 'enzyme'
 import { renderToJson } from 'enzyme-to-json'
 
-
 describe('ColorBar correctly', () => {
 	it('render correctly', () => {
 		const wrapper = render(<ColorBar color={[255,0,0]} model='rgb.r'/>)

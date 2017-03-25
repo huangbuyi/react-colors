@@ -18,11 +18,12 @@ export class ColorInput extends (PureComponent || Component) {
     fixed: PropTypes.number,
     step: PropTypes.number,
     min: PropTypes.number,
-    max: PropTypes.number
+    max: PropTypes.number,
+    scale: PropTypes.number
   }
 
   static defaultProps = {
-    
+    scale: 1
   }
 
   constructor(props) {
@@ -196,7 +197,7 @@ export class ColorInput extends (PureComponent || Component) {
 
   render() {
     // todo 后部标签
-    let {style, labelStyle, inputStyle, rightLabelStyle, model} = this.props
+    let {style, labelStyle, inputStyle, rightLabelStyle, model, scale} = this.props
 
     const styles = {
       root: Object.assign({
@@ -230,7 +231,7 @@ export class ColorInput extends (PureComponent || Component) {
     }
 
     let {label, rightLabel} = this.props
-    let value = this.state.value.toFixed(this.getAttr('fixed'))
+    let value = this.state.value.toFixed(this.getAttr('fixed')) * scale
     let labelNode = label || <span>{ this.getAttr('label') }</span>
 
     return (

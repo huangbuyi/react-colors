@@ -1,17 +1,64 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ColorInput renders correctly render correctly 1`] = `
+exports[`ColorHexInput render correctly 1`] = `
 <div
-  style="position:relative;margin-bottom:4px;height:36px;display:flex;align-items:center;"
+  style="display:inline-block;position:relative;margin-bottom:4px;height:100%;"
 >
-  <span
-    style="position:relative;font-size:16px;text-align:center;display:inline-block;width:30px;"
+  <div
+    style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;"
   >
-    R
-  </span>
+    <span>
+      #
+    </span>
+  </div>
   <input
-    style="box-sizing:border-box;height:100%;"
+    style="vertical-align:top;width:40px;box-sizing:border-box;height:100%;padding:0 2px;font-size:12px;"
+    value="2196F3"
+  />
+  <div
+    style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;"
+  />
+</div>
+`;
+
+exports[`ColorInput render correctly 1`] = `
+<div
+  style="display:inline-block;position:relative;margin-bottom:4px;height:100%;"
+>
+  <div
+    style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;"
+  >
+    <span>
+      R
+    </span>
+  </div>
+  <input
+    style="vertical-align:top;width:40px;box-sizing:border-box;height:100%;padding:0 2px;font-size:12px;"
     value="255"
+  />
+  <div
+    style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;"
+  />
+</div>
+`;
+
+exports[`ColorInput render correctly 2`] = `
+<div
+  style="display:inline-block;position:relative;margin-bottom:4px;height:100%;"
+>
+  <div
+    style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;"
+  >
+    <span>
+      R
+    </span>
+  </div>
+  <input
+    style="vertical-align:top;width:40px;box-sizing:border-box;height:100%;padding:0 2px;font-size:12px;"
+    value="255"
+  />
+  <div
+    style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;"
   />
 </div>
 `;
