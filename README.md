@@ -7,3 +7,8 @@
 [![NPM downloads](https://img.shields.io/npm/v/react-freecolor.svg)](https://www.npmjs.com/package/react-freecolor)
 [![NPM downloads](https://img.shields.io/npm/l/react-freecolor.svg)](https://www.npmjs.com/package/react-freecolor)
 
+## install
+
+```
+npm install react-freecolor
+```
