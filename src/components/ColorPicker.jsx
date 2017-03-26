@@ -43,28 +43,28 @@ class ColorPicker extends React.Component {
 		// defaultColor: colorType,
 		// 设置颜色
 		// color: colorType,
-		colorModel: PropTypes.oneOf(['rgb','hsl','hsv','hex'])
+		colorModel: PropTypes.oneOf(['rgb','hsl','hsv','hex','rgba'])
 	}	
 
 
 	static defaultProps = {
 		onChange: () => {},
 		onModelChange: () => {},
-		defaultColor: 'red',
+		color: '#ff9966',
 		history: [],
-		colorModel: 'rgb'
 	}
 
 	constructor(props) {
 		super(props);
 
-		this.chroma = chroma(props.defaultColor, props.colorModel)
+		this.chroma = chroma(props.color, props.colorModel)
 		this.state = {
 			// data format:[r,g,b] i.e: [0,0,255]
-			color: props.defaultColor,
+			color: props.color,
 			model: 'hsv.h',
 			activeModel: props.colorModel
 		}
+		
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -79,13 +79,24 @@ class ColorPicker extends React.Component {
 
 	handleChange (color, model, e) {
 		this.setState({color: color, activeModel: model})
+
+		this.props.onChange(this.formateColor(color, model), e)
+	}
+
+	handleModelChange (nextModel, e) {
+		this.setState({model: nextModel})
+		this.props.onModelChange(nextModel, e)
+	}
+
+	formateColor (color, model) {
 		let chroma = this.chroma
-
 		let formatColor = model === 'hex' ? formatHex(color) : color
-		chroma.set(model, formatColor)
-
-		this.props.onChange({
+		// keep alpha, because alpha would reset to 1 when chroma set color
+		let alpha = chroma.alpha()
+		chroma.set(model, formatColor).alpha(alpha)
+		return {
 			rgb: chroma.rgb(),
+			rgba: chroma.rgba(),
 			hsl: chroma.hsl(),
 			hsv: chroma.hsv(),
 			lab: chroma.lab(),
@@ -97,18 +108,13 @@ class ColorPicker extends React.Component {
 			temperature: chroma.temperature(),
 			a: chroma.alpha(),
 			alpha: chroma.alpha(),
-		}, e)
-	}
-
-	handleModelChange (nextModel, e) {
-		this.setState({model: nextModel})
-		this.props.onModelChange(nextModel, e)
+		}
 	}
 
 	getChildren (children) {
 		// 为子组件传入新属性
 		let {activeModel, color} = this.state
-		
+
 		return React.Children.map(children, child => {
 			let compName = child.type.name
 
@@ -129,9 +135,22 @@ class ColorPicker extends React.Component {
 				})
 			}
 
+			if(compName === 'ColorBlock') {
+				return React.cloneElement(child, {
+					onClick: (v, e) => {
+						this.handleChange(v, 'rgba', e)
+						child.props.onChange && child.props.onChange(v, e)
+					}
+				})
+			}
+
 			if(['ColorPanel','ColorBar','ColorInput','ColorPallete','ColorRadio'].indexOf(compName) > -1) {
 				let model = child.props.model || this.state.model
 				let type = model.split('.')[0] || 'rgb'
+				type = type === 'alpha' ? 'rgba' : type
+
+				// error!!!!!!!!!!!!!!!!!!!!!!!
+				console.log('233 ' + this.chroma.get(type))
 				return React.cloneElement(child, {
 					onChange: (v, e) => {
 						this.handleChange(v, type, e)
@@ -142,14 +161,10 @@ class ColorPicker extends React.Component {
 				})
 			}
 
-			if(/*自定义组件传入所有属性color,model*/false){
-				let color = {
-					rgb: [],
-					hsv: [],
-					model: [],
-				}
+			if(child.props['data-user-color']){
+			
 				return React.cloneElement(child, {
-					color: color,
+					color: this.formateColor(color, activeModel),
 					onChange: (value, type) => { 
 						this.handleCustomChange(value, type, e)
 					}

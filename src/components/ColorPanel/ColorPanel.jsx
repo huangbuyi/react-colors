@@ -65,6 +65,7 @@ export class ColorPanel extends (PureComponent || Component) {
 
   getPosition () {
     let {color, model} = this.props
+    console.log(color)
     let position = {
       'rgb.r': {
         leftP: color[2] / 255,

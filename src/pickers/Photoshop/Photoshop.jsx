@@ -6,7 +6,8 @@ import ColorPicker, {
 	ColorInput, 
 	ColorRadio, 
 	ColorPanel, 
-	ColorBar
+	ColorBar,
+	ColorBlock
 } from '../../components'
 
 
@@ -112,13 +113,8 @@ class Photoshop extends React.Component {
 				height: 20,
 				marginBottom: 10 
 			},
-			colorNew: {
+			colorBlock: {
 				height: 34,
-				background: color.hex
-			},
-			colorCurr: {
-				height: 34,
-				background: currColor.hex
 			},
 			inputHsv: {
 				position: 'absolute',
@@ -166,11 +162,11 @@ class Photoshop extends React.Component {
 			<ColorPicker style={ styles.root } defaultColor={color.hex} colorModel='hex' onChange={ (a) => this.handleChange(a) }>	
 				<div style={ styles.title }>{ this.props.title }</div>
 				<ColorPanel pointer={ <PsPointerCircle /> } style={ styles.panel }/>
-				<ColorBar pointer={ <PsPointerDoubleTriangle /> } style={ styles.bar }/>
-				<div style={ styles.color }>
+				<ColorBar direction='vertical' pointer={ <PsPointerDoubleTriangle /> } style={ styles.bar }/>
+				<div style={ styles.color } data-color='1'>
 					<p style={ styles.colorP }>new</p>
-					<div style={ styles.colorNew }></div>
-					<div style={ styles.colorCurr }></div>
+					<ColorBlock color={ color.hex } style={ styles.colorBlock }></ColorBlock>
+					<ColorBlock color={ currColor.hex } style={ styles.colorBlock }></ColorBlock>
 					<p style={ styles.colorP }>current</p>
 				</div>
 				<div style={ styles.buttons }>

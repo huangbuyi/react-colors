@@ -7,3 +7,5 @@ export {default as ColorBar} from './ColorBar'
 export {default as ColorInput} from './ColorInput'
 
 export {default as ColorRadio} from './ColorRadio'
+
+export {default as ColorBlock} from './ColorBlock'
