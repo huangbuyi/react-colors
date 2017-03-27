@@ -39,7 +39,6 @@ class Chrome extends React.Component {
 	}
 
 	handleChange = (newColor) => {
-		console.log(newColor)
 		this.setState({color: newColor})
 		this.props.onChange(newColor)
 	}
@@ -100,6 +99,7 @@ class Chrome extends React.Component {
 				border: '1px solid #ccc'
 			}		
 		}
+
 		return (
 			<ColorPicker style={styles.root} color={ color.rgba } onChange={(a) => this.handleChange(a) }>	
 				<ColorPanel style={ styles.panel }/>

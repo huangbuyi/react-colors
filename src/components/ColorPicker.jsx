@@ -57,7 +57,7 @@ class ColorPicker extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.chroma = chroma(props.color, props.colorModel)
+		this._chroma = chroma(props.color, props.colorModel)
 		this.state = {
 			// data format:[r,g,b] i.e: [0,0,255]
 			color: props.color,
@@ -68,9 +68,7 @@ class ColorPicker extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		nextProps.color && this.setState({
-			color: chroma(nextProps.color, nextProps.colorModel)
-		})
+		nextProps.color && this.formateColor(nextProps.color, nextProps.colorModel)
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
@@ -89,25 +87,26 @@ class ColorPicker extends React.Component {
 	}
 
 	formateColor (color, model) {
-		let chroma = this.chroma
 		let formatColor = model === 'hex' ? formatHex(color) : color
 		// keep alpha, because alpha would reset to 1 when chroma set color
-		let alpha = chroma.alpha()
-		chroma.set(model, formatColor).alpha(alpha)
+		let alpha = model === 'rgba' ? color[3] : this._chroma.alpha()
+		alpha = model === 'alpha' ? color : alpha
+		let _chroma = this._chroma = chroma(formatColor, model).alpha(alpha)
+
 		return {
-			rgb: chroma.rgb(),
-			rgba: chroma.rgba(),
-			hsl: chroma.hsl(),
-			hsv: chroma.hsv(),
-			lab: chroma.lab(),
-			lch: chroma.lch(),
-			hcl: chroma.hcl(),
-			cmyk: chroma.cmyk(),
-			css: chroma.css(),
-			hex: chroma.hex(),
-			temperature: chroma.temperature(),
-			a: chroma.alpha(),
-			alpha: chroma.alpha(),
+			rgb: _chroma.rgb(),
+			rgba: _chroma.rgba(),
+			hsl: _chroma.hsl(),
+			hsv: _chroma.hsv(),
+			lab: _chroma.lab(),
+			lch: _chroma.lch(),
+			hcl: _chroma.hcl(),
+			cmyk: _chroma.cmyk(),
+			css: _chroma.css(),
+			hex: _chroma.hex(),
+			temperature: _chroma.temperature(),
+			a: _chroma.alpha(),
+			alpha: _chroma.alpha(),
 		}
 	}
 
@@ -150,13 +149,12 @@ class ColorPicker extends React.Component {
 				type = type === 'alpha' ? 'rgba' : type
 
 				// error!!!!!!!!!!!!!!!!!!!!!!!
-				console.log('233 ' + this.chroma.get(type))
 				return React.cloneElement(child, {
 					onChange: (v, e) => {
 						this.handleChange(v, type, e)
 						child.props.onChange && child.props.onChange(v, e)
 					},
-					color: type === activeModel ? this.state.color : this.chroma.get(type),
+					color: type === activeModel ? this.state.color : this._chroma.get(type),
 					model: model
 				})
 			}
