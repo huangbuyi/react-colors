@@ -46,12 +46,13 @@ class ChromeDemo extends React.Component {
 
 	render () {
 		let {color, visible} = this.state
+		console.log(color)
 		const style = {
 			width: 20,
 			height: 20,
 			border: '1px solid #fff',
 			boxShadow: '#333 0 0 0 1px',
-			background: color
+			background: `rgba(${color[0]},${color[1]},${color[2]},${color[3]})`
 		}
 		return (
 			<div>
