@@ -137,7 +137,7 @@ class ColorPicker extends React.Component {
 			if(compName === 'ColorBlock') {
 				return React.cloneElement(child, {
 					onClick: (v, e) => {
-						this.handleChange(v, 'rgba', e)
+						this.handleChange(v, 'hex', e)
 						child.props.onChange && child.props.onChange(v, e)
 					}
 				})

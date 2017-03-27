@@ -2,6 +2,7 @@ import React from 'react'
 import {render} from 'react-dom'
 import ColorPicker from '../src/components/ColorPicker.jsx'
 import {Photoshop, Chrome} from '../src/pickers'
+import getTransparentBackground from '../src/helpers/getTransparentBackground'
 
 
 /* 组合化拾色器组件，让组件自由组合 */
@@ -52,7 +53,7 @@ class ChromeDemo extends React.Component {
 			height: 20,
 			border: '1px solid #fff',
 			boxShadow: '#333 0 0 0 1px',
-			background: `rgba(${color[0]},${color[1]},${color[2]},${color[3]})`
+			...getTransparentBackground(`rgba(${color[0]},${color[1]},${color[2]},${color[3]})`)
 		}
 		return (
 			<div>
