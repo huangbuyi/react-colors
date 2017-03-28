@@ -8,8 +8,9 @@ import ColorPicker, {
 	ColorBlock
 } from '../../components'
 
-
+// 0:rgba,1:hsla,2:hex
 class Chrome extends React.Component {
+
 	static propTypes = {
 		color: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
 		colors: PropTypes.array,
@@ -32,13 +33,16 @@ class Chrome extends React.Component {
 						 '#795548','#9e9e9e','#607d8b']
 	}
 
+	handleModelToggle = () => this.setState({inputModel: ++this.state.inputModel % 3})
+
 	constructor(props) {
 		let c = chroma(props.color, props.colorModel)
 	  super(props)
 		let color = {hex:c.hex(), css:c.css(), rgba:c.rgba()}
 	  this.state = {
 	  	color: color,
-	  	currColor: color
+	  	currColor: color,
+	  	inputModel: 0
 	  }
 	}
 
@@ -49,7 +53,7 @@ class Chrome extends React.Component {
 	}
 
 	render () {
-		let {color, currColor} = this.state
+		let {color, currColor, inputModel} = this.state
 		let {colors} = this.props
 
 		const styles = {
@@ -86,6 +90,10 @@ class Chrome extends React.Component {
 				width: 24,
 				height: 24,
 				borderRadius: 12
+			},
+			input: {
+				width: 38,
+				height: 20
 			},
 			hex: {
 				position: 'absolute',
@@ -136,8 +144,29 @@ class Chrome extends React.Component {
 				<ColorBar style={ styles.hueBar } model='hsv.h'/>
 				<ColorBar style={ styles.alphaBar } model='alpha'/>
 				<ColorBlock style={ styles.block } color={ color.css }/>
-				<ColorInput style={ styles.hex } labelStyle={ styles.hexLabel} inputStyle={ styles.hexInput } label={null} model='hex' />
-				<p style={ styles.hexP }>HEX</p>
+				{ 
+					inputModel === 0 ? 
+						<div data-color='1' key='rgb'>
+							<ColorInput style={ styles.input } model='rgb.r' /> 
+							<ColorInput style={ styles.input } model='rgb.g' /> 
+							<ColorInput style={ styles.input } model='rgb.b' /> 
+							<ColorInput style={ styles.input } model='alpha' /> 
+						</div>
+						: 
+					inputModel === 1 ? 
+						<div data-color='1' key='hsv'>
+							<ColorInput style={ styles.input } model='hsv.h' /> 
+							<ColorInput style={ styles.input } model='hsv.s' /> 
+							<ColorInput style={ styles.input } model='hsv.v' /> 
+							<ColorInput style={ styles.input } model='alpha' /> 
+						</div>
+						:
+						<div data-color='1' key='hex'>
+							<ColorInput style={ styles.hex } labelStyle={ styles.hexLabel} inputStyle={ styles.hexInput } label={null} model='hex' />
+							<p style={ styles.hexP }>HEX</p>
+						</div>
+				}
+				<div onClick={ this.handleModelToggle }>变</div>
 				<div data-color='1' style={ styles.colors }>
 					{colors.map( color => <ColorBlock key={color} color={color} style={styles.card}/> )}
 				</div>

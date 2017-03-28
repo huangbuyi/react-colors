@@ -12,17 +12,21 @@
 */
 
 import React, {PropTypes} from 'react'
-import reactCSS from 'reactcss'
 import chroma from 'chroma-js'
+import padStart from '../helpers/padStart'
+
 
 const formatHex = (hexStr) => {
+
 	const max = 16777215
   const min = 0
   let num = parseInt(hexStr, 16) 
-		let newValue = num > max ? 'ffffff' : hexStr
+	let newValue = num > max ? 'ffffff' : hexStr
   newValue = num < min ? '0' : newValue
-  return newValue.padStart(6, '0')
+  return padStart(newValue, 6, '0')
 }
+
+const format = colors => colors.map(c => Number(c))
 
 /*function colorType (props, propName, componentName) {
     if ( props[propName] && !color.isValid(props[propName])) {
@@ -87,9 +91,9 @@ class ColorPicker extends React.Component {
 	}
 
 	formateColor (color, model) {
-		let formatColor = model === 'hex' ? formatHex(color) : color
+		let formatColor = model === 'hex' ? formatHex(color) : format(color)
 		// keep alpha, because alpha would reset to 1 when chroma set color
-		let alpha = model === 'rgba' ? color[3] : this._chroma.alpha()
+		let alpha = model === 'rgba' ? Number(color[3]) : this._chroma.alpha()
 		alpha = model === 'alpha' ? color : alpha
 		let _chroma = this._chroma = chroma(formatColor, model).alpha(alpha)
 

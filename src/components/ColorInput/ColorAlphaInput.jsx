@@ -1,33 +1,13 @@
-/* 颜色属性输入 */
 
-// todo: 添加propTypes和defaultProps
-// todo: debug拖动改数功能
-// todo: 客制化标签
-// todo: 配置小数点位数
-// todo: Lab值变化bug
-// todo: fix cmyk.k
-// todo: 把number input抽象出来，number input组件接口为通用接口，可以使用任意其它组件替换，包裹到colorInput中都可以使用
-// todo: this === active 时，不merge值
 
 import React, { Component, PureComponent, PropTypes } from 'react'
 
-const isStrict16 = v => !(isNaN(parseInt(v, 16)) || isNaN(parseInt(v.split('').reverse().join(''), 16)))
-const formatHex = (hexStr) => {
-  const max = 16777215
-  const min = 0
-  let num = parseInt(hexStr, 16) 
-  let newValue = num > max ? 'ffffff' : hexStr
-  newValue = num < min ? '000000' : newValue
-  return newValue.padStart(6, '0')
-}
-const _16To10 = v => parseInt(v, 16)
-const _10To16 = v => Number(v).toString(16)
+// todo:设置小数点属性
 
-
-export class ColorHexInput extends (PureComponent || Component) {
+export class ColorAlphaInput extends (PureComponent || Component) {
   static propTypes = {
-    color: PropTypes.string,
-    model: PropTypes.oneOf(['hex']),
+    color: PropTypes.array,
+    model: PropTypes.oneOf(['alpha']),
     value: PropTypes.number,
     fixed: PropTypes.number,
     step: PropTypes.number,
@@ -37,21 +17,21 @@ export class ColorHexInput extends (PureComponent || Component) {
 
   static defaultProps = {
     label: <span>#</span>,
-    step: 1
+    step: 0.01
   }
 
   constructor(props) {
     super()
-    let value = props.color.replace('#', '')
     this.state = {
-      value: value,
-      blurValue: value,
+      value: props.color[3],
+      blurValue: props.color[3],
     }
   }
 
   componentWillReceiveProps(nextProps) {
     const input = this.input
-    let newValue = nextProps.color.replace('#', '')
+
+    let newValue = (Number(nextProps.color[3]).toFixed(2))
     if (newValue !== this.state.value) {
       if (input === document.activeElement) {
         this.setState({ blurValue: newValue })
@@ -65,32 +45,37 @@ export class ColorHexInput extends (PureComponent || Component) {
     this.unbindEventListeners()
   }
 
-  handleBlur = () => {
+  handleBlur = e => {
     if (this.state.blurValue) {
       this.setState({ value: this.state.blurValue, blurValue: null })
     }
   }
 
   handleChange = (value, e, call) => {
-    if( isStrict16(value) || !value ) {
-      this.props.onChange(value, e)
+    let {color} = this.props
+    value = value > 1 ? 1 : value 
+    value = value < 0 ? 0 : value
+    console.log('change ' + value)
+    if( !isNaN(Number(value)) || !value ) {
+      this.props.onChange([color[0],color[1],color[2],value], e)
       this.setState({ value: value }, call)
     }
   }
 
   handleKeyDown = (e) => {
     let { step } = this.props
-    let num = parseInt(e.target.value, 16)
-    // Up
+    let num = Number(e.target.value)
+    console.log('num' + num)
+    console.log('num' + (num + step) )
     if (e.keyCode === 38) {
       e.preventDefault()
-      this.handleChange(formatHex(_10To16(num + step)), e, () => this.input.select())
+      this.handleChange((num + step).toFixed(2), e, () => this.input.select())
     }
 
     // Down
     if (e.keyCode === 40) {
       e.preventDefault()
-      this.handleChange(formatHex(_10To16(num - step)), e, () => this.input.select())
+      this.handleChange((num - step).toFixed(2), e, () => this.input.select())
     }
   }
 
@@ -123,7 +108,7 @@ export class ColorHexInput extends (PureComponent || Component) {
 
   render() {
     // todo 后部标签
-    let {styles, label, rightLabel, model} = this.props
+    let {styles, label, rightLabel} = this.props
 
     return (
       <div style={ styles.root }>
@@ -147,4 +132,4 @@ export class ColorHexInput extends (PureComponent || Component) {
   }
 }
 
-export default ColorHexInput
+export default ColorAlphaInput

@@ -7,6 +7,8 @@
 // todo: Lab值变化bug
 // todo: fix cmyk.k
 
+// 抽离出对象部分
+
 import React, { Component, PureComponent, PropTypes } from 'react'
 import reactCSS from 'reactcss'
 
@@ -28,6 +30,7 @@ export class ColorInput extends (PureComponent || Component) {
 
   constructor(props) {
     super()
+    console.log(props)
     this.state = {
       value: this.getValue(props),
       blurValue: this.getValue(props),
@@ -96,7 +99,7 @@ export class ColorInput extends (PureComponent || Component) {
 
   componentWillReceiveProps(nextProps) {
     const input = this.input
-    let newValue = this.getValue(nextProps)
+    let newValue = Number(Number(this.getValue(nextProps)).toFixed(this.getAttr('fixed')))
     if (newValue !== this.state.value) {
       if (input === document.activeElement) {
         this.setState({ blurValue: newValue })
@@ -197,41 +200,8 @@ export class ColorInput extends (PureComponent || Component) {
 
   render() {
     // todo 后部标签
-    let {style, labelStyle, inputStyle, rightLabelStyle, model, scale} = this.props
+    let {styles, model, label, rightLabel} = this.props
 
-    const styles = {
-      root: Object.assign({
-        display: 'inline-block',
-        position: 'relative',
-        marginBottom: 4,
-        height: '100%',
-      }, style),
-      label: Object.assign({
-        display: 'inline-block',
-        height: '100%',
-        fontSize: 13,
-        verticalAlign: 'top',
-        width: 20
-      }, labelStyle),
-      rightLabel: Object.assign({
-        display: 'inline-block',
-        height: '100%',
-        fontSize: 13,
-        verticalAlign: 'top',
-        paddingLeft: 4
-      }, rightLabelStyle),
-      input: Object.assign({
-        verticalAlign: 'top',
-        width: 40,
-        boxSizing: 'border-box',
-        height: '100%',
-        padding: '0 2px',
-        fontSize: 12
-      }, inputStyle)
-    }
-
-    let {label, rightLabel} = this.props
-    let value = this.state.value.toFixed(this.getAttr('fixed')) * scale
     let labelNode = label || <span>{ this.getAttr('label') }</span>
 
     return (
@@ -242,7 +212,7 @@ export class ColorInput extends (PureComponent || Component) {
         <input
           style={ styles.input }
           ref={ node => this.input = node }
-          value={ value }
+          value={ this.state.value }
           onKeyDown={ this.handleKeyDown }
           onChange={ this.handleChange }
           onBlur={ this.handleBlur }
