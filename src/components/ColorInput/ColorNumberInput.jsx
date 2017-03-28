@@ -6,6 +6,8 @@
 // todo: 配置小数点位数
 // todo: Lab值变化bug
 // todo: fix cmyk.k
+// 
+// todo: 使用pos 0 1 2 3代替 getColor 和 getValue
 
 // 抽离出对象部分
 

@@ -4,6 +4,7 @@ import ColorPicker from '../src/components/ColorPicker.jsx'
 import {Photoshop, Chrome} from '../src/pickers'
 import getTransparentBackground from '../src/helpers/getTransparentBackground'
 
+import NumberInput from '../src/components/ColorInput/NumberInput.jsx'
 
 /* 组合化拾色器组件，让组件自由组合 */
 
