@@ -9,6 +9,7 @@ import ColorPicker, {
 } from '../../components'
 import ChromeCirclePointer from './ChromeCirclePointer.jsx'
 import ChromeDiscPointer from './ChromeDiscPointer.jsx'
+import ChromeToggleIcon from './ChromeToggleIcon.jsx'
 
 // 0:rgba,1:hsla,2:hex
 class Chrome extends React.Component {
@@ -38,13 +39,20 @@ class Chrome extends React.Component {
 	constructor(props) {
 		let c = chroma(props.color, props.colorModel)
 	  super(props)
-		let color = {hex:c.hex(), css:c.css(), rgba:c.rgba()}
+		let color = {css:c.css(), rgba:c.rgba()}
 	  this.state = {
 	  	color: color,
 	  	currColor: color,
 	  	inputModel: 0
 	  }
 	}
+
+	componentWillReceiveProps(nextProps) {
+		let c = chroma(nextProps.color, nextProps.colorModel)
+		let color = {css:c.css(), rgba:c.rgba()}
+		this.setState({color: color})
+	}
+
 
 	handleModelToggle = () => this.setState({inputModel: ++this.state.inputModel % 3})
 
@@ -98,7 +106,8 @@ class Chrome extends React.Component {
 			inputsDiv: {
 				position: 'absolute',
 				left: 16,
-				top: 185
+				top: 185,
+				fontSize: 0
 			},
 			input: {
 				width: 40,
@@ -117,11 +126,11 @@ class Chrome extends React.Component {
 			hexLabel: {
 				position: 'absolute',
 				color: '#999',
-				left: 78,
+				left: 76,
 				top: 24
 			},
 			hexInput: {
-				width: 176,
+				width: 172,
 				height: 22,
 				textAlign: 'center',
 				border: '1px solid #ccc',
@@ -131,7 +140,7 @@ class Chrome extends React.Component {
 			colors: {
 				position: 'absolute',
 				bottom: 0,
-				padding: '12px 0 0 25px',
+				padding: '12px 0 0 12px',
 				borderTop: '1px solid #ccc',
 				marginTop: 9,
 				fontSize: 0
@@ -178,7 +187,9 @@ class Chrome extends React.Component {
 							<ColorInput inputStyle={ styles.hexInput } labelStyle={ styles.hexLabel } label='HEX' model='hex' sharp={true}/>
 						</div>
 				}
-				<div style={ styles.toggle } onClick={ this.handleModelToggle }>变</div>
+				<div style={ styles.toggle } onClick={ this.handleModelToggle }>
+					<ChromeToggleIcon />
+				</div>
 				<div data-color='1' style={ styles.colors }>
 					{colors.map( color => <ColorBlock key={color} color={color} style={styles.card}/> )}
 				</div>

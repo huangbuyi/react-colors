@@ -28,7 +28,7 @@ export class ColorInput extends (PureComponent || Component) {
       'rgb.b': 'B',
       'hsv.h': 'H',
       'hsv.s': 'S',
-      'hsv.v':'v',
+      'hsv.v':'V',
       'lab.l':'L',
       'lab.a':'a',
       'lab.b':'b',

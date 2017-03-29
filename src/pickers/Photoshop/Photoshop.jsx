@@ -39,6 +39,12 @@ class Photoshop extends React.Component {
 	  }
 	}
 
+	componentWillReceiveProps(nextProps) {
+		let color = {hex: chroma(nextProps.color, nextProps.colorModel).hex()}
+		console.log(color)
+		this.setState({color: color})
+	}
+
 	handleChange = (newColor) => {
 		this.setState({color: newColor})
 		this.props.onChange(newColor)

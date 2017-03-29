@@ -9,6 +9,39 @@ import NumberInput from '../src/components/ColorInput/NumberInput.jsx'
 /* 组合化拾色器组件，让组件自由组合 */
 
 // todo 考虑hex字符串
+// 判断document.activeElement 的父辈元素是否为当前组件，不是就将activeModel设为null
+
+class BothDemo extends React.Component {
+	state = {
+		color: [21,235,245,1],
+	}
+
+	handleChange = v => { 
+		console.log(v.rgba)
+		this.setState({color: v.rgba})
+	}
+
+	render () {
+		let {color} = this.state
+
+		return (
+			<div>
+				<Photoshop 
+					color={ color } 
+					colorModel='rgba'
+					onChange={ this.handleChange }
+				/> 
+				<Chrome 
+					color={ color } 
+					colorModel='rgba'
+					onChange={ this.handleChange }
+				/> 
+			</div>
+			
+		)
+	}
+}
+
 
 class PsDemo extends React.Component {
 	state = {
@@ -71,7 +104,7 @@ class ChromeDemo extends React.Component {
 
 
 render (
-	<ChromeDemo />,
+	<BothDemo />,
 	document.querySelector('.content')
 )
 
