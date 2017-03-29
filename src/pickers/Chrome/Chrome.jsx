@@ -7,6 +7,8 @@ import ColorPicker, {
 	ColorBar,
 	ColorBlock
 } from '../../components'
+import ChromeCirclePointer from './ChromeCirclePointer.jsx'
+import ChromeDiscPointer from './ChromeDiscPointer.jsx'
 
 // 0:rgba,1:hsla,2:hex
 class Chrome extends React.Component {
@@ -24,7 +26,7 @@ class Chrome extends React.Component {
 
 	static defaultProps = {
 		title: 'Color Picker',
-	  color: [255,0,0],
+	  color: [255,0,0,1],
 	  onChange: () => {},
 	  onAccept: () => {},
 	  onCancel: () => {},
@@ -32,8 +34,6 @@ class Chrome extends React.Component {
 						 '#009688','#4caf50','#8bc34a','#cddc39','#fffb3b','#ffc107','#ff9800','#ff5722',
 						 '#795548','#9e9e9e','#607d8b']
 	}
-
-	handleModelToggle = () => this.setState({inputModel: ++this.state.inputModel % 3})
 
 	constructor(props) {
 		let c = chroma(props.color, props.colorModel)
@@ -46,10 +46,11 @@ class Chrome extends React.Component {
 	  }
 	}
 
-	handleChange = (newColor) => {
-		console.log(newColor)
-		this.setState({color: newColor})
-		this.props.onChange(newColor)
+	handleModelToggle = () => this.setState({inputModel: ++this.state.inputModel % 3})
+
+	handleChange = (v, e) => {
+		this.props.onChange(v, e)
+		this.setState({color: v})
 	}
 
 	render () {
@@ -61,27 +62,30 @@ class Chrome extends React.Component {
 				position: 'relative',
 				width: 232,
 				height: 320,
-				boxShadow: 'rgba(0, 0, 0, 0.247059) 0px 0px 0px 1px, rgba(0, 0, 0, 0.14902) 0px 8px 16px',
-				background: '#ededed',
+				boxShadow: 'rgba(0, 0, 0, 0.24) 0px 2px 4px, rgba(0, 0, 0, 0.24) 0px 6px 12px',
+				background: '#fff',
 				borderRadius: 2,
 				fontFamily: 'Consolas'
 			},
 			panel: {
-				height: 125
+				height: 125,
+				overflow: 'hidden'
 			},
 			hueBar: {
 				position: 'absolute',
 				left: 60,
 				top: 140,
 				width: 150,
-				height: 12
+				height: 12,
+				borderRadius: 2
 			},
 			alphaBar: {
 				position: 'absolute',
 				left: 60,
 				top: 160,
 				width: 150,
-				height: 12
+				height: 12,
+				borderRadius: 2
 			},
 			block: {
 				position: 'absolute',
@@ -91,82 +95,90 @@ class Chrome extends React.Component {
 				height: 24,
 				borderRadius: 12
 			},
-			input: {
-				width: 38,
-				height: 20
-			},
-			hex: {
+			inputsDiv: {
 				position: 'absolute',
-				left: 18,
-				top: 185,
+				left: 16,
+				top: 185
+			},
+			input: {
+				width: 40,
 				height: 22,
-				width: 175,
-			},
-			hexLabel: {
-        display: 'none',
-			},
-			hexInput: {
-				width: '100%',
-				height: 20,
 				textAlign: 'center',
 				border: '1px solid #ccc',
-				fontFamily: 'Consolas'
+				fontFamily: 'Consolas',
+				borderRadius: 2
 			},
-			hexP: {
+			inputLabel: {
 				position: 'absolute',
-				left: 92,
-				top: 210,
 				color: '#999',
+				left: 15,
+				top: 24
+			},
+			hexLabel: {
+				position: 'absolute',
+				color: '#999',
+				left: 78,
+				top: 24
+			},
+			hexInput: {
+				width: 176,
+				height: 22,
 				textAlign: 'center',
-				margin: 0,
-				fontSize: 12,
+				border: '1px solid #ccc',
+				fontFamily: 'Consolas',
+				borderRadius: 2
 			},
 			colors: {
 				position: 'absolute',
 				bottom: 0,
 				padding: '12px 0 0 25px',
 				borderTop: '1px solid #ccc',
-				marginTop: 9
+				marginTop: 9,
+				fontSize: 0
 			},
 			card: {
 				display: 'inline-block',
 				width: 10,
 				height: 10,
-				margin: '0 9px 9px 0',
+				margin: '0 12px 12px 0',
 				borderRadius: 2,
 				border: '1px solid rgba(0,0,0,0.2)'
+			},
+			toggle: {
+				position: 'absolute',
+				left: 203,
+				top: 196
 			}
 		}
 
 		return (
 			<ColorPicker style={ styles.root } color={ color.rgba } onChange={(a) => this.handleChange(a) }>	
-				<ColorPanel style={ styles.panel }/>
-				<ColorBar style={ styles.hueBar } model='hsv.h'/>
-				<ColorBar style={ styles.alphaBar } model='alpha'/>
+				<ColorPanel style={ styles.panel } pointer={ <ChromeCirclePointer/> }/>
+				<ColorBar style={ styles.hueBar } model='hsv.h' pointer={ <ChromeDiscPointer/> }/>
+				<ColorBar style={ styles.alphaBar } model='alpha' pointer={ <ChromeDiscPointer/> }/>
 				<ColorBlock style={ styles.block } color={ color.css }/>
 				{ 
 					inputModel === 0 ? 
-						<div data-color='1' key='rgb'>
-							<ColorInput style={ styles.input } model='rgb.r' /> 
-							<ColorInput style={ styles.input } model='rgb.g' /> 
-							<ColorInput style={ styles.input } model='rgb.b' /> 
-							<ColorInput style={ styles.input } model='alpha' /> 
+						<div style={ styles.inputsDiv } data-color='1' key='rgb'>
+							<ColorInput inputStyle={ styles.input } labelStyle={ styles.inputLabel } model='rgb.r' /> 
+							<ColorInput inputStyle={ styles.input } labelStyle={ styles.inputLabel } model='rgb.g' /> 
+							<ColorInput inputStyle={ styles.input } labelStyle={ styles.inputLabel } model='rgb.b' /> 
+							<ColorInput inputStyle={ styles.input } labelStyle={ styles.inputLabel } label='A' model='alpha' /> 
 						</div>
 						: 
 					inputModel === 1 ? 
-						<div data-color='1' key='hsv'>
-							<ColorInput style={ styles.input } model='hsv.h' /> 
-							<ColorInput style={ styles.input } model='hsv.s' /> 
-							<ColorInput style={ styles.input } model='hsv.v' /> 
-							<ColorInput style={ styles.input } model='alpha' /> 
+						<div style={ styles.inputsDiv } data-color='1' key='hsv'>
+							<ColorInput inputStyle={ styles.input } labelStyle={ styles.inputLabel } model='hsv.h' /> 
+							<ColorInput inputStyle={ styles.input } labelStyle={ styles.inputLabel } model='hsv.s' scale={100}/> 
+							<ColorInput inputStyle={ styles.input } labelStyle={ styles.inputLabel } model='hsv.v' scale={100}/> 
+							<ColorInput inputStyle={ styles.input } labelStyle={ styles.inputLabel } label='A' model='alpha' /> 
 						</div>
 						:
-						<div data-color='1' key='hex'>
-							<ColorInput style={ styles.hex } labelStyle={ styles.hexLabel} inputStyle={ styles.hexInput } label={null} model='hex' />
-							<p style={ styles.hexP }>HEX</p>
+						<div style={ styles.inputsDiv } data-color='1' key='hex'>
+							<ColorInput inputStyle={ styles.hexInput } labelStyle={ styles.hexLabel } label='HEX' model='hex' sharp={true}/>
 						</div>
 				}
-				<div onClick={ this.handleModelToggle }>变</div>
+				<div style={ styles.toggle } onClick={ this.handleModelToggle }>变</div>
 				<div data-color='1' style={ styles.colors }>
 					{colors.map( color => <ColorBlock key={color} color={color} style={styles.card}/> )}
 				</div>

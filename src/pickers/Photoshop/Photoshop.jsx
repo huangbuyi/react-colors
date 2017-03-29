@@ -159,7 +159,7 @@ class Photoshop extends React.Component {
 			} 
 		}
 		return (
-			<ColorPicker style={ styles.root } defaultColor={color.hex} colorModel='hex' onChange={ (a) => this.handleChange(a) }>	
+			<ColorPicker style={ styles.root } color={color.hex} colorModel='hex' onChange={ (a) => this.handleChange(a) }>	
 				<div style={ styles.title }>{ this.props.title }</div>
 				<ColorPanel pointer={ <PsPointerCircle /> } style={ styles.panel }/>
 				<ColorBar direction='vertical' pointer={ <PsPointerDoubleTriangle /> } style={ styles.bar }/>

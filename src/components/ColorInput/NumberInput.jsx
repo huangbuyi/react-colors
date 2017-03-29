@@ -6,17 +6,19 @@ class NumberInput extends React.Component{
 		min: PropTypes.number,
 		max: PropTypes.number,
 		step: PropTypes.number,
-		fixed: PropTypes.number
+		fixed: PropTypes.number,
+		scale: PropTypes.number
 	}
 
 	static defaultProps = {
 		step: 1,
-		fixed: 0
+		fixed: 0,
+		scale: 1
 	}
 
 	constructor(props) {
 		super(props);
-		let newValue = Number(Number(props.value).toFixed(props.fixed))
+		let newValue = Number((Number(props.value) * props.scale).toFixed(props.fixed))
 		this.state = {
 			value: newValue,
 			blurValue: null
@@ -25,7 +27,7 @@ class NumberInput extends React.Component{
 
 	componentWillReceiveProps(nextProps) {
 		const input = this.input 
-		let newValue = Number(Number(nextProps.value).toFixed(nextProps.fixed))
+		let newValue = Number((Number(nextProps.value) * nextProps.scale).toFixed(nextProps.fixed))
 		if(newValue !== this.state.value) {
 			if (input === document.activeElement) {
         this.setState({ blurValue: newValue })
@@ -36,9 +38,10 @@ class NumberInput extends React.Component{
 	}
 
 	handleBlur = e => {
-		if (this.state.blurValue){
+		let blurValue = this.state.blurValue
+		if (blurValue || blurValue == 0){
 			this.setState({
-				value: this.state.blurValue,
+				value: blurValue,
 				blurValue: null
 			})
 		}
@@ -46,17 +49,20 @@ class NumberInput extends React.Component{
 
 	handleChange = (newValue, e, call) => {
     let {min, max} = this.props
-    newValue = newValue > max ? max : newValue 
-    newValue = newValue < min ? min : newValue
-    if( !isNaN(Number(newValue)) || !newValue ) {
-      this.props.onChange(newValue, e)
-      this.setState({ value: newValue }, call)
+
+    if( !isNaN(Number(newValue)) ) {
+    	let outValue = newValue > max ? max : newValue 
+    	outValue = outValue < min ? min : outValue
+      this.props.onChange(outValue, e)   
     }
+    if( !isNaN(Number(newValue)) || !newValue )
+    this.setState({ value: newValue }, call)
   }
 
   handleKeyDown = (e) => {
     let { step, fixed } = this.props
     let num = Number(e.target.value)
+    // up
     if (e.keyCode === 38) {
       e.preventDefault()
       this.handleChange((num + step).toFixed(fixed), e, () => this.input.select())
@@ -71,14 +77,14 @@ class NumberInput extends React.Component{
 
 	render() {
 		let {style, placeholder} = this.props
-		let {value} = this.state
 		return (
 			<input 
+				type='text'
 				ref={ node => this.input = node }
-				value={ value }
+				value={ this.state.value }
 				style={ style }
 				onBlur={ this.handleBlur }
-				onChange={ this.handleChange }
+				onChange={ e => this.handleChange(e.target.value, e) }
 				onKeyDown={ this.handleKeyDown }
 				placeholder={ placeholder }
 			/>

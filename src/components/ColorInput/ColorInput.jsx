@@ -8,59 +8,93 @@
 // todo: fix cmyk.k
 
 import React, { Component, PureComponent, PropTypes } from 'react'
-import ColorNumberInput from './ColorNumberInput.jsx'
-import ColorHexInput from './ColorHexInput.jsx'
-import ColorAlphaInput from './ColorAlphaInput.jsx'
+import ColorInputChild from './ColorInputChild.jsx'
 
 export class ColorInput extends (PureComponent || Component) {
   static propTypes = {
     model: PropTypes.oneOf(['rgb.r','rgb.g','rgb.b','hsv.h','hsv.s','hsv.v','lab.l','lab.a','lab.b','cmyk.c','cmyk.m','cmyk.y','cmyk.k','hex','alpha']),
+    style: PropTypes.object,
+    label: PropTypes.node,
+    rightLabel: PropTypes.node,
+    labelStyle: PropTypes.object,
+    rightLabelStyle: PropTypes.object,
+    inputStyle: PropTypes.object,
+  }
+
+  getDefaultLabel(model) {
+    return {
+      'rgb.r':'R',
+      'rgb.g':'G',
+      'rgb.b': 'B',
+      'hsv.h': 'H',
+      'hsv.s': 'S',
+      'hsv.v':'v',
+      'lab.l':'L',
+      'lab.a':'a',
+      'lab.b':'b',
+      'cmyk.c': 'C',
+      'cmyk.m': 'M',
+      'cmyk.y':'Y',
+      'cmyk.k': 'K',
+      'alpha': 'a',
+      'hex': '#'
+    }[model]
   }
 
   render () {
-    let {model, style, labelStyle, rightLabelStyle, inputStyle, ...props} = this.props
+    let {
+      style, 
+      label,
+      rightLabel,
+      labelStyle, 
+      rightLabelStyle, 
+      inputStyle, 
+      ...props
+    } = this.props
+
     const styles = {
       root: Object.assign({
         display: 'inline-block',
         position: 'relative',
         marginBottom: 4,
-        height: '100%',
       }, style),
       label: Object.assign({
         display: 'inline-block',
         height: '100%',
         fontSize: 13,
         verticalAlign: 'top',
-        width: 20
+        width: 20,
+        lineHeight: '20px'
       }, labelStyle),
       rightLabel: Object.assign({
         display: 'inline-block',
         height: '100%',
         fontSize: 13,
         verticalAlign: 'top',
-        paddingLeft: 4
+        paddingLeft: 4,
+        lineHeight: '20px'
       }, rightLabelStyle),
       input: Object.assign({
         verticalAlign: 'top',
         width: 40,
         boxSizing: 'border-box',
-        height: '100%',
+        height: 20,
         padding: '0 2px',
         fontSize: 12
       }, inputStyle)
     }
 
-    if(model === 'hex') {
-      return <ColorHexInput styles={styles} {...props} />
-    }
-
-    if(model === 'alpha') {
-
-      return <ColorAlphaInput styles={styles} {...props} />
-    }
-
     return (
-      <ColorNumberInput model={model} styles={styles} {...props} />
+      <div style={ styles.root }>
+        <span style={ styles.label }>
+          { label || this.getDefaultLabel(props.model) }
+        </span>
+        <ColorInputChild style={styles.input} {...props} />
+        <span style={ styles.rightLabel }>
+          { rightLabel }
+        </span>
+      </div>
+      
     )
   }
 }

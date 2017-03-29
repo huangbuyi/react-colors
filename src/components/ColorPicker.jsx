@@ -91,11 +91,10 @@ class ColorPicker extends React.Component {
 	}
 
 	formateColor (color, model) {
-		let formatColor = model === 'hex' ? formatHex(color) : format(color)
 		// keep alpha, because alpha would reset to 1 when chroma set color
 		let alpha = model === 'rgba' ? Number(color[3]) : this._chroma.alpha()
 		alpha = model === 'alpha' ? color : alpha
-		let _chroma = this._chroma = chroma(formatColor, model).alpha(alpha)
+		let _chroma = this._chroma = chroma(color, model).alpha(alpha)
 
 		return {
 			rgb: _chroma.rgb(),
@@ -116,7 +115,7 @@ class ColorPicker extends React.Component {
 
 	getChildren (children) {
 		// 为子组件传入新属性
-		let {activeModel, color} = this.state
+		let {activeModel, model, color} = this.state
 
 		return React.Children.map(children, child => {
 			let compName = child.type.name
@@ -147,7 +146,7 @@ class ColorPicker extends React.Component {
 				})
 			}
 
-			if(['ColorPanel','ColorBar','ColorInput','ColorPallete','ColorRadio'].indexOf(compName) > -1) {
+			if(['ColorPanel','ColorBar','ColorInput','ColorRadio'].indexOf(compName) > -1) {
 				let model = child.props.model || this.state.model
 				let type = model.split('.')[0] || 'rgb'
 				type = type === 'alpha' ? 'rgba' : type
