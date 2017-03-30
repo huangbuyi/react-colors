@@ -1,1 +1,1 @@
-export {default} from './ColorInput.jsx'
+export {default} from './ColorInput'

@@ -8,6 +8,9 @@ module.exports = {
 		publicPath: 'http://127.0.0.1:8080/build/',
 		filename: 'bundle.js'
 	},
+	resolve: {
+    extensions: ['.js', '.jsx']
+  },
 	module: {
 		loaders: [{
 			test: /\.jsx?$/,
@@ -42,7 +45,7 @@ module.exports = {
 			'process.env.NODE.ENV':"development"
 		}),
 		new webpack.HotModuleReplacementPlugin()
-	],
+	]
 /*	plugins: [
 		new webpack.DefinePlugin({
 		  'process.env': {

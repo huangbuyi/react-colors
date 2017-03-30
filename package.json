@@ -1,10 +1,10 @@
 {
   "name": "react-colors",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "title": "React color picker",
   "description": "",
   "homepage": "",
-  "main": "index.js",
+  "main": "lib/index.js",
   "files": [
     "dist",
     "lib"
@@ -53,10 +53,8 @@
   "dependencies": {
     "chroma-js": "^1.2.2",
     "lodash": "^4.17.4",
-    "radium": "^0.18.1",
     "react": "^15.4.1",
-    "react-dom": "^15.4.1",
-    "reactcss": "^1.1.1"
+    "react-dom": "^15.4.1"
   },
   "jest": {
     "rootDir": "src",

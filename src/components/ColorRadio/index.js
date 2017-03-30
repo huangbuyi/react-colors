@@ -1,1 +1,1 @@
-export {default} from './ColorRadio.jsx'
+export {default} from './ColorRadio'

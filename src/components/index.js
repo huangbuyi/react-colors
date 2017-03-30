@@ -1,4 +1,4 @@
-export {default} from './ColorPicker.jsx'
+export {default} from './ColorPicker'
 
 export {default as ColorPanel} from './ColorPanel'
 

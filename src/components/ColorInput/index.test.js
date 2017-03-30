@@ -1,6 +1,6 @@
 import React from 'react'
-import ColorInput from './ColorInput.jsx'
-import ColorHexInput from './ColorHexInput.jsx'
+import ColorInput from './ColorInput'
+import ColorHexInput from './ColorHexInput'
 import { mount, render } from 'enzyme'
 import { renderToJson } from 'enzyme-to-json'
 

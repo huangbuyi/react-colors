@@ -8,7 +8,7 @@
 // todo: fix cmyk.k
 
 import React, { Component, PureComponent, PropTypes } from 'react'
-import ColorInputChild from './ColorInputChild.jsx'
+import ColorInputChild from './ColorInputChild'
 
 export class ColorInput extends (PureComponent || Component) {
   static propTypes = {

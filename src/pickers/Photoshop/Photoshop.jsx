@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
 import chroma from 'chroma-js'
-import PsPointerDoubleTriangle from './PsPointerDoubleTriangle.jsx'
-import PsPointerCircle from './PsPointerCircle.jsx'
+import PsPointerDoubleTriangle from './PsPointerDoubleTriangle'
+import PsPointerCircle from './PsPointerCircle'
 import ColorPicker, {
 	ColorInput, 
 	ColorRadio, 

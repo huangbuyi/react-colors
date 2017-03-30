@@ -1,1 +1,1 @@
-export {default} from './Chrome.jsx'
+export {default} from './Chrome'

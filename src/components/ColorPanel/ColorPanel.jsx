@@ -4,10 +4,9 @@
 // todo: 添加x，y轴配置
 
 import React, { Component, PureComponent, PropTypes } from 'react'
-import reactCSS from 'reactcss'
 import calcEventPosition from '../../helpers/calcEventPosition'
 import throttle from 'lodash/throttle'
-import CirclePanel from './CirclePointer.jsx'
+import CirclePanel from './CirclePointer'
 
 export class ColorPanel extends (PureComponent || Component) {
   static propTypes = {

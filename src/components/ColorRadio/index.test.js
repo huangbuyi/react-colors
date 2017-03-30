@@ -1,5 +1,5 @@
 import React from 'react'
-import ColorRadio from './ColorRadio.jsx'
+import ColorRadio from './ColorRadio'
 import { mount, render } from 'enzyme'
 import { renderToJson } from 'enzyme-to-json'
 

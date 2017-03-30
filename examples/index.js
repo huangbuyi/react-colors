@@ -1,10 +1,9 @@
 import React from 'react'
 import {render} from 'react-dom'
-import ColorPicker from '../src/components/ColorPicker.jsx'
+import ColorPicker from '../src/components/ColorPicker'
 import {Photoshop, Chrome} from '../src/pickers'
 import getTransparentBackground from '../src/helpers/getTransparentBackground'
-
-import NumberInput from '../src/components/ColorInput/NumberInput.jsx'
+import NumberInput from '../src/components/ColorInput/NumberInput'
 
 /* 组合化拾色器组件，让组件自由组合 */
 

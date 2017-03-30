@@ -7,9 +7,9 @@ import ColorPicker, {
 	ColorBar,
 	ColorBlock
 } from '../../components'
-import ChromeCirclePointer from './ChromeCirclePointer.jsx'
-import ChromeDiscPointer from './ChromeDiscPointer.jsx'
-import ChromeToggleIcon from './ChromeToggleIcon.jsx'
+import ChromeCirclePointer from './ChromeCirclePointer'
+import ChromeDiscPointer from './ChromeDiscPointer'
+import ChromeToggleIcon from './ChromeToggleIcon'
 
 // 0:rgba,1:hsla,2:hex
 class Chrome extends React.Component {

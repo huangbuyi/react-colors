@@ -1,6 +1,6 @@
 import React from 'react'
 import {render} from 'react-dom'
-import ColorPicker from '../src/components/ColorPicker.jsx'
+import ColorPicker from '../src/components/ColorPicker'
 import ColorPanel from '../src/components/ColorPanel'
 import ColorBlock from '../src/components/ColorBlock'
 

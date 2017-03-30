@@ -9,7 +9,7 @@
 
 ## Install
 
-```
+```js
 npm install react-colors
 ```
 
@@ -17,9 +17,9 @@ npm install react-colors
 
 ### Assembled Components 
 
-```
+```jsx
 import React from 'react'
-import {Chrome} from 'react-colors/picker'
+import {Chrome} from 'react-colors/lib/pickers'
 
 const Picker = () =>  <Chrome />
 ```
@@ -27,7 +27,7 @@ const Picker = () =>  <Chrome />
 So far, you can import `ChromeP` `Photoshop`.All assembled picker assemble from customizable components.
 
 ### Custom color picker 
-```
+```jsx
 import React from 'react'
 import {ColorPicker, ColorPanel, ColorBar} from 'react-colors'
 
@@ -38,8 +38,12 @@ const styles = {
 
 const MyPicker = () => (
 	<ColorPicker>
-		<div data-color={true}><ColorPanel /></div>
-		<div data-color={true}><ColorBar /></div>
+		<div data-color={true} style={ styles.pandelDiv }>
+			<ColorPanel />	
+		</div>
+		<div data-color={true} style={ styles.barDiv }>
+			<ColorBar />
+		</div>
 	</ColorPicker>
 )
 ```

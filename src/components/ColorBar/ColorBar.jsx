@@ -1,7 +1,7 @@
 import React, { Component, PureComponent, PropTypes } from 'react'
 import throttle from 'lodash/throttle'
 import calcEventPosition from '../../helpers/calcEventPosition'
-import RectPointer from './RectPointer.jsx'
+import RectPointer from './RectPointer'
 
 class ColorBar extends (PureComponent || Component) {
 	static defaultProps = {

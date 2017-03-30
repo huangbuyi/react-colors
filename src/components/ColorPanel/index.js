@@ -1,1 +1,1 @@
-export {default} from './ColorPanel.jsx' 
+export {default} from './ColorPanel' 

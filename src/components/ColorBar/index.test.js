@@ -1,5 +1,5 @@
 import React from 'react'
-import ColorBar from './ColorBar.jsx'
+import ColorBar from './ColorBar'
 import { mount, render } from 'enzyme'
 import { renderToJson } from 'enzyme-to-json'
 

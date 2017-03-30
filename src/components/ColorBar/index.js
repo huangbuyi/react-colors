@@ -1,4 +1,4 @@
-export {default} from './ColorBar.jsx'
+export {default} from './ColorBar'
 
 
 /* 色度组件 */

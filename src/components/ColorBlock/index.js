@@ -1,1 +1,1 @@
-export {default} from './ColorBlock.jsx'
+export {default} from './ColorBlock'

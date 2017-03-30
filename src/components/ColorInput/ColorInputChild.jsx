@@ -12,8 +12,8 @@
 // 抽离出对象部分
 
 import React, { Component, PureComponent, PropTypes } from 'react'
-import NumberInput from './NumberInput.jsx'
-import HexInput from './HexInput.jsx'
+import NumberInput from './NumberInput'
+import HexInput from './HexInput'
 
 export class ColorInputChild extends (PureComponent || Component) {
   static propTypes = {
