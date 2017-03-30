@@ -14,6 +14,7 @@
 import React, {PropTypes} from 'react'
 import chroma from 'chroma-js'
 import padStart from '../helpers/padStart'
+import contains from '../helpers/contains'
 
 
 const formatHex = (hexStr) => {
@@ -68,11 +69,13 @@ class ColorPicker extends React.Component {
 			model: 'hsv.h',
 			activeModel: props.colorModel
 		}
-		
 	}
 
 	componentWillReceiveProps(nextProps) {
 		nextProps.color && this.formateColor(nextProps.color, nextProps.colorModel)
+		if( !contains(this.container, document.activeElement) ) {
+			this.setState({activeModel: null})
+		}
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
@@ -183,7 +186,7 @@ class ColorPicker extends React.Component {
 		}, style)
 
 		return (
-			<div style={ root }>
+			<div style={ root } ref={ node => {this.container = node} }>
 				{this.getChildren(children)}
 			</div>
 		)

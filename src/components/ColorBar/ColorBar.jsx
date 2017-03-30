@@ -1,5 +1,5 @@
 import React, { Component, PureComponent, PropTypes } from 'react'
-import reactCSS from 'reactcss'
+import throttle from 'lodash/throttle'
 import calcEventPosition from '../../helpers/calcEventPosition'
 import RectPointer from './RectPointer.jsx'
 
@@ -17,9 +17,14 @@ class ColorBar extends (PureComponent || Component) {
 		direction: '',
 	}
 
+  constructor(props) {
+    super(props)
+    this.handleChange = throttle(this.handleChange, 50)
+  }
+
 	getBackground () {
 		let {color, model, direction} = this.props
-    let direct = direction === 'vertical' ? 'top' : 'right'
+    let direct = direction === 'vertical' ? 'top' : 'left'
 		let background = {
 			'rgb.r': `linear-gradient(to ${ direct }, rgb(0,${ Math.round(color[1]) },${ Math.round(color[2]) }), 
 					rgb(255, ${ Math.round(color[1]) }, ${ Math.round(color[2]) })`,

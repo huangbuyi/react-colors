@@ -17,7 +17,6 @@ class BothDemo extends React.Component {
 	}
 
 	handleChange = v => { 
-		console.log(v.rgba)
 		this.setState({color: v.rgba})
 	}
 
@@ -81,7 +80,6 @@ class ChromeDemo extends React.Component {
 
 	render () {
 		let {color, visible} = this.state
-		console.log(color)
 		const style = {
 			width: 20,
 			height: 20,
