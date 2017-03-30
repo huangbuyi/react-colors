@@ -38,7 +38,7 @@ class ColorBar extends (PureComponent || Component) {
           linear-gradient(to ${ direct },hsl(${ color[0] },100%,100%),hsl(${ color[0] },100%,50%))`,
       'hsv.v': `linear-gradient(to ${ direct },rgba(0,0,0,1),transparent),
           linear-gradient(to ${ direct },hsl(${ color[0] },100%,50%),hsl(${ color[0] },100%,50%))`,
-      'alpha': `linear-gradient(to ${ direct }, transparent, rgb(${ Math.round(color[0]) },${ Math.round(color[1]) },${ Math.round(color[2]) })),linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc), 
+      'alpha': `linear-gradient(to ${ direct }, rgb(${ Math.round(color[0]) },${ Math.round(color[1]) },${ Math.round(color[2]) }), transparent),linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc), 
 linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc)`
 		}
 		return background[model]
