@@ -10,7 +10,7 @@ module.exports = {
 	},
 	resolve: {
 		alias: {
-			'components': path.resolve(__dirname, '../src/components'),
+			components: path.resolve(__dirname, '../src/components'),
 			pickers: path.resolve(__dirname, '../src/pickers'),
 			'react-colors': path.resolve(__dirname, '../lib')
 		},

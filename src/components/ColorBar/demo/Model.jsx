@@ -1,15 +1,19 @@
 import React from 'react'
-import ColorPicker from '../../ColorPicker'
-import ColorBar from '../' 
+import { ColorPicker, ColorBar } from 'react-colors' 
+
+const style = {
+	width: 20,
+	height: 200
+}
 
 const Model = (props) => (
 	<ColorPicker {...props}>
-		<ColorBar model='hsv.h'/>
-		<ColorBar model='hsv.s'/>
-		<ColorBar model='hsv.v'/>
-		<ColorBar model='rgb.r'/>
-		<ColorBar model='rgb.g'/>
-		<ColorBar model='rgb.b'/>
+		<ColorBar model='hsv.h' style={ style }/>
+		<ColorBar model='hsv.s' style={ style }/>
+		<ColorBar model='hsv.v' style={ style }/>
+		<ColorBar model='rgb.r' style={ style }/>
+		<ColorBar model='rgb.g' style={ style }/>
+		<ColorBar model='rgb.b' style={ style }/>
 	</ColorPicker>
 )
 

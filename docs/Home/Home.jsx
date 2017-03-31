@@ -4,12 +4,25 @@ import Docs from './Docs'
 
 class Home extends React.Component {
 
+	getList (list) {
+		let newList = []
+		let tmp = ''
+		list.map( item => {
+			if( typeof item !== 'string') {
+				newList.push(<div>{ tmp }</div>)
+				newList.push(React.createElement(item.default))
+				item = ''
+			}
+			tmp += item
+		})
+
+		return newList
+	}
+
 	render () {
-		console.log(docList)
-		console.log(navList)
 		return (
 			<div>
-				HOME
+				{ this.getList(docList.zhCN) }
 			</div>
 		)
 	}

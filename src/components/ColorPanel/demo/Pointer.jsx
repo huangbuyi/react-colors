@@ -1,13 +1,18 @@
 import React from 'react'
-import ColorPicker from '../../ColorPicker'
-import ColorPanel from '../ColorPanel' 
+import {ColorPicker, ColorPanel} from 'react-colors'
+console.log(ColorPicker)
 
-const Pointer = () => <div>X</div>
+const style = {
+	width: 200,
+	height: 200
+}
 
-const Model = (props) => (
+const MyPointer = () => <div>X</div>
+
+const Pointer = (props) => (
 	<ColorPicker {...props}>
-		<ColorPanel model='hsv.h' pointer={ <Pointer/> }/>
+		<ColorPanel model='hsv.h' pointer={ <MyPointer/> } style={ style }/>
 	</ColorPicker>
 )
 
-export default Model
+export default Pointer
