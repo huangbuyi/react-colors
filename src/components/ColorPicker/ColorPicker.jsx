@@ -13,8 +13,8 @@
 
 import React, {PropTypes} from 'react'
 import chroma from 'chroma-js'
-import padStart from '../helpers/padStart'
-import contains from '../helpers/contains'
+import padStart from '../../helpers/padStart'
+import contains from '../../helpers/contains'
 
 
 const formatHex = (hexStr) => {

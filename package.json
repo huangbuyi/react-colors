@@ -13,8 +13,10 @@
     "test": "jest",
     "coverage": "jest && codecov",
     "start": "webpack-dev-server --inline",
+    "docs-start": "webpack-dev-server --config ./scripts/docs.config --inline",
     "clean": "rd /s/q lib && mkdir lib",
-    "lib": "npm run clean && babel src --out-dir lib --ignore \"**/*.test.js\""
+    "lib": "npm run clean && babel src --out-dir lib --ignore \"**/*.test.js\"",
+    "docs": "webpack --config ./scripts/docs"
   },
   "author": "Shibin Huang",
   "license": "MIT",
@@ -39,9 +41,11 @@
     "jest": "^19.0.2",
     "json-loader": "^0.5.4",
     "raw-loader": "^0.5.1",
+    "react": "^15.4.1",
     "react-addons-perf": "^15.4.1",
     "react-addons-test-utils": "^15.4.2",
     "react-css-modules": "^4.1.0",
+    "react-dom": "^15.4.1",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^2.2.1",
@@ -52,9 +56,7 @@
   },
   "dependencies": {
     "chroma-js": "^1.2.2",
-    "lodash": "^4.17.4",
-    "react": "^15.4.1",
-    "react-dom": "^15.4.1"
+    "lodash": "^4.17.4"
   },
   "jest": {
     "rootDir": "src",

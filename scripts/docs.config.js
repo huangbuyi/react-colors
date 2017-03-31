@@ -2,13 +2,18 @@ var path = require('path');
 var webpack = require('webpack')
 
 module.exports = {
-	entry: path.resolve(__dirname, 'examples/index.js'),
+	entry: path.resolve(__dirname, '../docs/index.js'),
 	output: {
-		path: path.resolve(__dirname, 'examples/build'),
-		publicPath: 'http://127.0.0.1:8080/examples/build',
+		path: path.resolve(__dirname, '../docs/build'),
+		publicPath: 'http://127.0.0.1:8080/docs/build/',
 		filename: 'bundle.js'
 	},
 	resolve: {
+		alias: {
+			'components': path.resolve(__dirname, '../src/components'),
+			pickers: path.resolve(__dirname, '../src/pickers'),
+			'react-colors': path.resolve(__dirname, '../lib')
+		},
     extensions: ['.js', '.jsx']
   },
 	module: {
@@ -47,14 +52,6 @@ module.exports = {
 		}),
 		new webpack.HotModuleReplacementPlugin()
 	]
-/*	plugins: [
-		new webpack.DefinePlugin({
-		  'process.env': {
-		    NODE_ENV: JSON.stringify('production')
-		  }
-		}),
-		new webpack.optimize.UglifyJsPlugin()	
-	]*/
 }	
 
 			
