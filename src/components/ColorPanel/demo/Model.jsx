@@ -2,11 +2,11 @@ import React from 'react'
 import {ColorPicker, ColorPanel} from 'react-colors'
 
 const style = {
+	display: 'inline-block',
 	width: 200,
 	height: 200
 }
 
-console.log(ColorPanel)
 const Model = (props) => (
 	<ColorPicker {...props}>
 		<ColorPanel model='hsv.h' style={ style }/>

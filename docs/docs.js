@@ -39,7 +39,7 @@ function getDocList(docArr, lan=0, sharp=2, navDeep=2) {
 	let getList = (doc, deep) => {
 		let {title, text, demo, api, children} = doc
 
-		docs.push('#'.repeat(deep + sharp) + title[lan])
+		docs.push('#'.repeat(deep + sharp) + ' ' + title[lan])
 		text && docs.push(text[lan])
 		demo && docs.push(demo)
 		api && docs.push(api[lan])

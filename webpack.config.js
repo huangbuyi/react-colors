@@ -25,7 +25,7 @@ module.exports = {
 			loader: 'url-loader?limit=8192'
 		},{
 			test: /\.css$/,
-			loader: 'style-loader!css-loader?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]'
+			loader: 'style-loader!css-loader'
 		},{
 			test: /\.json$/,
 			loader: 'json-loader'
