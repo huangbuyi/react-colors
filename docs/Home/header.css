@@ -1,0 +1,14 @@
+.header {
+	width: 100%;
+}
+
+.pickers {
+	display: flex;
+	padding: 52px 24px 24px 200px;
+	flex-wrap: wrap;
+}
+
+.chrome, .photoshop{
+	margin: 0 18px 18px 0;
+}
+

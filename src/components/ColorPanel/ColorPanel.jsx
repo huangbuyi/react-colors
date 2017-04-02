@@ -54,7 +54,7 @@ export class ColorPanel extends (PureComponent || Component) {
     let newColor = {
       'rgb.r': [color[0], 255 - p.topP * 255, p.leftP * 255],
       'rgb.g': [255 - p.topP * 255, color[1], p.leftP * 255],
-      'rgb.b': [255 - p.topP * 255, p.leftP * 255, color[2]],
+      'rgb.b': [p.leftP * 255, 255 - p.topP * 255, color[2]],
       'hsv.h': [color[0], p.leftP, 1 - p.topP],
       'hsv.s': [p.leftP * 360, color[1], 1 - p.topP],
       'hsv.v': [p.leftP * 360, 1 - p.topP, color[2]],
@@ -74,8 +74,8 @@ export class ColorPanel extends (PureComponent || Component) {
         topP: 1 - color[0] / 255
       },
       'rgb.b': {
-        leftP: color[1] / 255,
-        topP: 1 - color[0] / 255
+        leftP: color[0] / 255,
+        topP: 1 - color[1] / 255
       },
       'hsv.h': {
         leftP: color[1],

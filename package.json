@@ -12,7 +12,7 @@
   "scripts": {
     "test": "jest",
     "coverage": "jest && codecov",
-    "start": "webpack-dev-server --inline",
+    "start": "webpack-dev-server --inline --port 8081",
     "docs-start": "webpack-dev-server --config ./scripts/docs.config --inline",
     "clean": "rd /s/q lib && mkdir lib",
     "lib": "npm run clean && babel src --out-dir lib --ignore \"**/*.test.js\"",

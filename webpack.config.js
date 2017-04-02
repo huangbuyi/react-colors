@@ -5,7 +5,7 @@ module.exports = {
 	entry: path.resolve(__dirname, 'examples/index.js'),
 	output: {
 		path: path.resolve(__dirname, 'examples/build'),
-		publicPath: 'http://127.0.0.1:8080/examples/build',
+		publicPath: 'http://127.0.0.1:8081/examples/build',
 		filename: 'bundle.js'
 	},
 	resolve: {

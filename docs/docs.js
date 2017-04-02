@@ -4,7 +4,7 @@
 		text: [require('./index.en-US.md'), require('./index.zh-CN.md')]  
 	},
 	{ 
-		title: ['components', '组件'],
+		title: ['Components', '组件'],
 		children: [ 
 			{ 
 				title: ['ColorPanel', 'ColorPanel'],
@@ -38,22 +38,21 @@ function getDocList(docArr, lan=0, sharp=2, navDeep=2) {
 	sharp = sharp - 1
 	let getList = (doc, deep) => {
 		let {title, text, demo, api, children} = doc
-
-		docs.push('#'.repeat(deep + sharp) + ' ' + title[lan])
+		let headLevel = '#'.repeat(deep + sharp) 
+		docs.push(headLevel + ' ' + title[lan])
 		text && docs.push(text[lan])
 		demo && docs.push(demo)
-		api && docs.push(api[lan])
-		deep <= navDeep && navs.push(title[lan])
-
+		deep <= navDeep && navs.push([title[lan], deep])
 		children && children.map(child => {
 			getList(child, deep + 1)
 		})
+		api && docs.push(headLevel + '# API \n' + api[lan])
 	}
-	docArr.map(doc => getList(doc, sharp))
+	docArr.map(doc => getList(doc, deep))
 	return { docs, navs }
 }
 
-const enUS = getDocList(docs, 0)
-const zhCN = getDocList(docs, 1)
+const enUS = getDocList(docs, 0, 1)
+const zhCN = getDocList(docs, 1, 1)
 export const docList = {enUS: enUS.docs, zhCN: zhCN.docs}
 export const navList = {enUS: enUS.navs, zhCN: zhCN.navs}

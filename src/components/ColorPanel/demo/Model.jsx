@@ -1,11 +1,7 @@
 import React from 'react'
 import {ColorPicker, ColorPanel} from 'react-colors'
 
-const style = {
-	display: 'inline-block',
-	width: 200,
-	height: 200
-}
+const style = { display: 'inline-block',width: 200,height: 200,boxShadow:'0 1px 4px rgba(0,0,0,0.28)',margin:'0 12px 4px 0'}
 
 const Model = (props) => (
 	<ColorPicker {...props}>
