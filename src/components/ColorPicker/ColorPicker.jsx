@@ -84,7 +84,6 @@ class ColorPicker extends React.Component {
 
 	handleChange (color, model, e) {
 		this.setState({color: color, activeModel: model})
-
 		this.props.onChange(this.formateColor(color, model), e)
 	}
 
@@ -96,9 +95,7 @@ class ColorPicker extends React.Component {
 	formateColor (color, model) {
 		// keep alpha, because alpha would reset to 1 when chroma set color
 		let alpha = model === 'rgba' ? Number(color[3]) : this._chroma.alpha()
-		alpha = model === 'alpha' ? color : alpha
 		let _chroma = this._chroma = chroma(color, model).alpha(alpha)
-
 		return {
 			rgb: _chroma.rgb(),
 			rgba: _chroma.rgba(),

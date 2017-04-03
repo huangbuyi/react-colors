@@ -10,6 +10,9 @@ import ColorPicker, {
 	ColorBlock
 } from '../../components'
 
+const getCssRgb = arr => arr.map( color => 
+	`rgb(${Math.round(arr[0])},${Math.round(arr[1])},${Math.round(arr[2])})`
+) 
 
 class Photoshop extends React.Component {
 	static propTypes = {
@@ -24,7 +27,7 @@ class Photoshop extends React.Component {
 
 	static defaultProps = {
 		title: 'Color Picker',
-	  color: [255,0,0],
+	  color: [255,0,0,1],
 	  onChange: () => {},
 	  onAccept: () => {},
 	  onCancel: () => {}
@@ -32,7 +35,7 @@ class Photoshop extends React.Component {
 
 	constructor(props) {
 	  super(props)
-		let color = {hex: chroma(props.color, props.colorModel).hex()}
+		let color = {rgba: chroma(props.color, props.colorModel).rgba()}
 	  this.state = {
 	  	color: color,
 	  	currColor: color
@@ -40,8 +43,7 @@ class Photoshop extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		let color = {hex: chroma(nextProps.color, nextProps.colorModel).hex()}
-		console.log(color)
+		let color = {rgba: chroma(nextProps.color, nextProps.colorModel).rgba()}
 		this.setState({color: color})
 	}
 
@@ -165,14 +167,14 @@ class Photoshop extends React.Component {
 			} 
 		}
 		return (
-			<ColorPicker style={ styles.root } color={color.hex} colorModel='hex' onChange={ (a) => this.handleChange(a) }>	
+			<ColorPicker style={ styles.root } color={color.rgba} colorModel='rgba' onChange={ (a) => this.handleChange(a) }>	
 				<div style={ styles.title }>{ this.props.title }</div>
 				<ColorPanel pointer={ <PsPointerCircle /> } style={ styles.panel }/>
 				<ColorBar direction='vertical' pointer={ <PsPointerDoubleTriangle /> } style={ styles.bar }/>
 				<div style={ styles.color } data-color='1'>
 					<p style={ styles.colorP }>new</p>
-					<ColorBlock color={ color.hex } style={ styles.colorBlock }></ColorBlock>
-					<ColorBlock color={ currColor.hex } style={ styles.colorBlock }></ColorBlock>
+					<ColorBlock color={ getCssRgb(color.rgba) } style={ styles.colorBlock }></ColorBlock>
+					<ColorBlock color={ getCssRgb(currColor.rgba) } style={ styles.colorBlock }></ColorBlock>
 					<p style={ styles.colorP }>current</p>
 				</div>
 				<div style={ styles.buttons }>

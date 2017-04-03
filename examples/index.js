@@ -17,6 +17,7 @@ class BothDemo extends React.Component {
 
 	handleChange = v => { 
 		this.setState({color: v.rgba})
+		console.log(v.rgba)
 	}
 
 	render () {

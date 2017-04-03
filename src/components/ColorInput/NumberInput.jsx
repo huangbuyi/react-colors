@@ -51,7 +51,8 @@ class NumberInput extends React.Component{
     let {min, max} = this.props
 
     if( !isNaN(Number(newValue)) ) {
-    	let outValue = newValue > max ? max : newValue 
+    	let outValue = Number(newValue)
+    	outValue > max ? max : outValue 
     	outValue = outValue < min ? min : outValue
       this.props.onChange(outValue, e)   
     }
