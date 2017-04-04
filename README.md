@@ -7,6 +7,8 @@
 [![NPM downloads](https://img.shields.io/npm/v/react-colors.svg)](https://www.npmjs.com/package/react-colors)
 [![NPM downloads](https://img.shields.io/npm/l/react-colors.svg)](https://www.npmjs.com/package/react-colors)
 
+![react-colors](http://onw3okkga.bkt.gdipper.com/react-colors.jpg)
+
 ## Install
 
 ```js
