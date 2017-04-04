@@ -42,7 +42,7 @@ class Home extends React.Component {
 		this.state = {
 			color: color,
 			shouldFix: false,
-			language: 'English',
+			language: '中文',
 			isDark: false
 		}
 	}

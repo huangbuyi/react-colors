@@ -1,6 +1,6 @@
 {
   "name": "react-colors",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "title": "React color picker",
   "description": "",
   "homepage": "",
@@ -16,7 +16,8 @@
     "docs-start": "webpack-dev-server --config ./scripts/docs.config --inline",
     "clean": "rd /s/q lib && mkdir lib",
     "lib": "npm run clean && babel src --out-dir lib --ignore \"**/*.test.js\"",
-    "docs": "webpack --config ./scripts/docs"
+    "docs": "webpack --config ./scripts/docs.config",
+    "docs-build": "webpack --config ./scripts/build.config"
   },
   "author": "Shibin Huang",
   "license": "MIT",

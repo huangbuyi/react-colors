@@ -70,6 +70,10 @@ class ColorPicker extends React.Component {
 		}
 	}
 
+	componentWillMount() {
+		this.componentWillReceiveProps(this.props)
+	}
+
 	componentWillReceiveProps(nextProps) {
 		nextProps.color && this.formateColor(nextProps.color, nextProps.colorModel)
 		if( !contains(this.container, document.activeElement) ) {
