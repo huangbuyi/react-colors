@@ -17,14 +17,11 @@ class Chrome extends React.Component {
 	static propTypes = {
 		color: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
 		colors: PropTypes.array,
-		title: PropTypes.node,
 		onChange: PropTypes.func,
-		model: PropTypes.string,
 		colorModel: PropTypes.string
 	}
 
 	static defaultProps = {
-		title: 'Color Picker',
 	  color: [255,0,0,1],
 	  onChange: () => {},
 	  colors: ['#f44336','#e91e63','#9c27b0','#673ab7','#3f51b5','#2196f3','#03a9f4','#00bcd4',

@@ -61,7 +61,7 @@ class Home extends React.Component {
 	toggleLanguage = () => this.setState({language: this.state.language === 'English' ? '中文' : 'English'})
 
 	handleColorChange = (v) => { 
-
+		console.log(v)
 		this.setState({color: v.rgba, isDark: v.hsl[2] < 0.5 && v.rgba[3] > 0.5}) 
 	}
 
@@ -123,7 +123,7 @@ class Home extends React.Component {
 		let { color, shouldFix, isDark, language } = this.state
 		let backColor = `rgba(${Math.round(color[0])},${Math.round(color[1])},${Math.round(color[2])},${color[3]})`
 		const homeStyle = {
-			...getTransparentBackground(backColor)
+			...getTransparentBackground(backColor, 24)
 		}
 		const navStyle = {
 			position: shouldFix ? 'fixed' : 'absolute'

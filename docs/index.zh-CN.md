@@ -1,1 +1,1 @@
-这是英文文档
+支持 r、g、b、h、s、v 六种拾色模式，提供更强大的`Chrome`和`Photoshop`拾色器。组件能够自由搭配、自定义样式布局，构建完全客制化的拾色器。 [Github](https://github.com/huangbuyi/react-colors) 

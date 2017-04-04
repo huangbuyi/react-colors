@@ -1,2 +1,2 @@
-ColorModel 是二维拾色器，嵌套在 ColorPicker 中使用。
+`ColorRadio` 是 `radio` 类型的 `input`，用于切换色彩空间。
 

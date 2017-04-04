@@ -1,1 +1,1 @@
-ColorBar is a two-demensional picker
+ColorBar only change single coordinate of color space, support all coordinates of rgb and hsv.

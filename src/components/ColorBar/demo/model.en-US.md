@@ -1,19 +1,22 @@
-model change x y
+model 
+
+Set `model` as a string like `colorSpace.coord`. `colorSpace` is color space, support rgb and hsv, `coord` is coordinate in color space. `coord` is mutable in `ColorBar` component
 
 
 ```
 import React from 'react'
-import ColorPicker from '../../ColorPicker'
-import ColorBar from '../ColorBar' 
+import { ColorPicker, ColorBar } from 'react-colors' 
 
-const Model = (props) => (
+const style = { width: 20, height: 200}
+
+const ModelExample = (props) => (
 	<ColorPicker {...props}>
-		<ColorBar model='hsv.h'/>
-		<ColorBar model='hsv.s'/>
-		<ColorBar model='hsv.v'/>
-		<ColorBar model='rgb.r'/>
-		<ColorBar model='rgb.g'/>
-		<ColorBar model='rgb.b'/>
+		<ColorBar model='hsv.h' style={ style }/>
+		<ColorBar model='hsv.s' style={ style }/>
+		<ColorBar model='hsv.v' style={ style }/>
+		<ColorBar model='rgb.r' style={ style }/>
+		<ColorBar model='rgb.g' style={ style }/>
+		<ColorBar model='rgb.b' style={ style }/>
 	</ColorPicker>
 )
 ```

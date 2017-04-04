@@ -1,0 +1,1 @@
+look like color picker in Adobe Photoshop.

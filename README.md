@@ -10,7 +10,7 @@
 ## Install
 
 ```js
-npm install react-colors
+npm install react-colors --save
 ```
 
 ## Usage

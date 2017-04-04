@@ -1,1 +1,1 @@
-ColorPanel is a two-demensional picker
+`ColorPanel` is a radio type input, can toggle color space

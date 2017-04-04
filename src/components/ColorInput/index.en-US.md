@@ -1,1 +1,1 @@
-ColorPanel is a two-demensional picker
+`ColorInput` used for number and hex input.

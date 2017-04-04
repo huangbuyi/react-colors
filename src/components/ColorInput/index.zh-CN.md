@@ -1,2 +1,2 @@
-ColorModel 是二维拾色器，嵌套在 ColorPicker 中使用。
+`ColorInput` 用于数值类型和 hex 类型（例：2196F3）的输入。
 

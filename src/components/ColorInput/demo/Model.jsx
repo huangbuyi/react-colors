@@ -1,16 +1,26 @@
 import React from 'react'
-import ColorPicker from '../../ColorPicker'
-import ColorPanel from '../ColorPanel' 
+import {ColorPicker, ColorInput} from 'react-colors'
 
-const Model = (props) => (
+const inputStyle = {width: 80, height: 20, fontFamily: 'Consolas', paddingLeft: 6}
+
+const ModelExample = (props) => (
 	<ColorPicker {...props}>
-		<ColorPanel model='hsv.h'/>
-		<ColorPanel model='hsv.s'/>
-		<ColorPanel model='hsv.v'/>
-		<ColorPanel model='rgb.r'/>
-		<ColorPanel model='rgb.g'/>
-		<ColorPanel model='rgb.b'/>
+		<ColorInput model='hsv.h' inputStyle={ inputStyle }/>
+		<ColorInput model='hsv.s' inputStyle={ inputStyle }/>
+		<ColorInput model='hsv.v' inputStyle={ inputStyle }/>
+		<ColorInput model='rgb.r' inputStyle={ inputStyle }/>
+		<ColorInput model='rgb.g' inputStyle={ inputStyle }/>
+		<ColorInput model='rgb.b' inputStyle={ inputStyle }/>
+		<ColorInput model='lab.l' inputStyle={ inputStyle }/>
+		<ColorInput model='lab.a' inputStyle={ inputStyle }/>
+		<ColorInput model='lab.b' inputStyle={ inputStyle }/>
+		<ColorInput model='cmyk.c' inputStyle={ inputStyle }/>
+		<ColorInput model='cmyk.m' inputStyle={ inputStyle }/>
+		<ColorInput model='cmyk.y' inputStyle={ inputStyle }/>
+		<ColorInput model='cmyk.k' inputStyle={ inputStyle }/>
+		<ColorInput model='hex' inputStyle={ inputStyle }/>
+		<ColorInput model='alpha' inputStyle={ inputStyle }/>
 	</ColorPicker>
 )
 
-export default Model
+export default ModelExample

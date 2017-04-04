@@ -1,2 +1,2 @@
-ColorModel 是二维拾色器，嵌套在 ColorPicker 中使用。
+设置一个颜色，点取拾取该色
 

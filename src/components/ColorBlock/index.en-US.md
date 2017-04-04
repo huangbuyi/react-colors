@@ -1,1 +1,1 @@
-ColorPanel is a two-demensional picker
+set a color, click it to pick the color

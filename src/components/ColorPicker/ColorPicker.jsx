@@ -56,7 +56,6 @@ class ColorPicker extends React.Component {
 		onChange: () => {},
 		onModelChange: () => {},
 		color: '#ff9966',
-		history: [],
 	}
 
 	constructor(props) {
