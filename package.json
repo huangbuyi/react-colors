@@ -1,9 +1,9 @@
 {
   "name": "react-colors",
-  "version": "0.1.0",
-  "title": "React color picker",
-  "description": "",
-  "homepage": "",
+  "version": "0.1.1",
+  "title": "React colors",
+  "description": "A A customizable color picker",
+  "homepage": "https://huangbuyi.github.io/react-colors/",
   "main": "lib/index.js",
   "files": [
     "dist",
