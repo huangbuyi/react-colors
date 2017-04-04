@@ -34,19 +34,19 @@ import React from 'react'
 import {ColorPicker, ColorPanel, ColorBar} from 'react-colors'
 
 const styles = {
-	pandelDiv: {width: 255, height: 255},
-	barDiv: {width: 20, height: 255, marginLeft: 20}
+  pandelDiv: {width: 255, height: 255},
+  barDiv: {width: 20, height: 255, marginLeft: 20}
 }
 
 const MyPicker = () => (
-	<ColorPicker>
-		<div data-color={true} style={ styles.pandelDiv }>
-			<ColorPanel />	
-		</div>
-		<div data-color={true} style={ styles.barDiv }>
-			<ColorBar />
-		</div>
-	</ColorPicker>
+  <ColorPicker>
+    <div data-color={true} style={ styles.pandelDiv }>
+      <ColorPanel />	
+    </div>
+    <div data-color={true} style={ styles.barDiv }>
+      <ColorBar />
+    </div>
+  </ColorPicker>
 )
 ```
 There are a container components and 5 differents child components. You can style and layout them through any label marked `data-color` as `true` value, or pass style props in.  
