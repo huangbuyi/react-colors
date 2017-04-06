@@ -23,11 +23,11 @@ exports[`ColorHexInput render correctly 1`] = `
     </div>
   </div>
   <div
-    style="position:relative;height:255px;background:linear-gradient(to top, #f00 0%, #ff0 17%, #0f0 33%,
+    style="position:relative;height:255px;background-image:linear-gradient(to top, #f00 0%, #ff0 17%, #0f0 33%,
             #0ff 50%, #00f 67%, #f0f 83%, #f00 100%);curosr:default;display:absolute;left:280px;top:57px;width:20px;"
   >
     <div
-      style="position:absolute;left:0;top:42.61904761904761%;"
+      style="position:absolute;top:42.61904761904761%;"
     >
       <div
         style="position:absolute;width:40px;transform:translate(-10px, -5px);"
@@ -62,6 +62,7 @@ exports[`ColorHexInput render correctly 1`] = `
     </div>
   </div>
   <div
+    data-color="1"
     style="position:absolute;left:315px;top:44px;width:60px;height:68px;"
   >
     <p
@@ -70,10 +71,14 @@ exports[`ColorHexInput render correctly 1`] = `
       new
     </p>
     <div
-      style="height:34px;background:#2196f3;"
+      style="height:34px;background-image:linear-gradient(rgb(33,150,243),rgb(33,150,243),rgb(33,150,243),rgb(33,150,243), rgb(33,150,243),rgb(33,150,243),rgb(33,150,243),rgb(33,150,243)),
+        									linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc),
+        									linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc);background-size:100% 100%,12px 12px,12px 12px;background-position:0 0,0 0, 6px 6px;background-color:#fff;"
     />
     <div
-      style="height:34px;background:#2196f3;"
+      style="height:34px;background-image:linear-gradient(rgb(33,150,243),rgb(33,150,243),rgb(33,150,243),rgb(33,150,243), rgb(33,150,243),rgb(33,150,243),rgb(33,150,243),rgb(33,150,243)),
+        									linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc),
+        									linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc);background-size:100% 100%,12px 12px,12px 12px;background-position:0 0,0 0, 6px 6px;background-color:#fff;"
     />
     <p
       style="margin:0;font-size:13px;text-align:center;"
@@ -108,22 +113,23 @@ exports[`ColorHexInput render correctly 1`] = `
         type="radio"
       />
       <div
-        style="display:inline-block;position:relative;margin-bottom:4px;height:100%;"
+        style="display:inline-block;position:relative;margin-bottom:4px;"
       >
-        <div
-          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;"
+        <span
+          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;line-height:20px;"
         >
           H:
-        </div>
+        </span>
         <input
           style="vertical-align:top;width:45px;box-sizing:border-box;height:20px;padding:0 2px;font-size:12px;"
+          type="text"
           value="207"
         />
-        <div
-          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;"
+        <span
+          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;line-height:20px;"
         >
           °
-        </div>
+        </span>
       </div>
     </div>
     <div
@@ -134,22 +140,23 @@ exports[`ColorHexInput render correctly 1`] = `
         type="radio"
       />
       <div
-        style="display:inline-block;position:relative;margin-bottom:4px;height:100%;"
+        style="display:inline-block;position:relative;margin-bottom:4px;"
       >
-        <div
-          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;"
+        <span
+          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;line-height:20px;"
         >
           S:
-        </div>
+        </span>
         <input
           style="vertical-align:top;width:45px;box-sizing:border-box;height:20px;padding:0 2px;font-size:12px;"
+          type="text"
           value="86"
         />
-        <div
-          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;"
+        <span
+          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;line-height:20px;"
         >
           %
-        </div>
+        </span>
       </div>
     </div>
     <div
@@ -160,22 +167,23 @@ exports[`ColorHexInput render correctly 1`] = `
         type="radio"
       />
       <div
-        style="display:inline-block;position:relative;margin-bottom:4px;height:100%;"
+        style="display:inline-block;position:relative;margin-bottom:4px;"
       >
-        <div
-          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;"
+        <span
+          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;line-height:20px;"
         >
           V:
-        </div>
+        </span>
         <input
           style="vertical-align:top;width:45px;box-sizing:border-box;height:20px;padding:0 2px;font-size:12px;"
+          type="text"
           value="95"
         />
-        <div
-          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;"
+        <span
+          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;line-height:20px;"
         >
           %
-        </div>
+        </span>
       </div>
     </div>
   </div>
@@ -191,19 +199,20 @@ exports[`ColorHexInput render correctly 1`] = `
         type="radio"
       />
       <div
-        style="display:inline-block;position:relative;margin-bottom:4px;height:100%;"
+        style="display:inline-block;position:relative;margin-bottom:4px;"
       >
-        <div
-          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;"
+        <span
+          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;line-height:20px;"
         >
           R:
-        </div>
+        </span>
         <input
           style="vertical-align:top;width:45px;box-sizing:border-box;height:20px;padding:0 2px;font-size:12px;"
+          type="text"
           value="33"
         />
-        <div
-          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;"
+        <span
+          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;line-height:20px;"
         />
       </div>
     </div>
@@ -215,19 +224,20 @@ exports[`ColorHexInput render correctly 1`] = `
         type="radio"
       />
       <div
-        style="display:inline-block;position:relative;margin-bottom:4px;height:100%;"
+        style="display:inline-block;position:relative;margin-bottom:4px;"
       >
-        <div
-          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;"
+        <span
+          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;line-height:20px;"
         >
           G:
-        </div>
+        </span>
         <input
           style="vertical-align:top;width:45px;box-sizing:border-box;height:20px;padding:0 2px;font-size:12px;"
+          type="text"
           value="150"
         />
-        <div
-          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;"
+        <span
+          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;line-height:20px;"
         />
       </div>
     </div>
@@ -239,19 +249,20 @@ exports[`ColorHexInput render correctly 1`] = `
         type="radio"
       />
       <div
-        style="display:inline-block;position:relative;margin-bottom:4px;height:100%;"
+        style="display:inline-block;position:relative;margin-bottom:4px;"
       >
-        <div
-          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;"
+        <span
+          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;line-height:20px;"
         >
           B:
-        </div>
+        </span>
         <input
           style="vertical-align:top;width:45px;box-sizing:border-box;height:20px;padding:0 2px;font-size:12px;"
+          type="text"
           value="243"
         />
-        <div
-          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;"
+        <span
+          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;line-height:20px;"
         />
       </div>
     </div>
@@ -265,19 +276,20 @@ exports[`ColorHexInput render correctly 1`] = `
       style="margin-bottom:4px;height:19px;"
     >
       <div
-        style="display:inline-block;position:relative;margin-bottom:4px;height:100%;"
+        style="display:inline-block;position:relative;margin-bottom:4px;"
       >
-        <div
-          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;"
+        <span
+          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;line-height:20px;"
         >
           L:
-        </div>
+        </span>
         <input
           style="vertical-align:top;width:56px;box-sizing:border-box;height:20px;padding:0 2px;font-size:12px;"
+          type="text"
           value="60"
         />
-        <div
-          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;"
+        <span
+          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;line-height:20px;"
         />
       </div>
     </div>
@@ -286,19 +298,20 @@ exports[`ColorHexInput render correctly 1`] = `
       style="margin-bottom:4px;height:19px;"
     >
       <div
-        style="display:inline-block;position:relative;margin-bottom:4px;height:100%;"
+        style="display:inline-block;position:relative;margin-bottom:4px;"
       >
-        <div
-          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;"
+        <span
+          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;line-height:20px;"
         >
           a:
-        </div>
+        </span>
         <input
           style="vertical-align:top;width:56px;box-sizing:border-box;height:20px;padding:0 2px;font-size:12px;"
+          type="text"
           value="2"
         />
-        <div
-          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;"
+        <span
+          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;line-height:20px;"
         />
       </div>
     </div>
@@ -307,19 +320,20 @@ exports[`ColorHexInput render correctly 1`] = `
       style="margin-bottom:4px;height:19px;"
     >
       <div
-        style="display:inline-block;position:relative;margin-bottom:4px;height:100%;"
+        style="display:inline-block;position:relative;margin-bottom:4px;"
       >
-        <div
-          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;"
+        <span
+          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;line-height:20px;"
         >
           b:
-        </div>
+        </span>
         <input
           style="vertical-align:top;width:56px;box-sizing:border-box;height:20px;padding:0 2px;font-size:12px;"
+          type="text"
           value="-55"
         />
-        <div
-          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;"
+        <span
+          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;line-height:20px;"
         />
       </div>
     </div>
@@ -333,22 +347,23 @@ exports[`ColorHexInput render correctly 1`] = `
       style="margin-bottom:4px;height:19px;"
     >
       <div
-        style="display:inline-block;position:relative;margin-bottom:4px;height:100%;"
+        style="display:inline-block;position:relative;margin-bottom:4px;"
       >
-        <div
-          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;"
+        <span
+          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;line-height:20px;"
         >
           C:
-        </div>
+        </span>
         <input
           style="vertical-align:top;width:45px;box-sizing:border-box;height:20px;padding:0 2px;font-size:12px;"
+          type="text"
           value="86"
         />
-        <div
-          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;"
+        <span
+          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;line-height:20px;"
         >
           %
-        </div>
+        </span>
       </div>
     </div>
     <div
@@ -356,22 +371,23 @@ exports[`ColorHexInput render correctly 1`] = `
       style="margin-bottom:4px;height:19px;"
     >
       <div
-        style="display:inline-block;position:relative;margin-bottom:4px;height:100%;"
+        style="display:inline-block;position:relative;margin-bottom:4px;"
       >
-        <div
-          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;"
+        <span
+          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;line-height:20px;"
         >
           M:
-        </div>
+        </span>
         <input
           style="vertical-align:top;width:45px;box-sizing:border-box;height:20px;padding:0 2px;font-size:12px;"
+          type="text"
           value="38"
         />
-        <div
-          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;"
+        <span
+          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;line-height:20px;"
         >
           %
-        </div>
+        </span>
       </div>
     </div>
     <div
@@ -379,22 +395,23 @@ exports[`ColorHexInput render correctly 1`] = `
       style="margin-bottom:4px;height:19px;"
     >
       <div
-        style="display:inline-block;position:relative;margin-bottom:4px;height:100%;"
+        style="display:inline-block;position:relative;margin-bottom:4px;"
       >
-        <div
-          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;"
+        <span
+          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;line-height:20px;"
         >
           Y:
-        </div>
+        </span>
         <input
           style="vertical-align:top;width:45px;box-sizing:border-box;height:20px;padding:0 2px;font-size:12px;"
+          type="text"
           value="0"
         />
-        <div
-          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;"
+        <span
+          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;line-height:20px;"
         >
           %
-        </div>
+        </span>
       </div>
     </div>
     <div
@@ -402,22 +419,23 @@ exports[`ColorHexInput render correctly 1`] = `
       style="margin-bottom:4px;height:19px;"
     >
       <div
-        style="display:inline-block;position:relative;margin-bottom:4px;height:100%;"
+        style="display:inline-block;position:relative;margin-bottom:4px;"
       >
-        <div
-          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;"
+        <span
+          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;line-height:20px;"
         >
           K:
-        </div>
+        </span>
         <input
           style="vertical-align:top;width:45px;box-sizing:border-box;height:20px;padding:0 2px;font-size:12px;"
+          type="text"
           value="5"
         />
-        <div
-          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;"
+        <span
+          style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;line-height:20px;"
         >
           %
-        </div>
+        </span>
       </div>
     </div>
   </div>
@@ -426,21 +444,19 @@ exports[`ColorHexInput render correctly 1`] = `
     style="position:absolute;left:318px;top:319px;"
   >
     <div
-      style="display:inline-block;position:relative;margin-bottom:4px;height:100%;"
+      style="display:inline-block;position:relative;margin-bottom:4px;"
     >
-      <div
-        style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;"
+      <span
+        style="display:inline-block;height:100%;font-size:13px;vertical-align:top;width:20px;line-height:20px;"
       >
-        <span>
-          #
-        </span>
-      </div>
+        #
+      </span>
       <input
         style="vertical-align:top;width:80px;box-sizing:border-box;height:20px;padding:0 2px;font-size:12px;"
         value="2196f3"
       />
-      <div
-        style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;"
+      <span
+        style="display:inline-block;height:100%;font-size:13px;vertical-align:top;padding-left:4px;line-height:20px;"
       />
     </div>
   </div>

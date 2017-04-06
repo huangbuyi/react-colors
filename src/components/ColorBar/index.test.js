@@ -11,13 +11,13 @@ describe('ColorBar correctly', () => {
 
 	it('show color correctly', () => {
 		const wrapper = mount(<ColorBar color={[127.5,0,0]} model='rgb.r'/>)
-		expect(parseInt(wrapper.childAt(0).getNode().style.top)).toBe(50)
+		expect(parseInt(wrapper.childAt(0).getNode().style.left)).toBe(50)
 	})
 
 	it('mousedown set color correctly', () => {
 		const colorBar = mount(<ColorBar color={[255,0,0]} model='rgb.r' onChange={newColor => {
 			newColor[0] = parseInt(newColor[0])
-			expect(newColor).toEqual([155,0,0])
+			expect(newColor).toEqual([191,0,0])
 		}}/>).find(ColorBar)
 
 		colorBar.getNode().container = {

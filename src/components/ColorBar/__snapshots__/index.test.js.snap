@@ -2,11 +2,11 @@
 
 exports[`ColorBar correctly render correctly 1`] = `
 <div
-  style="position:relative;height:100%;background:linear-gradient(to top, rgb(0,0,0), 
+  style="position:relative;height:100%;background-image:linear-gradient(to left, rgb(0,0,0), 
 					rgb(255, 0, 0);curosr:default;"
 >
   <div
-    style="position:absolute;left:0;top:0%;"
+    style="position:absolute;left:0%;"
   >
     <div
       style="width:4px;border-radius:1px;height:8px;box-shadow:0 0 2px rgba(0, 0, 0, .6);background:#fff;transform:translateY(-4px);"
