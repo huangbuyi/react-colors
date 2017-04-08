@@ -28,6 +28,8 @@ function ColorBlock ({style, color, onClick, ...props}) {
 	></div>
 }
 
+ColorBlock.displayName='ColorBlock'
+
 ColorBlock.defaultProps = {
 	color: PropTypes.string.isRequired
 }

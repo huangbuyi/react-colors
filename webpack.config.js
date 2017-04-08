@@ -34,27 +34,27 @@ module.exports = {
 			loader: 'raw-loader'
 		}]
 	},
-	devtool: "cheap-eval-source-map",
-	devServer: {
+	//devtool: "cheap-eval-source-map",
+/*	devServer: {
 		historyApiFallback: true,
 		hot: true,
 		inline: true,
 		//progress: true,
-	},
-	plugins: [
+	},*/
+/*	plugins: [
 		new webpack.DefinePlugin({
 			'process.env.NODE.ENV':"development"
 		}),
 		new webpack.HotModuleReplacementPlugin()
-	]
-/*	plugins: [
+	]*/
+	plugins: [
 		new webpack.DefinePlugin({
 		  'process.env': {
 		    NODE_ENV: JSON.stringify('production')
 		  }
 		}),
 		new webpack.optimize.UglifyJsPlugin()	
-	]*/
+	]
 }	
 
 			

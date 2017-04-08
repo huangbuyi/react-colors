@@ -9,6 +9,7 @@ import throttle from 'lodash/throttle'
 import CirclePanel from './CirclePointer'
 
 export class ColorPanel extends (PureComponent || Component) {
+  static displayName = 'ColorPanel'
   static propTypes = {
     model: PropTypes.oneOf(['rgb.r','rgb.g','rgb.b','hsv.h','hsv.s','hsv.v']),
     pointer: PropTypes.node,

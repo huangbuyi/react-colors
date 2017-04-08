@@ -38,7 +38,6 @@ module.exports = {
 			loader: 'raw-loader'
 		}]
 	},
-	devtool: "source-map",
 	plugins: [
 		new webpack.DefinePlugin({
 		  'process.env': {
