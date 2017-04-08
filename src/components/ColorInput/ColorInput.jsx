@@ -11,6 +11,7 @@ import React, { Component, PureComponent, PropTypes } from 'react'
 import ColorInputChild from './ColorInputChild'
 
 export class ColorInput extends (PureComponent || Component) {
+  static displayName = 'ColorInput'
   static propTypes = {
     model: PropTypes.oneOf(['rgb.r','rgb.g','rgb.b','hsv.h','hsv.s','hsv.v','lab.l','lab.a','lab.b','cmyk.c','cmyk.m','cmyk.y','cmyk.k','hex','alpha']),
     style: PropTypes.object,

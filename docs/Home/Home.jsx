@@ -61,7 +61,6 @@ class Home extends React.Component {
 	toggleLanguage = () => this.setState({language: this.state.language === 'English' ? '中文' : 'English'})
 
 	handleColorChange = (v) => { 
-		console.log(v)
 		this.setState({color: v.rgba, isDark: v.hsl[2] < 0.5 && v.rgba[3] > 0.5}) 
 	}
 

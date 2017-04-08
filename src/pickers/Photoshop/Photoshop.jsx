@@ -9,10 +9,7 @@ import ColorPicker, {
 	ColorBar,
 	ColorBlock
 } from '../../components'
-
-const getCssRgb = arr => arr.map( color => 
-	`rgb(${Math.round(arr[0])},${Math.round(arr[1])},${Math.round(arr[2])})`
-) 
+import getHexColor from '../../helpers/rgbToHex'
 
 class Photoshop extends React.Component {
 	static propTypes = {
@@ -64,108 +61,6 @@ class Photoshop extends React.Component {
 	render () {
 		let {color, currColor} = this.state
 
-		const styles = {
-			root: {
-				width: 550,
-				height: 354,
-				boxShadow: 'rgba(0, 0, 0, 0.247059) 0px 0px 0px 1px, rgba(0, 0, 0, 0.14902) 0px 8px 16px',
-				background: '#ededed',
-				fontSize: 'Robot nono Sans-serif'
-			},
-			title: {
-				boxSizing: 'border-box',
-				position: 'absolute',
-				color: '#666',
-				left: 0,
-				top: 0,
-				width: '100%',
-				height: 26,
-				lineHeight: '26px',
-				paddingLeft: 4, 
-				fontSize: 13,
-				background: '#fff'
-			},
-			panel: {
-				position: 'absolute',
-				left: 12,
-				top: 57,
-				width: 255,
-				height: 255
-			},
-			bar: {
-				display: 'absolute',
-				left: 280,
-				top: 57,
-				width: 20,
-				height: 255
-			},
-			color: {
-				position: 'absolute',
-				left: 315,
-				top: 44,
-				width: 60,
-				height: 68,
-			},
-			colorP: {
-				margin: 0,
-				fontSize: 13,
-				textAlign: 'center'
-			},
-			buttons: {
-				position: 'absolute',
-				left: 426,
-				top: 36
-			},
-			button: {
-				width: 115,
-				height: 20,
-				marginBottom: 10 
-			},
-			colorBlock: {
-				height: 34,
-			},
-			inputHsv: {
-				position: 'absolute',
-				left: 315,
-				top: 167,
-			},
-			inputRgb: {
-				position: 'absolute',
-				left: 315,
-				top: 244,
-			},
-			inputLab: {
-				position: 'absolute',
-				left: 455,
-				top: 167
-			},
-			inputCmyk: {
-				position: 'absolute',
-				left: 455,
-				top: 244,
-			},
-			inputHex: {
-				position: 'absolute',
-				left: 318,
-				top: 319,
-			},
-			inputDiv: {
-				marginBottom: 4,
-				height: 19
-			},
-			input: {
-				width: 45,
-				height: 20
-			},
-			lab: {
-				width: 56,
-				height: 20
-			},
-			hex: {
-				width: 80,
-				height: 20
-			} 
-		}
 		return (
 			<ColorPicker style={ styles.root } color={color.rgba} colorModel='rgba' onChange={ (a) => this.handleChange(a) }>	
 				<div style={ styles.title }>{ this.props.title }</div>
@@ -173,8 +68,8 @@ class Photoshop extends React.Component {
 				<ColorBar direction='vertical' pointer={ <PsPointerDoubleTriangle /> } style={ styles.bar }/>
 				<div style={ styles.color } data-color='1'>
 					<p style={ styles.colorP }>new</p>
-					<ColorBlock color={ getCssRgb(color.rgba) } style={ styles.colorBlock }></ColorBlock>
-					<ColorBlock color={ getCssRgb(currColor.rgba) } style={ styles.colorBlock }></ColorBlock>
+					<ColorBlock color={ getHexColor(color.rgba) } style={ styles.colorBlock }></ColorBlock>
+					<ColorBlock color={ getHexColor(currColor.rgba) } style={ styles.colorBlock }></ColorBlock>
 					<p style={ styles.colorP }>current</p>
 				</div>
 				<div style={ styles.buttons }>
@@ -210,5 +105,108 @@ class Photoshop extends React.Component {
 		)
 	}
 }
+
+const styles = {
+	root: {
+		width: 550,
+		height: 354,
+		boxShadow: 'rgba(0, 0, 0, 0.247059) 0px 0px 0px 1px, rgba(0, 0, 0, 0.14902) 0px 8px 16px',
+		background: '#ededed',
+		fontSize: 'Robot nono Sans-serif'
+	},
+	title: {
+		boxSizing: 'border-box',
+		position: 'absolute',
+		color: '#666',
+		left: 0,
+		top: 0,
+		width: '100%',
+		height: 26,
+		lineHeight: '26px',
+		paddingLeft: 4, 
+		fontSize: 13,
+		background: '#fff'
+	},
+	panel: {
+		position: 'absolute',
+		left: 12,
+		top: 57,
+		width: 255,
+		height: 255
+	},
+	bar: {
+		display: 'absolute',
+		left: 280,
+		top: 57,
+		width: 20,
+		height: 255
+	},
+	color: {
+		position: 'absolute',
+		left: 315,
+		top: 44,
+		width: 60,
+		height: 68,
+	},
+	colorP: {
+		margin: 0,
+		fontSize: 13,
+		textAlign: 'center'
+	},
+	buttons: {
+		position: 'absolute',
+		left: 426,
+		top: 36
+	},
+	button: {
+		width: 115,
+		height: 20,
+		marginBottom: 10 
+	},
+	colorBlock: {
+		height: 34,
+	},
+	inputHsv: {
+		position: 'absolute',
+		left: 315,
+		top: 167,
+	},
+	inputRgb: {
+		position: 'absolute',
+		left: 315,
+		top: 244,
+	},
+	inputLab: {
+		position: 'absolute',
+		left: 455,
+		top: 167
+	},
+	inputCmyk: {
+		position: 'absolute',
+		left: 455,
+		top: 244,
+	},
+	inputHex: {
+		position: 'absolute',
+		left: 318,
+		top: 319,
+	},
+	inputDiv: {
+		marginBottom: 4,
+		height: 19
+	},
+	input: {
+		width: 45,
+		height: 20
+	},
+	lab: {
+		width: 56,
+		height: 20
+	},
+	hex: {
+		width: 80,
+		height: 20
+	} 
+	}
 
 export default Photoshop

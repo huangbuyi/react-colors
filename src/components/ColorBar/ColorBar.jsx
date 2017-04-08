@@ -4,6 +4,7 @@ import calcEventPosition from '../../helpers/calcEventPosition'
 import RectPointer from './RectPointer'
 
 class ColorBar extends (PureComponent || Component) {
+  static displayName = 'ColorBar'
 	static defaultProps = {
 		model: PropTypes.oneOf(['rgb.r','rgb.g','rgb.b','hsv.h','hsv.s','hsv.v']),
 		pointer: PropTypes.node,

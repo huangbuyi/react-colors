@@ -121,7 +121,7 @@ class ColorPicker extends React.Component {
 		let {activeModel, model, color} = this.state
 
 		return React.Children.map(children, child => {
-			let compName = child.type.name
+			let compName = child.type.displayName
 
 			if(child.props['data-color']) {
 				let divChildren = child.props.children 
