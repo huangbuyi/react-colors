@@ -71,12 +71,12 @@ exports[`ColorHexInput render correctly 1`] = `
       new
     </p>
     <div
-      style="height:34px;background-image:linear-gradient(rgb(33,150,243),rgb(33,150,243),rgb(33,150,243),rgb(33,150,243), rgb(33,150,243),rgb(33,150,243),rgb(33,150,243),rgb(33,150,243)),
+      style="height:34px;background-image:linear-gradient(#2196f3, #2196f3),
         									linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc),
         									linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc);background-size:100% 100%,12px 12px,12px 12px;background-position:0 0,0 0, 6px 6px;background-color:#fff;"
     />
     <div
-      style="height:34px;background-image:linear-gradient(rgb(33,150,243),rgb(33,150,243),rgb(33,150,243),rgb(33,150,243), rgb(33,150,243),rgb(33,150,243),rgb(33,150,243),rgb(33,150,243)),
+      style="height:34px;background-image:linear-gradient(#2196f3, #2196f3),
         									linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc),
         									linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc);background-size:100% 100%,12px 12px,12px 12px;background-position:0 0,0 0, 6px 6px;background-color:#fff;"
     />
